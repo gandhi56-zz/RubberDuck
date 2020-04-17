@@ -1,20 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/anshil/workspace/RubberDuck/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+            "outputFile": "/home/anshil/Desktop/RubberDuck/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
             "map": [
                 {
-                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/4b9870924e6a59106ae571b6074fa673/core-1.2.0/res/values-v16/values-v16.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "65",
-                        "endOffsets": "116"
-                    }
-                },
-                {
-                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/aa9e18d12c5afb35dcd731ed91706877/appcompat-1.1.0/res/values-v16/values-v16.xml",
+                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/8e8d54c0c40159fca4f0e5f755d1626b/appcompat-1.1.0/res/values-v16/values-v16.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -30,6 +20,16 @@
                         "endLines": "6",
                         "endColumns": "12",
                         "endOffsets": "289"
+                    }
+                },
+                {
+                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/5c52af2befcfdd7f061cdb2081c184d3/core-1.2.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
                     }
                 }
             ]
