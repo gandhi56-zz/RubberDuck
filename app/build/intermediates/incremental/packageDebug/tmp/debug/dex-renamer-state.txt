@@ -1,4 +1,4 @@
-#Thu Apr 16 22:35:21 MDT 2020
-base.0=/home/anshil/Desktop/RubberDuck/app/build/intermediates/dex/debug/out/classes.dex
+#Thu Apr 16 22:45:00 MDT 2020
+base.0=/home/anshil/workspace/RubberDuck/app/build/intermediates/dex/debug/out/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

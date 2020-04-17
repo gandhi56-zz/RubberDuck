@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/anshil/Desktop/RubberDuck/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-fi/values-fi.xml",
+            "outputFile": "/home/anshil/workspace/RubberDuck/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-fi/values-fi.xml",
             "map": [
                 {
                     "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/5c52af2befcfdd7f061cdb2081c184d3/core-1.2.0/res/values-fi/values-fi.xml",
