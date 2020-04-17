@@ -10,40 +10,45 @@
 9        android:targetSdkVersion="29" />
 9-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml
 10
-11    <application
-11-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:5:5-20:19
-12        android:allowBackup="true"
-12-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:6:9-35
-13        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-13-->[androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/5c52af2befcfdd7f061cdb2081c184d3/core-1.2.0/AndroidManifest.xml:24:18-86
-14        android:debuggable="true"
-15        android:icon="@mipmap/ic_launcher"
-15-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:7:9-43
-16        android:label="@string/app_name"
-16-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:8:9-41
-17        android:roundIcon="@mipmap/ic_launcher_round"
-17-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:9:9-54
-18        android:supportsRtl="true"
-18-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:10:9-35
-19        android:theme="@style/AppTheme" >
-19-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:11:9-40
-20        <activity android:name="com.example.rubberduck.MainActivity" />
-20-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:12:9-59
-20-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:12:19-47
-21        <activity android:name="com.example.rubberduck.LoginActivity" >
-21-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:13:9-19:20
-21-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:13:19-48
-22            <intent-filter>
-22-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:13-18:29
-23                <action android:name="android.intent.action.MAIN" />
-23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:17-69
-23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:25-66
-24
-25                <category android:name="android.intent.category.LAUNCHER" />
-25-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:17:17-77
-25-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:17:27-74
-26            </intent-filter>
-27        </activity>
-28    </application>
-29
-30</manifest>
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:4:5-67
+11-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:4:22-64
+12
+13    <application
+13-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:6:5-21:19
+14        android:allowBackup="true"
+14-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:7:9-35
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/5c52af2befcfdd7f061cdb2081c184d3/core-1.2.0/AndroidManifest.xml:24:18-86
+16        android:debuggable="true"
+17        android:icon="@mipmap/ic_launcher"
+17-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:8:9-43
+18        android:label="@string/app_name"
+18-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:9:9-41
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:10:9-54
+20        android:supportsRtl="true"
+20-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:11:9-35
+21        android:testOnly="true"
+22        android:theme="@style/AppTheme" >
+22-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:12:9-40
+23        <activity android:name="com.example.rubberduck.MainActivity" />
+23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:13:9-59
+23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:13:19-47
+24        <activity android:name="com.example.rubberduck.LoginActivity" >
+24-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:9-20:20
+24-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:19-48
+25            <intent-filter>
+25-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:13-19:29
+26                <action android:name="android.intent.action.MAIN" />
+26-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:16:17-69
+26-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:16:25-66
+27
+28                <category android:name="android.intent.category.LAUNCHER" />
+28-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:18:17-77
+28-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:18:27-74
+29            </intent-filter>
+30        </activity>
+31    </application>
+32
+33</manifest>

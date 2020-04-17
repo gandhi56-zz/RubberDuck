@@ -44,12 +44,12 @@
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/fragment_play.xml"
     },
     {
-        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_user_icon.xml.flat",
-        "source": "/home/anshil/workspace/RubberDuck/app/build/generated/res/pngs/debug/drawable-anydpi-v21/user_icon.xml"
-    },
-    {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-xhdpi_play_icon.png.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/drawable-xhdpi/play_icon.png"
+    },
+    {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-anydpi-v21_user_icon.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/build/generated/res/pngs/debug/drawable-anydpi-v21/user_icon.xml"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_ic_launcher_background.png.flat",
