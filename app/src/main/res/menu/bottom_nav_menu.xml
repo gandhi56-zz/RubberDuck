@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/stats"
+        android:title="@string/stats"/>
+
+    <item
+        android:id="@+id/contest"
+        android:title="@string/contest"/>
+
+    <item
+        android:id="@+id/play"
+        android:title="@string/play"/>
+
+    <item
+        android:id="@+id/blog"
+        android:title="@string/blog"/>
+
+    <item
+        android:id="@+id/user"
+        android:title="@string/user"
+        />
+
+</menu>

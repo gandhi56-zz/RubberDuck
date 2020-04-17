@@ -3,4 +3,12 @@
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="sign_in">sign in</string>
+    <string name="stats">Stats</string>
+    <string name="contest">Contest</string>
+    <string name="play">Play</string>
+    <string name="blog">Blog</string>
+    <string name="user">User</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
