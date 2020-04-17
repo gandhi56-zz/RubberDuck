@@ -3,23 +3,28 @@
 
     <item
         android:id="@+id/stats"
-        android:title="@string/stats"/>
+        android:title="@string/stats"
+        android:icon="@drawable/stats_icon"/>
 
     <item
         android:id="@+id/contest"
-        android:title="@string/contest"/>
+        android:title="@string/contest"
+        android:icon="@drawable/contest_icon"/>
 
     <item
         android:id="@+id/play"
-        android:title="@string/play"/>
+        android:title="@string/play"
+        android:icon="@drawable/play_icon"/>
 
     <item
         android:id="@+id/blog"
-        android:title="@string/blog"/>
+        android:title="@string/blog"
+        android:icon="@drawable/blog_icon"/>
 
     <item
         android:id="@+id/user"
         android:title="@string/user"
+        android:icon="@drawable/user_icon"
         />
 
 </menu>
