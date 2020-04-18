@@ -1532,7 +1532,6 @@ id icon
 id icon_group
 id ifRoom
 id image
-id imageView
 id info
 id invisible
 id italic
@@ -1681,6 +1680,7 @@ id textinput_helper_text
 id time
 id title
 id titleDividerNoCustom
+id titlePhoto
 id title_template
 id top
 id topPanel

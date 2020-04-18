@@ -84,7 +84,7 @@ class LoginActivity : AppCompatActivity() {
 
             val resultArray = jsonObj.getJSONArray("result")
             user.setHandle(resultArray.getJSONObject(0).getString("handle"))
-            user.setTitlePhoto(resultArray.getJSONObject(0).getString("titlePhoto"))
+            user.setTitlePhoto("https:" + resultArray.getJSONObject(0).getString("titlePhoto"))
             user.setRank(resultArray.getJSONObject(0).getString("rank"))
             return true
         }
