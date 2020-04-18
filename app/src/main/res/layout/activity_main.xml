@@ -4,19 +4,76 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmentContainer"
     tools:context=".MainActivity">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:background="@color/colorPrimaryDark"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
+    <TextView
+        android:id="@+id/handleView"
+        android:layout_width="313dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/assistant"
+        android:text="Handle"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.026"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/rankView"
+        android:layout_width="393dp"
+        android:layout_height="54dp"
+        android:gravity="center"
+        android:text="TextView"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/handleView" />
+
+    <Button
+        android:id="@+id/ratingBtn"
+        android:layout_width="230dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="120dp"
+        android:text="Rating"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rankView" />
+
+    <Button
+        android:id="@+id/solvedProblemsBtn"
+        android:layout_width="230dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="32dp"
+        android:text="Solved Problems"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBtn" />
+
+    <Button
+        android:id="@+id/strengthsBtn"
+        android:layout_width="230dp"
+        android:layout_height="80dp"
+        android:text="Strengths"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solvedProblemsBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>

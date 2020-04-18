@@ -1,13 +1,6 @@
 <resources>
     <string name="app_name">RubberDuck</string>
-    <string name="email">email</string>
-    <string name="password">password</string>
     <string name="sign_in">sign in</string>
-    <string name="stats">Stats</string>
-    <string name="contest">Contest</string>
-    <string name="play">Play</string>
-    <string name="blog">Blog</string>
-    <string name="user">User</string>
     <string name="codeforces_handle">codeforces handle</string>
 
     <!-- TODO: Remove or change this placeholder text -->

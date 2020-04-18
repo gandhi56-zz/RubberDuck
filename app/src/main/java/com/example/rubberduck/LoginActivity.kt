@@ -27,6 +27,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var signInBtn: Button
     val tag: String = "LoginActivity"
     var handleState: HandleInput = HandleInput.EMPTY
+    var user = User()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,14 +75,17 @@ class LoginActivity : AppCompatActivity() {
             val request = Request.Builder().url(url).build()
             val response = client.newCall(request).execute()
             val json = response.body()?.string().toString()
-
             lbl.text = json
 
             val jsonObj = JSONObject(json)
-            val status = jsonObj.getString("status")
-            if (status == "FAILED"){
+            if (jsonObj.getString("status") == "FAILED"){
                 return false
             }
+
+            val resultArray = jsonObj.getJSONArray("result")
+            user.setHandle(resultArray.getJSONObject(0).getString("handle"))
+            user.setTitlePhoto(resultArray.getJSONObject(0).getString("titlePhoto"))
+            user.setRank(resultArray.getJSONObject(0).getString("rank"))
             return true
         }
 
@@ -119,7 +123,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startMainActivity(){
-        val intent = Intent(this, MainActivity::class.java).apply {}
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(Intent.EXTRA_USER, user)
         startActivity(intent)
     }
 }
