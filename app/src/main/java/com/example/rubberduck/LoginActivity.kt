@@ -11,6 +11,7 @@ import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.annotation.RequiresApi
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -70,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
             signInBtn.isEnabled = false
         }
 
+        @RequiresApi(Build.VERSION_CODES.N)
         @SuppressLint("WrongThread")
         override fun doInBackground(vararg params: Context): Boolean {
             var json = sendHTTPRequest("https://codeforces.com/api/user.info?handles=" + getHandle())
@@ -94,7 +96,8 @@ class LoginActivity : AppCompatActivity() {
             (0 until resultArray.length()-1).forEach { i ->
                 val sub = Submission()
                 sub.id = resultArray.getJSONObject(i).getInt("id")
-                sub.verdict = resultArray.getJSONObject(i).getString("verdict")
+                val verdict = resultArray.getJSONObject(i).getString("verdict")
+                user.addVerdict(verdict.toString())
 
                 sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getInt("contestId")
@@ -102,6 +105,8 @@ class LoginActivity : AppCompatActivity() {
                     .getString("index")
                 sub.problem.name = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getString("name")
+
+                // FIXME
 //                sub.problem.rating = resultArray.getJSONObject(i).getJSONObject("problem")
 //                    .getInt("rating")
 
