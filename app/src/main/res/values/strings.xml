@@ -8,6 +8,7 @@
     <string name="play">Play</string>
     <string name="blog">Blog</string>
     <string name="user">User</string>
+    <string name="codeforces_handle">codeforces handle</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

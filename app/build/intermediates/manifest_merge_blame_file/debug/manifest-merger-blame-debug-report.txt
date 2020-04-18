@@ -15,11 +15,11 @@
 11-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:4:22-64
 12
 13    <application
-13-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:6:5-21:19
+13-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:6:5-25:19
 14        android:allowBackup="true"
 14-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:7:9-35
 15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-15-->[androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/5c52af2befcfdd7f061cdb2081c184d3/core-1.2.0/AndroidManifest.xml:24:18-86
+15-->[androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a3eef63a1949ce565e26a68908e433ce/core-1.2.0/AndroidManifest.xml:24:18-86
 16        android:debuggable="true"
 17        android:icon="@mipmap/ic_launcher"
 17-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:8:9-43
@@ -49,6 +49,13 @@
 28-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:18:27-74
 29            </intent-filter>
 30        </activity>
-31    </application>
-32
-33</manifest>
+31
+32        <meta-data
+32-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:22:9-24:57
+33            android:name="preloaded_fonts"
+33-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:23:13-43
+34            android:resource="@array/preloaded_fonts" />
+34-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:24:13-54
+35    </application>
+36
+37</manifest>

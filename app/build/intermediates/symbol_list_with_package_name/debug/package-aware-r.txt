@@ -45,6 +45,10 @@ animator mtrl_fab_hide_motion_spec
 animator mtrl_fab_show_motion_spec
 animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
+array com_google_android_gms_fonts_certs
+array com_google_android_gms_fonts_certs_dev
+array com_google_android_gms_fonts_certs_prod
+array preloaded_fonts
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -1389,6 +1393,8 @@ drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
 drawable user_icon
+font amaranth
+font assistant
 id ALT
 id BOTTOM_END
 id BOTTOM_START
@@ -1527,6 +1533,7 @@ id ghost_view_holder
 id gone
 id group_divider
 id groups
+id handleText
 id hideable
 id home
 id homeAsUp
@@ -1599,6 +1606,7 @@ id peekHeight
 id percent
 id pin
 id play
+id progressBar
 id progress_circular
 id progress_horizontal
 id radio
@@ -1670,6 +1678,7 @@ id textSpacerNoButtons
 id textSpacerNoTitle
 id textStart
 id textView
+id textView2
 id text_input_end_icon
 id text_input_start_icon
 id textinput_counter
@@ -1880,6 +1889,7 @@ string character_counter_overflowed_content_description
 string character_counter_pattern
 string chip_text
 string clear_text_end_icon_content_description
+string codeforces_handle
 string contest
 string email
 string error_icon_content_description

@@ -2,6 +2,9 @@ package com.example.rubberduck
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.android.volley.Request
 import com.android.volley.Response
@@ -52,11 +55,6 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         replaceFragment(UserFragment()) // default fragment on screen
         bottomNavigation.menu.findItem(R.id.user).setChecked(true)
-
-        var receivedJson = ""
-        val getJson: (String)->Unit = {s : String -> receivedJson = s}
-        getUserData("https://codeforces.com/api/user.info?handles=gandhi21299", getJson)
-        println("Respone: ${receivedJson}")
     }
 
     private fun replaceFragment(fragment: Fragment){
@@ -65,17 +63,4 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    private fun getUserData(url: String, callback: (String)->Unit) : Unit{
-        val queue = Volley.newRequestQueue(this)
-        val stringRequest = StringRequest(
-            Request.Method.GET, url,
-            Response.Listener<String>{
-                    response ->
-                callback(response)
-            },
-            Response.ErrorListener{
-                callback("ERROR")
-            })
-        queue.add(stringRequest)
-    }
 }
