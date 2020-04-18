@@ -1639,6 +1639,7 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id signInBtn
 id skipCollapsed
 id slide
 id smallLabel
