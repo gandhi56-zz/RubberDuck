@@ -8,16 +8,16 @@
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_play_icon.png.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/build/generated/res/pngs/debug/drawable-xxxhdpi/play_icon.png"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-xxhdpi_play_icon.png.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/drawable-xxhdpi/play_icon.png"
     },
     {
-        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_play_icon.png.flat",
-        "source": "/home/anshil/workspace/RubberDuck/app/build/generated/res/pngs/debug/drawable-xxxhdpi/play_icon.png"
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-xxxhdpi_user_icon.png.flat",

@@ -6,6 +6,7 @@ import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import okhttp3.OkHttpClient
@@ -30,8 +31,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun startMainActivity(view: View){
-        getUserProfile().execute()
-        println("done")
+        if (validateInput()){
+            getUserProfile().execute()
+            println("done")
+        }
+        else{
+
+        }
     }
 
     internal inner class getUserProfile : AsyncTask<Void, Void, String>(){
@@ -43,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
         @SuppressLint("WrongThread")
         override fun doInBackground(vararg params: Void?): String {
             val client = OkHttpClient()
-            val url = "https://codeforces.com/api/user.info?handles=gandhi56"
+            val url = "https://codeforces.com/api/user.info?handles=" + getHandle()
             val request = Request.Builder().url(url).build()
             val response = client.newCall(request).execute()
             val json = response.body()?.string().toString()
@@ -58,5 +64,13 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    private fun validateInput(): Boolean{
+        return true
+    }
+
+    private fun getHandle(): String{
+        val nameTxt = findViewById<EditText>(R.id.handleText)
+        return nameTxt.text.toString()
+    }
 
 }
