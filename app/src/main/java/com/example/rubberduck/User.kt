@@ -1,11 +1,13 @@
 package com.example.rubberduck
 
+import org.json.JSONArray
 import java.io.Serializable
 
 class User: Serializable {
     private var handle: String? = null
     private var titlePhoto: String? = null
     private var rank: String? = null
+    var submissions = ArrayList<Submission>()
 
     fun User(){
         handle = ""
@@ -28,7 +30,9 @@ class User: Serializable {
     fun setRank(rankValue: String){
         rank = rankValue
     }
+
     fun getRank(): String{
         return rank.toString()
     }
+
 }
