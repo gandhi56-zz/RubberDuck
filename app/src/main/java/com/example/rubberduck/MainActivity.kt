@@ -1,31 +1,66 @@
 package com.example.rubberduck
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-
-const val EMAIL_MESSAGE = "com.example.rubberduck.EMAIL_MESSAGE"
+import android.widget.ProgressBar
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
+        item ->
+        when(item.itemId){
+            R.id.stats->{
+                println("Stats selected")
+                replaceFragment(StatsFragment())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.contest->{
+                println("Contest selected")
+                replaceFragment(ContestFragment())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.play->{
+                println("Play selected")
+                replaceFragment(PlayFragment())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.blog->{
+                println("Blog selected")
+                replaceFragment(BlogFragment())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.user->{
+                println("User selected")
+                replaceFragment(UserFragment())
+                return@OnNavigationItemSelectedListener true
+            }
+            else -> {
+                return@OnNavigationItemSelectedListener false
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        replaceFragment(UserFragment()) // default fragment on screen
+        bottomNavigation.menu.findItem(R.id.user).setChecked(true)
     }
 
-    fun startDashboard(view: View){
-        val emailTxt = findViewById<EditText>(R.id.emailText)
-        val passwordTxt = findViewById<EditText>(R.id.passwordText)
-        val email = emailTxt.text.toString()
-        val password = passwordTxt.text.toString()
-        val intent = Intent(this, DashboardActivity::class.java).apply {
-            putExtra(EMAIL_MESSAGE, email)
-        }
-        startActivity(intent)
+    private fun replaceFragment(fragment: Fragment){
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+        fragmentTransaction.commit()
     }
 
 }

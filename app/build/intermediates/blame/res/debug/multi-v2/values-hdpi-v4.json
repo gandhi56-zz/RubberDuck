@@ -4,7 +4,7 @@
             "outputFile": "/home/anshil/workspace/RubberDuck/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-hdpi-v4/values-hdpi-v4.xml",
             "map": [
                 {
-                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/aa9e18d12c5afb35dcd731ed91706877/appcompat-1.1.0/res/values-hdpi-v4/values-hdpi-v4.xml",
+                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/bd9eaa2992ad422b7eac643b0aac27f7/appcompat-1.1.0/res/values-hdpi-v4/values-hdpi-v4.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
