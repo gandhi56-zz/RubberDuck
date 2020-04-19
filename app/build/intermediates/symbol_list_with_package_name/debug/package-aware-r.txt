@@ -1594,6 +1594,7 @@ id parent_matrix
 id password_toggle
 id peekHeight
 id percent
+id piechart
 id pin
 id progressBar
 id progress_circular
@@ -1762,6 +1763,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_login
 layout activity_main
+layout activity_submission
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -1778,6 +1780,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_chart
 layout mtrl_alert_dialog
 layout mtrl_alert_dialog_actions
 layout mtrl_alert_dialog_title
@@ -1880,6 +1883,7 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string mtrl_badge_numberless_content_description

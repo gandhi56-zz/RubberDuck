@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var lbl: TextView
     lateinit var signInBtn: Button
     var handleState: HandleInput = HandleInput.EMPTY
-    var user = User()
+    var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +41,7 @@ class LoginActivity : AppCompatActivity() {
         lbl = findViewById(R.id.textView2)
         signInBtn = findViewById<Button>(R.id.signInBtn)
         progBar.setVisibility(View.INVISIBLE)
+        user = User()
     }
 
     fun signIn(view: View) {
@@ -80,9 +81,9 @@ class LoginActivity : AppCompatActivity() {
 
             // user data
             var resultArray = jsonObj.getJSONArray("result")
-            user.setHandle(resultArray.getJSONObject(0).getString("handle"))
-            user.setTitlePhoto("https:" + resultArray.getJSONObject(0).getString("titlePhoto"))
-            user.setRank(resultArray.getJSONObject(0).getString("rank"))
+            user?.setHandle(resultArray.getJSONObject(0).getString("handle"))
+            user?.setTitlePhoto("https:" + resultArray.getJSONObject(0).getString("titlePhoto"))
+            user?.setRank(resultArray.getJSONObject(0).getString("rank"))
 
             // submissions of the user
             json = sendHTTPRequest("https://codeforces.com/api/user.status?handle=" + getHandle())
@@ -97,7 +98,7 @@ class LoginActivity : AppCompatActivity() {
                 val sub = Submission()
                 sub.id = resultArray.getJSONObject(i).getInt("id")
                 val verdict = resultArray.getJSONObject(i).getString("verdict")
-                user.addVerdict(verdict.toString())
+                user?.addVerdict(verdict.toString())
 
                 sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getInt("contestId")
@@ -115,7 +116,7 @@ class LoginActivity : AppCompatActivity() {
                 (0 until tags.length()-1).forEach{j ->
                     sub.problem.tags.add(tags[j].toString())
                 }
-                user.submissions.add(sub)
+                user?.submissions?.add(sub)
             }
             return true
         }

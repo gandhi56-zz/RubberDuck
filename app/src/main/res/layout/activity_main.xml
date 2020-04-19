@@ -65,7 +65,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/ratingBtn"
+        android:onClick="startSubmissionActvity"/>
 
     <Button
         android:id="@+id/strengthsBtn"

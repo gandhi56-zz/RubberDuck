@@ -1,8 +1,10 @@
 package com.example.rubberduck
 
+import android.content.Intent
 import android.content.Intent.EXTRA_USER
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,6 +30,11 @@ class MainActivity : AppCompatActivity() {
         handleTxt.text = user.getHandle()
         rankTxt.text = user.getRank()
         solvedProblemsBtn.text = "Attempted ${user.submissions.size}"
+    }
+
+    fun startSubmissionActvity(view: View) {
+        val intent = Intent(this, SubmissionActivity::class.java)
+        startActivity(intent)
     }
 
 }
