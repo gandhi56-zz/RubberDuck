@@ -1,13 +1,14 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
-INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
-INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
-INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
 MERGED from [com.google.android.material:material:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/0cbb3851e4b63e68b75aa6e0a1a2998e/material-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/bd9eaa2992ad422b7eac643b0aac27f7/appcompat-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core-ktx:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/9bb335e4785cfec91958375c7c0d4aa2/jetified-core-ktx-1.2.0/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /home/anshil/.gradle/caches/transforms-2/files-2.1/85fa2711bb2ad134a23924a267c31046/constraintlayout-1.1.3/AndroidManifest.xml:2:1-11:12
+MERGED from [com.jjoe64:graphview:4.2.2] /home/anshil/.gradle/caches/transforms-2/files-2.1/c7eb0762a05355633233e91871169eb4/jetified-graphview-4.2.2/AndroidManifest.xml:2:1-14:12
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/69b4c8670b91f17f79d043e1e50fac52/legacy-support-v4-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.volley:volley:1.1.1] /home/anshil/.gradle/caches/transforms-2/files-2.1/6c89d50ee97dbd4eb43f1d731ae414b6/jetified-volley-1.1.1/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/80ab11731f015223616277d743ce584c/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
@@ -43,35 +44,37 @@ MERGED from [androidx.savedstate:savedstate:1.0.0] /home/anshil/.gradle/caches/t
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/c67b9bb136a4f6d2adb0b6b00aa57ae6/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a25feba509b9cf92e2d524d5a5ea1774/lifecycle-livedata-core-2.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/49555381fa7291ed6a909b646083fc2a/core-runtime-2.0.0/AndroidManifest.xml:17:1-22:12
-INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
-INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
-INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
+INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
+INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
 	package
 		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:4:5-37
 		INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml
 		INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
 		INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml
 	xmlns:tools
 		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-32:12
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:1-36:12
 		INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:2:11-69
 uses-permission#android.permission.INTERNET
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:5:5-67
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:6:5-67
 	android:name
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:5:22-64
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:6:22-64
 application
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:7:5-30:19
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:8:5-34:19
 MERGED from [com.google.android.material:material:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/0cbb3851e4b63e68b75aa6e0a1a2998e/material-1.1.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/0cbb3851e4b63e68b75aa6e0a1a2998e/material-1.1.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /home/anshil/.gradle/caches/transforms-2/files-2.1/85fa2711bb2ad134a23924a267c31046/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /home/anshil/.gradle/caches/transforms-2/files-2.1/85fa2711bb2ad134a23924a267c31046/constraintlayout-1.1.3/AndroidManifest.xml:9:5-20
+MERGED from [com.jjoe64:graphview:4.2.2] /home/anshil/.gradle/caches/transforms-2/files-2.1/c7eb0762a05355633233e91871169eb4/jetified-graphview-4.2.2/AndroidManifest.xml:11:5-12:19
+MERGED from [com.jjoe64:graphview:4.2.2] /home/anshil/.gradle/caches/transforms-2/files-2.1/c7eb0762a05355633233e91871169eb4/jetified-graphview-4.2.2/AndroidManifest.xml:11:5-12:19
 MERGED from [com.android.volley:volley:1.1.1] /home/anshil/.gradle/caches/transforms-2/files-2.1/6c89d50ee97dbd4eb43f1d731ae414b6/jetified-volley-1.1.1/AndroidManifest.xml:9:5-20
 MERGED from [com.android.volley:volley:1.1.1] /home/anshil/.gradle/caches/transforms-2/files-2.1/6c89d50ee97dbd4eb43f1d731ae414b6/jetified-volley-1.1.1/AndroidManifest.xml:9:5-20
 MERGED from [androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a3eef63a1949ce565e26a68908e433ce/core-1.2.0/AndroidManifest.xml:24:5-89
@@ -81,49 +84,53 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/anshi
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a3eef63a1949ce565e26a68908e433ce/core-1.2.0/AndroidManifest.xml:24:18-86
 	android:supportsRtl
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:12:9-35
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:13:9-35
 	android:label
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:10:9-41
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:11:9-41
 	android:roundIcon
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:11:9-54
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:12:9-54
 	android:icon
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:9:9-43
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:10:9-43
 	android:allowBackup
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:8:9-35
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:9:9-35
 	android:theme
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:13:9-40
-activity#com.example.rubberduck.MainActivity
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:9-16:56
-	android:screenOrientation
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:13-49
-	tools:ignore
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:16:13-53
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:9-40
+activity#com.example.rubberduck.RatingActivity
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:9-61
 	android:name
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:19-47
-activity#com.example.rubberduck.LoginActivity
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:17:9-25:20
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:19-49
+activity#com.example.rubberduck.MainActivity
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:16:9-19:56
 	android:screenOrientation
 		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:18:13-49
 	tools:ignore
 		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:19:13-53
 	android:name
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:17:19-48
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:17:13-41
+activity#com.example.rubberduck.LoginActivity
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:20:9-29:20
+	android:screenOrientation
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:22:13-49
+	tools:ignore
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:23:13-53
+	android:name
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:21:13-42
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:20:13-24:29
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:24:13-28:29
 action#android.intent.action.MAIN
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:21:17-69
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:25:17-69
 	android:name
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:21:25-66
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:25:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:23:17-77
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:27:17-77
 	android:name
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:23:27-74
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:27:27-74
 meta-data#preloaded_fonts
-ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:27:9-29:57
+ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:31:9-33:57
 	android:resource
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:29:13-54
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:33:13-54
 	android:name
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:28:13-43
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:32:13-43
 uses-sdk
 INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml
@@ -136,6 +143,8 @@ MERGED from [androidx.core:core-ktx:1.2.0] /home/anshil/.gradle/caches/transform
 MERGED from [androidx.core:core-ktx:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/9bb335e4785cfec91958375c7c0d4aa2/jetified-core-ktx-1.2.0/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /home/anshil/.gradle/caches/transforms-2/files-2.1/85fa2711bb2ad134a23924a267c31046/constraintlayout-1.1.3/AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /home/anshil/.gradle/caches/transforms-2/files-2.1/85fa2711bb2ad134a23924a267c31046/constraintlayout-1.1.3/AndroidManifest.xml:5:5-7:41
+MERGED from [com.jjoe64:graphview:4.2.2] /home/anshil/.gradle/caches/transforms-2/files-2.1/c7eb0762a05355633233e91871169eb4/jetified-graphview-4.2.2/AndroidManifest.xml:7:5-9:41
+MERGED from [com.jjoe64:graphview:4.2.2] /home/anshil/.gradle/caches/transforms-2/files-2.1/c7eb0762a05355633233e91871169eb4/jetified-graphview-4.2.2/AndroidManifest.xml:7:5-9:41
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/69b4c8670b91f17f79d043e1e50fac52/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/69b4c8670b91f17f79d043e1e50fac52/legacy-support-v4-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [com.android.volley:volley:1.1.1] /home/anshil/.gradle/caches/transforms-2/files-2.1/6c89d50ee97dbd4eb43f1d731ae414b6/jetified-volley-1.1.1/AndroidManifest.xml:7:5-43

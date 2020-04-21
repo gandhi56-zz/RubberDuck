@@ -88,6 +88,10 @@
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/activity_login.xml"
     },
     {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/layout_activity_rating.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/activity_rating.xml"
+    },
+    {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/activity_main.xml"
     },
