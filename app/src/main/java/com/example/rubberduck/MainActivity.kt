@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         handleTxt.text = user.getHandle()
         rankTxt.text = user.getRank()
         solvedProblemsBtn.text = "Attempted ${user.submissions.size}"
+        ratingsBtn.text = user.ratingList[user.ratingList.size-1].toString()
     }
 
 }

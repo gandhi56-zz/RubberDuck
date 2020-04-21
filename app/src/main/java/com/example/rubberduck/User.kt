@@ -14,8 +14,10 @@ class User: Serializable {
     private var handle: String? = null
     private var titlePhoto: String? = null
     private var rank: String? = null
+    var ratingList = ArrayList<Int>()
     var submissions = ArrayList<Submission>()
     var verdictStats: HashMap<String, Int> = HashMap<String, Int>()
+    var classStats: HashMap<String, Int> = HashMap<String, Int>()
 
     fun User(){
         handle = ""
@@ -44,13 +46,20 @@ class User: Serializable {
     }
 
     fun addVerdict(verdict: String){
-        println("adding verdict ${verdict}")
         if (verdictStats.containsKey(verdict)){
             verdictStats[verdict] = verdictStats[verdict]!! + 1
         }
         else{
-            println("${verdict} key not found")
             verdictStats[verdict] = 1
+        }
+    }
+
+    fun addClass(tag: String){
+        if (classStats.containsKey(tag)){
+            classStats[tag] = classStats[tag]!! + 1
+        }
+        else{
+            classStats[tag] = 1
         }
     }
 

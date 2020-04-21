@@ -74,31 +74,34 @@ class LoginActivity : AppCompatActivity() {
         @RequiresApi(Build.VERSION_CODES.N)
         @SuppressLint("WrongThread")
         override fun doInBackground(vararg params: Context): Boolean {
-            var json = sendHTTPRequest("https://codeforces.com/api/user.info?handles=" + getHandle())
+
+            // HTTP user.info request ---------------------------------------------------------------
+            var json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
+                    + getHandle())
             var jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
 
             // user data
             var resultArray = jsonObj.getJSONArray("result")
             user.setHandle(resultArray.getJSONObject(0).getString("handle"))
-            user.setTitlePhoto("https:" + resultArray.getJSONObject(0).getString("titlePhoto"))
+            user.setTitlePhoto("https:" + resultArray.getJSONObject(0)
+                .getString("titlePhoto"))
             user.setRank(resultArray.getJSONObject(0).getString("rank"))
 
+            // HTTP user.status request -------------------------------------------------------------
             // submissions of the user
-            json = sendHTTPRequest("https://codeforces.com/api/user.status?handle=" + getHandle())
+            json = sendHTTPRequest("https://codeforces.com/api/user.status?handle="
+                    + getHandle())
             jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
             lbl.text = json
             resultArray = jsonObj.getJSONArray("result")
-            println("LEN = ${resultArray.length()}")
-            println("RESULT = ${resultArray.getJSONObject(0).getJSONObject("problem")}")
 
             (0 until resultArray.length()-1).forEach { i ->
                 val sub = Submission()
                 sub.id = resultArray.getJSONObject(i).getInt("id")
                 val verdict = resultArray.getJSONObject(i).getString("verdict")
                 user.addVerdict(verdict.toString())
-
                 sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getInt("contestId")
                 sub.problem.index = resultArray.getJSONObject(i).getJSONObject("problem")
@@ -114,9 +117,23 @@ class LoginActivity : AppCompatActivity() {
                     .getJSONArray("tags")
                 (0 until tags.length()-1).forEach{j ->
                     sub.problem.tags.add(tags[j].toString())
+                    user.addClass(tags[j].toString())
                 }
                 user.submissions.add(sub)
             }
+
+            // HTTP user.rating request -------------------------------------------------------------
+            json = sendHTTPRequest("https://codeforces.com/api/user.rating?handle="
+                    + getHandle())
+            jsonObj = JSONObject(json)
+            if (jsonObj.getString("status") == "FAILED")    return false
+            lbl.text = json
+            resultArray = jsonObj.getJSONArray("result")
+            user.ratingList.add(1500) // initial rating
+            (0 until resultArray.length()-1).forEach {i ->
+                user.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
+            }
+
             return true
         }
 
