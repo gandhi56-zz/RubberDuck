@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var lbl: TextView
     lateinit var signInBtn: Button
     var handleState: HandleInput = HandleInput.EMPTY
-    var user = User()
+    var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
 
     fun signIn(view: View) {
         handleState = HandleInput.WAIT
+        user = User()
         hideKeyboard()
         if (validateInput())
             UserProfileRequest().execute()
@@ -83,10 +84,10 @@ class LoginActivity : AppCompatActivity() {
 
             // user data
             var resultArray = jsonObj.getJSONArray("result")
-            user.setHandle(resultArray.getJSONObject(0).getString("handle"))
-            user.setTitlePhoto("https:" + resultArray.getJSONObject(0)
+            user!!.setHandle(resultArray.getJSONObject(0).getString("handle"))
+            user!!.setTitlePhoto("https:" + resultArray.getJSONObject(0)
                 .getString("titlePhoto"))
-            user.setRank(resultArray.getJSONObject(0).getString("rank"))
+            user!!.setRank(resultArray.getJSONObject(0).getString("rank"))
 
             // HTTP user.status request -------------------------------------------------------------
             // submissions of the user
@@ -94,16 +95,16 @@ class LoginActivity : AppCompatActivity() {
                     + getHandle())
             jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            lbl.text = json
+            //lbl.text = json
             resultArray = jsonObj.getJSONArray("result")
 
             (0 until resultArray.length()-1).forEach { i ->
                 val sub = Submission()
                 sub.id = resultArray.getJSONObject(i).getInt("id")
                 val verdict = resultArray.getJSONObject(i).getString("verdict")
-                user.addVerdict(verdict.toString())
-                sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
-                    .getInt("contestId")
+                user!!.addVerdict(verdict.toString())
+//                sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
+//                    .getInt("contestId")
                 sub.problem.index = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getString("index")
                 sub.problem.name = resultArray.getJSONObject(i).getJSONObject("problem")
@@ -117,9 +118,9 @@ class LoginActivity : AppCompatActivity() {
                     .getJSONArray("tags")
                 (0 until tags.length()-1).forEach{j ->
                     sub.problem.tags.add(tags[j].toString())
-                    user.addClass(tags[j].toString())
+                    user!!.addClass(tags[j].toString())
                 }
-                user.submissions.add(sub)
+                user!!.submissions.add(sub)
             }
 
             // HTTP user.rating request -------------------------------------------------------------
@@ -127,11 +128,11 @@ class LoginActivity : AppCompatActivity() {
                     + getHandle())
             jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            lbl.text = json
+            //lbl.text = json
             resultArray = jsonObj.getJSONArray("result")
-            user.ratingList.add(1500) // initial rating
+            user!!.ratingList.add(1500) // initial rating
             (0 until resultArray.length()-1).forEach {i ->
-                user.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
+                user!!.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
             }
 
             return true
