@@ -31,6 +31,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var signInBtn: Button
     var handleState: HandleInput = HandleInput.EMPTY
     var user: User? = null
+    var problemSet = ArrayList<Problem>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,7 @@ class LoginActivity : AppCompatActivity() {
     fun signIn(view: View) {
         handleState = HandleInput.WAIT
         user = User()
+        problemSet = ArrayList<Problem>()
         hideKeyboard()
         if (validateInput())
             UserProfileRequest().execute()
@@ -103,16 +105,20 @@ class LoginActivity : AppCompatActivity() {
                 sub.id = resultArray.getJSONObject(i).getInt("id")
                 val verdict = resultArray.getJSONObject(i).getString("verdict")
                 user!!.addVerdict(verdict.toString())
-//                sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
-//                    .getInt("contestId")
+                if (resultArray.getJSONObject(i).getJSONObject("problem").has("contestId")){
+                    sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
+                        .getInt("contestId")
+                }
+
                 sub.problem.index = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getString("index")
                 sub.problem.name = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getString("name")
 
-                // FIXME
-//                sub.problem.rating = resultArray.getJSONObject(i).getJSONObject("problem")
-//                    .getInt("rating")
+                if (resultArray.getJSONObject(i).getJSONObject("problem").has("rating")){
+                    sub.problem.rating = resultArray.getJSONObject(i).getJSONObject("problem")
+                        .getInt("rating")
+                }
 
                 val tags = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getJSONArray("tags")
@@ -134,6 +140,32 @@ class LoginActivity : AppCompatActivity() {
             (0 until resultArray.length()-1).forEach {i ->
                 user!!.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
             }
+
+            // HTTP problemset.problems request -----------------------------------------------------
+            json = sendHTTPRequest(" https://codeforces.com/api/problemset.problems")
+            jsonObj = JSONObject(json)
+            if (jsonObj.getString("status") == "FAILED")    return false
+            var problemsetJson = jsonObj.getJSONObject("result").getJSONArray("problems")
+
+            (0 until problemsetJson.length()-1).forEach{ i->
+                var prob = Problem()
+                var probJson = problemsetJson.getJSONObject(i)
+                if (probJson.has("contestId")){
+                    prob.contestId = probJson.getInt("contestId")
+                }
+                prob.index = probJson.getString("index")
+                prob.name = probJson.getString("name")
+                if (probJson.has("rating")){
+                    prob.rating = probJson.getInt("rating")
+                }
+                val tags = probJson.getJSONArray("tags")
+                (0 until tags.length()-1).forEach{j ->
+                    prob.tags.add(tags[j].toString())
+                }
+                problemSet.add(prob)
+                println(prob.name)
+            }
+            println(problemSet.size)
 
             return true
         }
@@ -182,6 +214,7 @@ class LoginActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             intent.putExtra(Intent.EXTRA_USER, user)
+//            intent.putExtra(Intent.EXTRA_STREAM, problemSet)
         }
         startActivity(intent)
     }

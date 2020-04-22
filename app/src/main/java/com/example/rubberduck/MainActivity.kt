@@ -1,6 +1,7 @@
 package com.example.rubberduck
 
 import android.content.Intent
+import android.content.Intent.EXTRA_STREAM
 import android.content.Intent.EXTRA_USER
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +15,14 @@ import com.squareup.picasso.Picasso
 class MainActivity : AppCompatActivity() {
 
     var user: User? = null
+    var problemSet: ArrayList<Problem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         user = intent.getSerializableExtra(EXTRA_USER) as User
+//        problemSet = intent.getSerializableExtra(EXTRA_STREAM) as ArrayList<Problem>
 
         val userPic = findViewById<ImageView>(R.id.titlePhoto)
         val handleTxt = findViewById<TextView>(R.id.handleView)
