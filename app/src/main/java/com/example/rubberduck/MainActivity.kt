@@ -44,5 +44,20 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    fun startSubmissionActivity(view: View) {
+        val intent = Intent(this, SubmissionActivity::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            intent.putExtra(Intent.EXTRA_USER, user)
+        }
+        startActivity(intent)
+    }
+
+    fun startCategoriesActivity(view: View) {
+        val intent = Intent(this, CategoriesActivity::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            intent.putExtra(Intent.EXTRA_USER, user)
+        }
+        startActivity(intent)
+    }
 
 }

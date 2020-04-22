@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RatingActivity"></activity>
+        <activity android:name=".CategoriesActivity"></activity>
+        <activity android:name=".SubmissionActivity" />
+        <activity android:name=".RatingActivity" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"

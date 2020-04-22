@@ -20,6 +20,8 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
+        <activity android:name="com.example.rubberduck.CategoriesActivity" />
+        <activity android:name="com.example.rubberduck.SubmissionActivity" />
         <activity android:name="com.example.rubberduck.RatingActivity" />
         <activity
             android:name="com.example.rubberduck.MainActivity"
