@@ -2,6 +2,8 @@
     <string name="app_name">RubberDuck</string>
     <string name="sign_in">sign in</string>
     <string name="codeforces_handle">codeforces handle</string>
+    <string name="handle">Handle</string>
+    <string name="rank">rank</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

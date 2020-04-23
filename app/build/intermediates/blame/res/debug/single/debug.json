@@ -52,12 +52,12 @@
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xxhdpi/ic_launcher.png"
     },
     {
-        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/font_amaranth.xml.flat",
-        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/font/amaranth.xml"
-    },
-    {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/layout_activity_categories.xml.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/activity_categories.xml"
+    },
+    {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/font_amaranth.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/font/amaranth.xml"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
@@ -96,12 +96,12 @@
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/activity_rating.xml"
     },
     {
-        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat",
-        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/activity_main.xml"
-    },
-    {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/layout_activity_submission.xml.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/activity_submission.xml"
+    },
+    {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/layout_activity_main.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/layout/activity_main.xml"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable-mdpi_ic_launcher_background.png.flat",

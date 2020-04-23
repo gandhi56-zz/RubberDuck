@@ -1889,6 +1889,7 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string handle
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string mtrl_badge_numberless_content_description
@@ -1930,6 +1931,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string rank
 string search_menu_title
 string sign_in
 string status_bar_notification_info_overflow

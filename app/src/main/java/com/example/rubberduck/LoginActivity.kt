@@ -12,6 +12,7 @@ import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
+import com.example.rubberduck.HandleInput.EMPTY
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -29,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var handleText: EditText
     lateinit var lbl: TextView
     lateinit var signInBtn: Button
-    var handleState: HandleInput = HandleInput.EMPTY
+    var handleState: HandleInput = EMPTY
     var user: User? = null
     var problemSet = ArrayList<Problem>()
 
@@ -52,17 +53,7 @@ class LoginActivity : AppCompatActivity() {
         if (validateInput())
             UserProfileRequest().execute()
         else
-            handleState = HandleInput.EMPTY
-
-        // FIXME async toasts
-        when (handleState){
-            HandleInput.EMPTY -> {
-                Toast.makeText(this,"Please enter a codeforces handle",Toast.LENGTH_SHORT).show()
-            }
-            HandleInput.INVALID ->{
-                Toast.makeText(this,"Invalid codeforces handle",Toast.LENGTH_SHORT).show()
-            }
-        }
+            handleState = EMPTY
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -137,7 +128,7 @@ class LoginActivity : AppCompatActivity() {
             //lbl.text = json
             resultArray = jsonObj.getJSONArray("result")
             user!!.ratingList.add(1500) // initial rating
-            (0 until resultArray.length()-1).forEach {i ->
+            (0 until resultArray.length()).forEach {i ->
                 user!!.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
             }
 
@@ -145,11 +136,11 @@ class LoginActivity : AppCompatActivity() {
             json = sendHTTPRequest(" https://codeforces.com/api/problemset.problems")
             jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            var problemsetJson = jsonObj.getJSONObject("result").getJSONArray("problems")
+            val problemsetJson = jsonObj.getJSONObject("result").getJSONArray("problems")
 
-            (0 until problemsetJson.length()-1).forEach{ i->
-                var prob = Problem()
-                var probJson = problemsetJson.getJSONObject(i)
+            (0 until problemsetJson.length()).forEach{ i->
+                val prob = Problem()
+                val probJson = problemsetJson.getJSONObject(i)
                 if (probJson.has("contestId")){
                     prob.contestId = probJson.getInt("contestId")
                 }
@@ -159,7 +150,7 @@ class LoginActivity : AppCompatActivity() {
                     prob.rating = probJson.getInt("rating")
                 }
                 val tags = probJson.getJSONArray("tags")
-                (0 until tags.length()-1).forEach{j ->
+                (0 until tags.length()).forEach{j ->
                     prob.tags.add(tags[j].toString())
                 }
                 problemSet.add(prob)
