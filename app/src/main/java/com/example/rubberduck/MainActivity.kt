@@ -28,16 +28,10 @@ class MainActivity : AppCompatActivity() {
         val handleTxt = findViewById<TextView>(R.id.handleView)
         val rankTxt = findViewById<TextView>(R.id.rankView)
 
-        val ratingsBtn = findViewById<Button>(R.id.ratingBtn)
-        val solvedProblemsBtn = findViewById<Button>(R.id.solvedProblemsBtn)
-        val strengthsBtn = findViewById<Button>(R.id.strengthsBtn)
-
         Picasso.with(this).load(user!!.getTitlePhoto()).into(userPic)
 
         handleTxt.text = user!!.getHandle()
         rankTxt.text = user!!.getRank()
-        solvedProblemsBtn.text = "Attempted ${user!!.submissions.size}"
-        ratingsBtn.text = user!!.ratingList[user!!.ratingList.size-1].toString()
     }
 
     fun startRatingActivity(view: View) {

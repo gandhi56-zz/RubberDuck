@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
         handleText = findViewById<EditText>(R.id.handleText)
         lbl = findViewById(R.id.textView2)
         signInBtn = findViewById<Button>(R.id.signInBtn)
-        progBar.setVisibility(View.INVISIBLE)
+        progBar.visibility = View.INVISIBLE
     }
 
     fun signIn(view: View) {
