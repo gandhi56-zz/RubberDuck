@@ -3,6 +3,9 @@ package com.example.rubberduck
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.ColorFilter
 import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -28,19 +31,18 @@ class LoginActivity : AppCompatActivity() {
 
     lateinit var progBar: ProgressBar
     lateinit var handleText: EditText
-    lateinit var lbl: TextView
     lateinit var signInBtn: Button
     var handleState: HandleInput = EMPTY
     var user: User? = null
     var problemSet = ArrayList<Problem>()
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         progBar = findViewById<ProgressBar>(R.id.progressBar)
         handleText = findViewById<EditText>(R.id.handleText)
-        lbl = findViewById(R.id.textView2)
         signInBtn = findViewById<Button>(R.id.signInBtn)
         progBar.visibility = View.INVISIBLE
     }
@@ -88,7 +90,6 @@ class LoginActivity : AppCompatActivity() {
                     + getHandle())
             jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            //lbl.text = json
             resultArray = jsonObj.getJSONArray("result")
 
             (0 until resultArray.length()-1).forEach { i ->
@@ -125,7 +126,6 @@ class LoginActivity : AppCompatActivity() {
                     + getHandle())
             jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            //lbl.text = json
             resultArray = jsonObj.getJSONArray("result")
             user!!.ratingList.add(1500) // initial rating
             (0 until resultArray.length()).forEach {i ->

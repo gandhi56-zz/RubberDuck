@@ -12,12 +12,12 @@
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
-    },
-    {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
@@ -72,6 +72,10 @@
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xhdpi/ic_launcher.png"
     },
     {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable_handle_view.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/drawable/handle_view.xml"
+    },
+    {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-anydpi-v26_ic_launcher.xml.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
     },
@@ -84,8 +88,16 @@
         "source": "/home/anshil/workspace/RubberDuck/app/build/generated/res/pngs/debug/drawable-hdpi/ic_launcher_background.png"
     },
     {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/font_anaheim.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/font/anaheim.xml"
+    },
+    {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable_menu_layout.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/drawable/menu_layout.xml"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/layout_activity_login.xml.flat",
