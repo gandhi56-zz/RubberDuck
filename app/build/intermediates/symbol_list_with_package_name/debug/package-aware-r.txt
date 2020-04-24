@@ -1397,6 +1397,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable profile_pic_bg
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -1535,6 +1536,7 @@ id forever
 id ghost_view
 id ghost_view_holder
 id gone
+id gridLayout
 id group_divider
 id groups
 id handleText
@@ -1888,11 +1890,13 @@ string abc_toolbar_collapse_description
 string app_name
 string appbar_scrolling_view_behavior
 string bottom_sheet_behavior
+string categories
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string chip_text
 string clear_text_end_icon_content_description
+string code
 string codeforces_handle
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
@@ -1941,9 +1945,11 @@ string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
 string rank
+string rating
 string search_menu_title
 string sign_in
 string status_bar_notification_info_overflow
+string verdicts
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

@@ -4,6 +4,10 @@
     <string name="codeforces_handle">codeforces handle</string>
     <string name="handle">Handle</string>
     <string name="rank">rank</string>
+    <string name="code">Code</string>
+    <string name="rating">Rating</string>
+    <string name="verdicts">Verdicts</string>
+    <string name="categories">Categories</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
