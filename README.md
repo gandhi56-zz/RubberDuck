@@ -1,34 +1,62 @@
 ## RubberDuck
 
 ### Overview
-* RubberDuck is an android application that includes various features to helps competitive programmers to track and improve their problem-solving skills. Some features include:
-  * sync with codeforces profile
-  * play code to survive
-    * solve problems out of surprise based on your skill level until you give up!
-  * solve suggested problems from codeforces
-  * track and visualize performance on a website and multiple websites together
-  * a blog containing articles on algorithms and data structures
+* RubberDuck is an android application that includes various features to 
+helps competitive programmers to track and improve their problem-solving 
+skills.
 
 ### Development
-* This project is currenly under development, mainly done in the bottombar branch. 
-  * Features that have been implemented includes:
-    * Login activity (MainActivity.xml)
-    * Firebase database setup
+* This project is currenly under development, mainly done in the alpha2 
+branch. Features that have been implemented include:
+  * fetching user profile data and storing in a user object which is passed
+    between activities; the user object stores:
+    * handle
+    * url to profile photo
+    * rank
+    * ratings ArrayList
+    * submissions ArrayList
+    * verdicts HashMap
+    * solved problem categories HashMap
+  * renders user profile photo
+  * displays ratings line graph
+  * displays pie graph for submission statistics
+  * displays pie graph for solved problem categories statistics
+  * receives a list of all problems on codeforces
 
-### Issues
-* UI: the bottombar navigation controls and their corresponding pages
-  * Stats
-    * display user performance for codeforces including ratings graph and solved problems graph respecting difficulty
-  * Contest
-    * view problems synchronized submission status during contest
-  * Play
-    * loads a page where the user can select a training platform
-      * warmup: RubberDuck recommends problems to warm the user up
-      * code to survive: a rapid fire game where user is spontaneously given problems to solve with a survival time limit
-      * master it: user will be given problems of a particular kind at random to measure performance in specific classes of problems
-  * Blog
-    * display articles on algorithms and data structures
-  * User
-    * user profile settings
-* implement HTTP GET request method to fetch data from the codeforces API and store the response in a JSONObject
-* implement UI components to appropriately display JSONObjects
+### Issues and TODOs
+* Application context
+  * store problemset which is globally accessible to activities, 
+  or is there a better solution?
+  * problem suggestion algorithm formulation
+  * live coding
+* User interface
+  * LoginActivity
+  * MainActivity
+  * Ratings line graph
+    * change the ratings array into an array of entries which are directly
+    usable by the pie chart component
+    * table of contests
+    * x-axis should contain dates 
+    * add colours to the chart to convey ranks
+    * each point may be tapped to link the user to the corresponding 
+    contest
+  * Submissions pie chart
+    * Fix display of labels and numbers
+    * Fix colour issues
+    * Improve labelling
+    * add table
+  * Problem categories
+    * Fix display of labels and numbers
+    * Fix colour issues
+    * Improve labelling
+    * add table
+  * Theme
+  * Buttons
+  * Font
+  
+  
+  
+  
+  
+  
+

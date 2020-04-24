@@ -3,13 +3,19 @@ package com.example.rubberduck
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.ColorFilter
 import android.os.AsyncTask
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
+import androidx.annotation.RequiresApi
+import com.example.rubberduck.HandleInput.EMPTY
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -18,76 +24,146 @@ enum class HandleInput{
     WAIT, EMPTY, INVALID, OK
 }
 
+// https://codeforces.com/api/user.status?handle=Fefer_Ivan
+
 @Suppress("UNREACHABLE_CODE")
 class LoginActivity : AppCompatActivity() {
 
     lateinit var progBar: ProgressBar
     lateinit var handleText: EditText
-    lateinit var lbl: TextView
     lateinit var signInBtn: Button
-    val tag: String = "LoginActivity"
-    var handleState: HandleInput = HandleInput.EMPTY
+    var handleState: HandleInput = EMPTY
+    var user: User? = null
+    var problemSet = ArrayList<Problem>()
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
         progBar = findViewById<ProgressBar>(R.id.progressBar)
         handleText = findViewById<EditText>(R.id.handleText)
-        lbl = findViewById(R.id.textView2)
         signInBtn = findViewById<Button>(R.id.signInBtn)
-
-        progBar.setVisibility(View.INVISIBLE)
+        progBar.visibility = View.INVISIBLE
     }
 
-    fun signIn(view: View){
+    fun signIn(view: View) {
         handleState = HandleInput.WAIT
-        hide_keyboard()
+        user = User()
+        problemSet = ArrayList<Problem>()
+        hideKeyboard()
         if (validateInput())
-            getUserProfile().execute()
+            UserProfileRequest().execute()
         else
-            handleState = HandleInput.EMPTY
-
-        // FIXME async toasts
-        when (handleState){
-            HandleInput.EMPTY -> {
-                Toast.makeText(this,"Please enter a codeforces handle",Toast.LENGTH_SHORT).show()
-            }
-            HandleInput.INVALID ->{
-                Toast.makeText(this,"Invalid codeforces handle",Toast.LENGTH_SHORT).show()
-            }
-        }
+            handleState = EMPTY
     }
 
-    internal inner class getUserProfile : AsyncTask<Context, Void, Boolean>(){
+    @SuppressLint("StaticFieldLeak")
+    internal inner class UserProfileRequest : AsyncTask<Context, Void, Boolean>(){
         override fun onPreExecute() {
             super.onPreExecute()
-            progBar.setVisibility(View.VISIBLE)
-            handleText.setEnabled(false)
-            signInBtn.setEnabled(false)
+            progBar.visibility = View.VISIBLE
+            handleText.isEnabled = false
+            signInBtn.isEnabled = false
         }
 
+        @RequiresApi(Build.VERSION_CODES.N)
         @SuppressLint("WrongThread")
         override fun doInBackground(vararg params: Context): Boolean {
-            val client = OkHttpClient()
-            val url = "https://codeforces.com/api/user.info?handles=" + getHandle()
-            val request = Request.Builder().url(url).build()
-            val response = client.newCall(request).execute()
-            val json = response.body()?.string().toString()
 
-            lbl.text = json
+            // HTTP user.info request ---------------------------------------------------------------
+            var json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
+                    + getHandle())
+            var jsonObj = JSONObject(json)
+            if (jsonObj.getString("status") == "FAILED")    return false
 
-            val jsonObj = JSONObject(json)
-            val status = jsonObj.getString("status")
-            if (status == "FAILED"){
-                return false
+            // user data
+            var resultArray = jsonObj.getJSONArray("result")
+            user!!.setHandle(resultArray.getJSONObject(0).getString("handle"))
+            user!!.setTitlePhoto("https:" + resultArray.getJSONObject(0)
+                .getString("titlePhoto"))
+            user!!.setRank(resultArray.getJSONObject(0).getString("rank"))
+
+            // HTTP user.status request -------------------------------------------------------------
+            // submissions of the user
+            json = sendHTTPRequest("https://codeforces.com/api/user.status?handle="
+                    + getHandle())
+            jsonObj = JSONObject(json)
+            if (jsonObj.getString("status") == "FAILED")    return false
+            resultArray = jsonObj.getJSONArray("result")
+
+            (0 until resultArray.length()-1).forEach { i ->
+                val sub = Submission()
+                sub.id = resultArray.getJSONObject(i).getInt("id")
+                val verdict = resultArray.getJSONObject(i).getString("verdict")
+                user!!.addVerdict(verdict.toString())
+                if (resultArray.getJSONObject(i).getJSONObject("problem").has("contestId")){
+                    sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
+                        .getInt("contestId")
+                }
+
+                sub.problem.index = resultArray.getJSONObject(i).getJSONObject("problem")
+                    .getString("index")
+                sub.problem.name = resultArray.getJSONObject(i).getJSONObject("problem")
+                    .getString("name")
+
+                if (resultArray.getJSONObject(i).getJSONObject("problem").has("rating")){
+                    sub.problem.rating = resultArray.getJSONObject(i).getJSONObject("problem")
+                        .getInt("rating")
+                }
+
+                val tags = resultArray.getJSONObject(i).getJSONObject("problem")
+                    .getJSONArray("tags")
+                (0 until tags.length()-1).forEach{j ->
+                    sub.problem.tags.add(tags[j].toString())
+                    user!!.addClass(tags[j].toString())
+                }
+                user!!.submissions.add(sub)
             }
+
+            // HTTP user.rating request -------------------------------------------------------------
+            json = sendHTTPRequest("https://codeforces.com/api/user.rating?handle="
+                    + getHandle())
+            jsonObj = JSONObject(json)
+            if (jsonObj.getString("status") == "FAILED")    return false
+            resultArray = jsonObj.getJSONArray("result")
+            user!!.ratingList.add(1500) // initial rating
+            (0 until resultArray.length()).forEach {i ->
+                user!!.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
+            }
+
+            // HTTP problemset.problems request -----------------------------------------------------
+            json = sendHTTPRequest(" https://codeforces.com/api/problemset.problems")
+            jsonObj = JSONObject(json)
+            if (jsonObj.getString("status") == "FAILED")    return false
+            val problemsetJson = jsonObj.getJSONObject("result").getJSONArray("problems")
+
+            (0 until problemsetJson.length()).forEach{ i->
+                val prob = Problem()
+                val probJson = problemsetJson.getJSONObject(i)
+                if (probJson.has("contestId")){
+                    prob.contestId = probJson.getInt("contestId")
+                }
+                prob.index = probJson.getString("index")
+                prob.name = probJson.getString("name")
+                if (probJson.has("rating")){
+                    prob.rating = probJson.getInt("rating")
+                }
+                val tags = probJson.getJSONArray("tags")
+                (0 until tags.length()).forEach{j ->
+                    prob.tags.add(tags[j].toString())
+                }
+                problemSet.add(prob)
+                println(prob.name)
+            }
+            println(problemSet.size)
+
             return true
         }
 
         override fun onPostExecute(result: Boolean) {
             super.onPostExecute(result)
-            progBar.setVisibility(View.GONE)
+            progBar.visibility = View.GONE
             if (result){
                 handleState = HandleInput.OK
                 startMainActivity()
@@ -95,8 +171,15 @@ class LoginActivity : AppCompatActivity() {
             else{
                 handleState = HandleInput.INVALID
             }
-            handleText.setEnabled(true)
-            signInBtn.setEnabled(true)
+            handleText.isEnabled = true
+            signInBtn.isEnabled = true
+        }
+
+        private fun sendHTTPRequest(url: String): String{
+            val client = OkHttpClient()
+            val request = Request.Builder().url(url).build()
+            val response = client.newCall(request).execute()
+            return response.body()?.string().toString()
         }
     }
 
@@ -109,7 +192,7 @@ class LoginActivity : AppCompatActivity() {
         return nameTxt.text.toString()
     }
 
-    private fun hide_keyboard(){
+    private fun hideKeyboard(){
         val view = this.currentFocus
         if (view != null){
             val hideMe = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -119,7 +202,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun startMainActivity(){
-        val intent = Intent(this, MainActivity::class.java).apply {}
+        val intent = Intent(this, MainActivity::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            intent.putExtra(Intent.EXTRA_USER, user)
+//            intent.putExtra(Intent.EXTRA_STREAM, problemSet)
+        }
         startActivity(intent)
     }
 }

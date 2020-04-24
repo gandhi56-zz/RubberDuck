@@ -20,8 +20,15 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.rubberduck.MainActivity" />
-        <activity android:name="com.example.rubberduck.LoginActivity" >
+        <activity android:name="com.example.rubberduck.CategoriesActivity" />
+        <activity android:name="com.example.rubberduck.SubmissionActivity" />
+        <activity android:name="com.example.rubberduck.RatingActivity" />
+        <activity
+            android:name="com.example.rubberduck.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.rubberduck.LoginActivity"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

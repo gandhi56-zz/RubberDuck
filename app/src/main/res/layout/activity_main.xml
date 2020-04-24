@@ -4,19 +4,115 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragmentContainer"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/LightBlue">
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigation"
+    <TextView
+        android:id="@+id/handleView"
+        android:layout_width="313dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/assistant"
+        android:gravity="center_horizontal"
+        android:text="@string/handle"
+        android:textAlignment="center"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/titlePhoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/handleView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="ContentDescription"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/rankView"
+        android:layout_width="391dp"
+        android:layout_height="36dp"
+        android:gravity="center"
+        android:text="@string/rank"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/handleView" />
+
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:background="@color/colorPrimaryDark"
-        app:itemIconTint="@android:color/white"
-        app:itemTextColor="@android:color/white"
+        android:layout_height="440dp"
+        android:background="@drawable/handle_view"
+        android:columnCount="2"
+        android:orientation="vertical"
+        android:rowCount="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+
+        <Button
+            android:id="@+id/codeBtn"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_margin="45dp"
+            android:background="@color/Yellow"
+            android:onClick="startRatingActivity"
+            android:text="Code"
+            android:textColor="@color/font_color"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/ratingBtn"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_margin="45dp"
+            android:background="@color/Yellow"
+            android:onClick="startRatingActivity"
+            android:text="Rating"
+            android:textColor="@color/font_color"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/verdictsBtn"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_margin="45dp"
+            android:background="@color/Yellow"
+            android:onClick="startSubmissionActivity"
+            android:text="Verdicts"
+            android:textColor="@color/font_color"
+            android:textSize="18dp" />
+
+        <Button
+            android:id="@+id/strengthsBtn"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_margin="45dp"
+            android:background="@color/Yellow"
+            android:onClick="startCategoriesActivity"
+            android:text="Categories"
+            android:textColor="@color/font_color"
+            android:textSize="18dp" />
+
+    </GridLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
