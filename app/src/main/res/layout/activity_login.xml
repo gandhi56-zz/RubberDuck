@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".LoginActivity"
-    android:background="#99d9ea">
+    android:background="@color/LightBlue">
 
     <TextView
         android:id="@+id/textView"
@@ -19,7 +19,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textColor="#051633"
+        android:textColor="@color/FontColor"
         android:paddingHorizontal="30dp"/>
 
     <LinearLayout
@@ -46,14 +46,15 @@
             android:fontFamily="@font/anaheim"
             android:hint="@string/handle"
             android:inputType="text"
-            android:textColor="#051633" />
+            android:textColor="@color/font_color"
+            android:textSize="26dp"/>
 
         <Button
             android:id="@+id/signInBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="#fbcb0e"
+            android:background="@color/Yellow"
             android:fontFamily="@font/anaheim"
             android:onClick="signIn"
             android:text="@string/sign_in"

@@ -728,6 +728,10 @@ bool abc_action_bar_embed_tabs
 bool abc_allow_stacked_button_bar
 bool abc_config_actionMenuItemAllCaps
 bool mtrl_btn_textappearance_all_caps
+color FontColor
+color LightBlue
+color LightYellow
+color Yellow
 color abc_background_cache_hint_selector_material_dark
 color abc_background_cache_hint_selector_material_light
 color abc_btn_colored_borderless_text_material
@@ -819,6 +823,7 @@ color dim_foreground_material_dark
 color dim_foreground_material_light
 color error_color_material_dark
 color error_color_material_light
+color font_color
 color foreground_material_dark
 color foreground_material_light
 color highlighted_text_material_dark
@@ -1487,6 +1492,7 @@ id chronometer
 id clear_text
 id clip_horizontal
 id clip_vertical
+id codeBtn
 id collapseActionView
 id confirm_button
 id container
@@ -1648,7 +1654,6 @@ id snackbar_action
 id snackbar_text
 id snap
 id snapMargins
-id solvedProblemsBtn
 id spacer
 id split_action_bar
 id spread
@@ -1704,6 +1709,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id verdictsBtn
 id view_offset_helper
 id visible
 id withText
