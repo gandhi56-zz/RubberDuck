@@ -1560,6 +1560,7 @@ id line3
 id linearLayout
 id listMode
 id list_item
+id loadingProblems
 id masked
 id media_actions
 id message
@@ -1778,6 +1779,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_categories
+layout activity_code
 layout activity_login
 layout activity_main
 layout activity_rating

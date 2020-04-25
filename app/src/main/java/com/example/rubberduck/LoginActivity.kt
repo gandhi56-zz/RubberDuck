@@ -3,9 +3,6 @@ package com.example.rubberduck
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -34,23 +31,21 @@ class LoginActivity : AppCompatActivity() {
     lateinit var signInBtn: Button
     var handleState: HandleInput = EMPTY
     var user: User? = null
-    var problemSet = ArrayList<Problem>()
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        progBar = findViewById<ProgressBar>(R.id.progressBar)
-        handleText = findViewById<EditText>(R.id.handleText)
-        signInBtn = findViewById<Button>(R.id.signInBtn)
+        progBar = findViewById(R.id.progressBar)
+        handleText = findViewById(R.id.handleText)
+        signInBtn = findViewById(R.id.signInBtn)
         progBar.visibility = View.INVISIBLE
     }
 
     fun signIn(view: View) {
         handleState = HandleInput.WAIT
         user = User()
-        problemSet = ArrayList<Problem>()
         hideKeyboard()
         if (validateInput())
             UserProfileRequest().execute()
@@ -132,32 +127,6 @@ class LoginActivity : AppCompatActivity() {
                 user!!.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
             }
 
-            // HTTP problemset.problems request -----------------------------------------------------
-            json = sendHTTPRequest(" https://codeforces.com/api/problemset.problems")
-            jsonObj = JSONObject(json)
-            if (jsonObj.getString("status") == "FAILED")    return false
-            val problemsetJson = jsonObj.getJSONObject("result").getJSONArray("problems")
-
-            (0 until problemsetJson.length()).forEach{ i->
-                val prob = Problem()
-                val probJson = problemsetJson.getJSONObject(i)
-                if (probJson.has("contestId")){
-                    prob.contestId = probJson.getInt("contestId")
-                }
-                prob.index = probJson.getString("index")
-                prob.name = probJson.getString("name")
-                if (probJson.has("rating")){
-                    prob.rating = probJson.getInt("rating")
-                }
-                val tags = probJson.getJSONArray("tags")
-                (0 until tags.length()).forEach{j ->
-                    prob.tags.add(tags[j].toString())
-                }
-                problemSet.add(prob)
-                println(prob.name)
-            }
-            println(problemSet.size)
-
             return true
         }
 
@@ -193,7 +162,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun hideKeyboard(){
-        val view = this.currentFocus
+        val view: View? = this.currentFocus
         if (view != null){
             val hideMe = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             hideMe.hideSoftInputFromWindow(view.windowToken, 0)
