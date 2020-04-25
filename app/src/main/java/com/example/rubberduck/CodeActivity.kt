@@ -9,18 +9,23 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.TextView
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
+import kotlin.random.Random
 
 class CodeActivity : AppCompatActivity() {
 
     var problemSet = ArrayList<Problem>()
-    lateinit var progBar: ProgressBar
-    lateinit var codeBtn: Button
-    lateinit var probLayout: LinearLayout
-    lateinit var skipBtn: Button
-    lateinit var submitBtn: Button
+    private lateinit var progBar: ProgressBar
+    private lateinit var codeBtn: Button
+    private lateinit var probLayout: LinearLayout
+    private lateinit var probName: TextView
+    private lateinit var probContent: TextView
+    private lateinit var skipBtn: Button
+    private lateinit var submitBtn: Button
+    private var pIdx: Int = 0
 
     @SuppressLint("StaticFieldLeak")
     internal inner class ProblemsetRequest: AsyncTask<Context, Void, Boolean>(){
@@ -62,6 +67,9 @@ class CodeActivity : AppCompatActivity() {
             super.onPostExecute(result)
             progBar.visibility = View.GONE
             codeBtn.visibility = View.VISIBLE
+
+            problemSet.sortedWith(compareBy {it.rating})
+
             println("SIZE = ${problemSet.size}")
         }
 
@@ -82,6 +90,9 @@ class CodeActivity : AppCompatActivity() {
         probLayout = findViewById(R.id.problem_layout)
         skipBtn = findViewById(R.id.skip_btn)
         submitBtn = findViewById(R.id.submit_btn)
+        probName = findViewById(R.id.problem_name)
+        probContent = findViewById(R.id.problem_content)
+
         probLayout.visibility = View.INVISIBLE
         codeBtn.visibility = View.INVISIBLE
         progBar.visibility = View.INVISIBLE
@@ -91,11 +102,23 @@ class CodeActivity : AppCompatActivity() {
     }
 
     fun beginCoding(view: View) {
+        displayProblem(pIdx)
         codeBtn.visibility = View.GONE
         probLayout.visibility = View.VISIBLE
         skipBtn.visibility = View.VISIBLE
         submitBtn.visibility = View.VISIBLE
     }
 
+    @SuppressLint("SetTextI18n")
+    fun displayProblem(idx: Int){
+        probName.text = problemSet[idx].name
+        probContent.text = "ID: " + problemSet[idx].contestId.toString() +
+                "\nRating: " + problemSet[idx].rating.toString()
+    }
+
+    fun skipProblem(view: View) {
+        pIdx += 1
+        displayProblem(pIdx)
+    }
 
 }

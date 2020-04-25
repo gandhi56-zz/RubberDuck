@@ -1618,7 +1618,9 @@ id peekHeight
 id percent
 id piechart
 id pin
+id problem_content
 id problem_layout
+id problem_name
 id progressBar
 id progress_circular
 id progress_horizontal

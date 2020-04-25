@@ -57,6 +57,7 @@
             tools:layout_editor_absoluteX="0dp">
 
             <TextView
+                android:id="@+id/problem_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/anaheim"
@@ -68,7 +69,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="220dp"
             android:background="@drawable/handle_view"
             android:paddingHorizontal="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -77,8 +78,9 @@
             tools:layout_editor_absoluteX="0dp">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="60dp"
+                android:id="@+id/problem_content"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
                 android:fontFamily="@font/anaheim"
                 android:text="@string/problem_content"
                 android:textColor="@color/font_color"
@@ -100,7 +102,8 @@
                 android:textColor="#FFFFFF"
                 android:text="@string/skip"
                 android:textSize="20sp"
-                tools:ignore="ButtonStyle" />
+                tools:ignore="ButtonStyle,OnClick"
+                android:onClick="skipProblem"/>
 
             <Button
                 android:id="@+id/submit_btn"
