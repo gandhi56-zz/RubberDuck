@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
@@ -14,12 +13,12 @@ import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_code.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import java.lang.Integer.max
-import java.math.BigInteger
 
 class CodeActivity : AppCompatActivity() {
 
@@ -139,6 +138,17 @@ class CodeActivity : AppCompatActivity() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             timer_view.isCountDown = false
+        }
+
+        timer_view.setOnChronometerTickListener {
+            val time = SystemClock.elapsedRealtime() - timer_view.base
+            val hrs = time / 3600000
+            val mins = (time - hrs*3600000)/60000
+            val sec = (time - hrs*3600000- mins*60000)/1000
+            timer_view.text =
+                (if (hrs < 10) "0$hrs" else hrs).toString() + ":" +
+                        (if (mins < 10) "0$mins" else mins) +
+                        ":" + if (sec < 10) "0$sec" else sec
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
