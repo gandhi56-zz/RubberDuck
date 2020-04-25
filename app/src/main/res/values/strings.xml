@@ -15,6 +15,9 @@
     <string name="start_coding">Start Coding!</string>
     <string name="_00_00_00">00:00:00</string>
     <string name="end">End</string>
+    <string name="ask_exit">Are you sure you want to end this session?</string>
+    <string name="ans_no">No</string>
+    <string name="ans_yes">Yes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

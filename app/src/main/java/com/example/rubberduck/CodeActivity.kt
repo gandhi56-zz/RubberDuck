@@ -1,19 +1,20 @@
 package com.example.rubberduck
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
-import android.widget.Button
-import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import kotlinx.android.synthetic.main.activity_code.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -31,11 +32,9 @@ class CodeActivity : AppCompatActivity() {
     private lateinit var probContent: TextView
     private lateinit var skipBtn: Button
     private lateinit var submitBtn: Button
-    private lateinit var timerView: TextView
     private lateinit var endBtn: Button
     private var pIdx: Int = 0
     private var minRating: Int = 1000
-    private var startTime: Long = 0L
 
     fun String.sendHTTPRequest(): String{
         val client = OkHttpClient()
@@ -99,14 +98,14 @@ class CodeActivity : AppCompatActivity() {
     @SuppressLint("StaticFieldLeak")
     internal inner class RecentSubmissionRequest: AsyncTask<Context, Void, Boolean>(){
         override fun doInBackground(vararg params: Context?): Boolean {
-            val url:String = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
+            val url = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
             val jsonObj = JSONObject(url.sendHTTPRequest())
             if (jsonObj.getString("status") == "FAILED")    return false
             val submissions = jsonObj.getJSONArray("result")
 
             if (submissions.getJSONObject(0).getInt("id") != user!!.lastSubmId){
                 // new submission was made
-                var prob = submissions.getJSONObject(0).getJSONObject("problem")
+                val prob = submissions.getJSONObject(0).getJSONObject("problem")
                 println("last problem solved was ${prob.getString("name")}")
             }
             else{
@@ -120,6 +119,7 @@ class CodeActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -154,7 +154,7 @@ class CodeActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             minRating = max(user!!.ratingList[user!!.ratingList.size-1] - 100, 900)
         }
-        println("MIN RATING SET TO ${minRating}")
+        println("MIN RATING SET TO $minRating")
 
         probLayout.visibility = View.INVISIBLE
         codeBtn.visibility = View.INVISIBLE
@@ -187,4 +187,44 @@ class CodeActivity : AppCompatActivity() {
         RecentSubmissionRequest().execute()
     }
 
+    fun endGame(view: View) {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure about ending this session?")
+        builder.setPositiveButton("Yes"){
+            dialog: DialogInterface?, which: Int ->
+            this.finish()
+        }
+
+        builder.setNegativeButton("No"){
+            dialog: DialogInterface?, which: Int ->
+            Toast.makeText(applicationContext,"Stay focused, you can solve this problem!",Toast.LENGTH_LONG).show()
+        }
+        val alertdiag = builder.create()
+        alertdiag.setCancelable(false)
+        alertdiag.show()
+    }
+
 }
+
+class EndSessionDialogFragment : DialogFragment() {
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let {
+            // Use the Builder class for convenient dialog construction
+            val builder = AlertDialog.Builder(it)
+            builder.setMessage(R.string.ask_exit)
+                .setPositiveButton(R.string.ans_no,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        println("Hit NO")
+                    })
+                .setNegativeButton(R.string.ans_yes,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        // User cancelled the dialog
+                        println("Hit YES")
+                    })
+            // Create the AlertDialog object and return it
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+}
+

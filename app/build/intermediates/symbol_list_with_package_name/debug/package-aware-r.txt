@@ -1902,8 +1902,11 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string ans_no
+string ans_yes
 string app_name
 string appbar_scrolling_view_behavior
+string ask_exit
 string bottom_sheet_behavior
 string categories
 string character_counter_content_description
