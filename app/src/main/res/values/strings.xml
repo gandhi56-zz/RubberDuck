@@ -8,6 +8,10 @@
     <string name="rating">Rating</string>
     <string name="verdicts">Verdicts</string>
     <string name="categories">Categories</string>
+    <string name="problem_name">Problem name</string>
+    <string name="problem_content">Problem content</string>
+    <string name="skip">Skip</string>
+    <string name="submit">Submit</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

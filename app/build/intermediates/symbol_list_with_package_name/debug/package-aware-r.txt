@@ -1397,7 +1397,10 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable problem_name
 drawable profile_pic_bg
+drawable skip_btn
+drawable submit_btn
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -1475,6 +1478,7 @@ id always
 id async
 id auto
 id barrier
+id beginBtn
 id beginning
 id blocking
 id bottom
@@ -1614,6 +1618,7 @@ id peekHeight
 id percent
 id piechart
 id pin
+id problem_layout
 id progressBar
 id progress_circular
 id progress_horizontal
@@ -1651,6 +1656,7 @@ id showHome
 id showTitle
 id signInBtn
 id skipCollapsed
+id skip_btn
 id slide
 id smallLabel
 id snackbar_action
@@ -1671,6 +1677,7 @@ id strengthsBtn
 id stretch
 id submenuarrow
 id submit_area
+id submit_btn
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -1946,11 +1953,15 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string problem_content
+string problem_name
 string rank
 string rating
 string search_menu_title
 string sign_in
+string skip
 string status_bar_notification_info_overflow
+string submit
 string verdicts
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
