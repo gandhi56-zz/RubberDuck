@@ -1961,9 +1961,10 @@ int string rating 0x7f100057
 int string search_menu_title 0x7f100058
 int string sign_in 0x7f100059
 int string skip 0x7f10005a
-int string status_bar_notification_info_overflow 0x7f10005b
-int string submit 0x7f10005c
-int string verdicts 0x7f10005d
+int string start_coding 0x7f10005b
+int string status_bar_notification_info_overflow 0x7f10005c
+int string submit 0x7f10005d
+int string verdicts 0x7f10005e
 int style AlertDialog_AppCompat 0x7f110000
 int style AlertDialog_AppCompat_Light 0x7f110001
 int style Animation_AppCompat_Dialog 0x7f110002

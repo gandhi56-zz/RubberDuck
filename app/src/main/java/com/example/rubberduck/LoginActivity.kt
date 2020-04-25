@@ -77,7 +77,10 @@ class LoginActivity : AppCompatActivity() {
             user!!.setHandle(resultArray.getJSONObject(0).getString("handle"))
             user!!.setTitlePhoto("https:" + resultArray.getJSONObject(0)
                 .getString("titlePhoto"))
-            user!!.setRank(resultArray.getJSONObject(0).getString("rank"))
+
+            if (resultArray.getJSONObject(0).has("rank")){
+                user!!.setRank(resultArray.getJSONObject(0).getString("rank"))
+            }
 
             // HTTP user.status request -------------------------------------------------------------
             // submissions of the user

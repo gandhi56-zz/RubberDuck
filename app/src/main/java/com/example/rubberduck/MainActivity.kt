@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
 
     fun startCodeActivity(view: View) {
         val intent = Intent(this, CodeActivity::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            intent.putExtra(Intent.EXTRA_USER, user)
+        }
         startActivity(intent)
     }
 

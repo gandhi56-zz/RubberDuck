@@ -2,6 +2,7 @@ package com.example.rubberduck
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,6 +18,7 @@ import kotlin.random.Random
 
 class CodeActivity : AppCompatActivity() {
 
+    var user: User? = null
     var problemSet = ArrayList<Problem>()
     private lateinit var progBar: ProgressBar
     private lateinit var codeBtn: Button
@@ -27,6 +29,13 @@ class CodeActivity : AppCompatActivity() {
     private lateinit var submitBtn: Button
     private var pIdx: Int = 0
     private var minRating: Int = 1000
+
+    fun String.sendHTTPRequest(): String{
+        val client = OkHttpClient()
+        val request = Request.Builder().url(this).build()
+        val response = client.newCall(request).execute()
+        return response.body()?.string().toString()
+    }
 
     @SuppressLint("StaticFieldLeak")
     internal inner class ProblemsetRequest: AsyncTask<Context, Void, Boolean>(){
@@ -78,11 +87,18 @@ class CodeActivity : AppCompatActivity() {
             println("SIZE = ${problemSet.size}")
         }
 
-        private fun String.sendHTTPRequest(): String{
-            val client = OkHttpClient()
-            val request = Request.Builder().url(this).build()
-            val response = client.newCall(request).execute()
-            return response.body()?.string().toString()
+    }
+
+    internal inner class RecentSubmissionRequest: AsyncTask<Context, Void, Boolean>(){
+        override fun doInBackground(vararg params: Context?): Boolean {
+            val url:String = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
+            val jsonObj = JSONObject(url.sendHTTPRequest())
+            if (jsonObj.getString("status") == "FAILED")    return false
+            val submissions = jsonObj.getJSONArray("result")
+
+            println("SUBMIT = ${submissions}")
+
+            return true
         }
 
     }
@@ -90,6 +106,9 @@ class CodeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_code)
+
+        user = intent.getSerializableExtra(Intent.EXTRA_USER) as User
+
         progBar = findViewById(R.id.loadingProblems)
         codeBtn = findViewById(R.id.beginBtn)
         probLayout = findViewById(R.id.problem_layout)
@@ -125,6 +144,10 @@ class CodeActivity : AppCompatActivity() {
         pIdx += 2
         pIdx %= problemSet.size
         displayProblem()
+    }
+
+    fun submitSoln(view: View) {
+        RecentSubmissionRequest().execute()
     }
 
 }
