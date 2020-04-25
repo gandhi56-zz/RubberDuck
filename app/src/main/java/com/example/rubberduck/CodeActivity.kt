@@ -4,17 +4,22 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import kotlinx.android.synthetic.main.activity_code.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
-import kotlin.random.Random
+import java.lang.Integer.max
+import java.math.BigInteger
 
 class CodeActivity : AppCompatActivity() {
 
@@ -27,8 +32,11 @@ class CodeActivity : AppCompatActivity() {
     private lateinit var probContent: TextView
     private lateinit var skipBtn: Button
     private lateinit var submitBtn: Button
+    private lateinit var timerView: TextView
+    private lateinit var endBtn: Button
     private var pIdx: Int = 0
     private var minRating: Int = 1000
+    private var startTime: Long = 0L
 
     fun String.sendHTTPRequest(): String{
         val client = OkHttpClient()
@@ -89,6 +97,7 @@ class CodeActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     internal inner class RecentSubmissionRequest: AsyncTask<Context, Void, Boolean>(){
         override fun doInBackground(vararg params: Context?): Boolean {
             val url:String = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
@@ -96,13 +105,23 @@ class CodeActivity : AppCompatActivity() {
             if (jsonObj.getString("status") == "FAILED")    return false
             val submissions = jsonObj.getJSONArray("result")
 
-            println("SUBMIT = ${submissions}")
+            if (submissions.getJSONObject(0).getInt("id") != user!!.lastSubmId){
+                // new submission was made
+                var prob = submissions.getJSONObject(0).getJSONObject("problem")
+                println("last problem solved was ${prob.getString("name")}")
+            }
+            else{
+                println("no new submission was made")
+            }
+
+            println("SUBMIT = ${submissions[0]}")
 
             return true
         }
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_code)
@@ -116,12 +135,20 @@ class CodeActivity : AppCompatActivity() {
         submitBtn = findViewById(R.id.submit_btn)
         probName = findViewById(R.id.problem_name)
         probContent = findViewById(R.id.problem_content)
+        endBtn = findViewById(R.id.end_btn)
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            timer_view.isCountDown = false
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            minRating = max(user!!.ratingList[user!!.ratingList.size-1] - 100, 900)
+        }
+        println("MIN RATING SET TO ${minRating}")
 
         probLayout.visibility = View.INVISIBLE
         codeBtn.visibility = View.INVISIBLE
         progBar.visibility = View.INVISIBLE
-        skipBtn.visibility = View.INVISIBLE
-        submitBtn.visibility = View.INVISIBLE
         ProblemsetRequest().execute()
     }
 
@@ -129,8 +156,8 @@ class CodeActivity : AppCompatActivity() {
         displayProblem()
         codeBtn.visibility = View.GONE
         probLayout.visibility = View.VISIBLE
-        skipBtn.visibility = View.VISIBLE
-        submitBtn.visibility = View.VISIBLE
+        timer_view.base = SystemClock.elapsedRealtime()
+        timer_view.start()
     }
 
     @SuppressLint("SetTextI18n")

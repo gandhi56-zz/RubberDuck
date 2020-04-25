@@ -16,16 +16,16 @@
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-mdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable_skip_btn.xml.flat",
-        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/drawable/skip_btn.xml"
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xhdpi_ic_launcher_round.png.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png"
     },
     {
-        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xxhdpi_ic_launcher_round.png.flat",
-        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png"
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable_skip_btn.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/drawable/skip_btn.xml"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-xxxhdpi_ic_launcher_round.png.flat",
@@ -110,6 +110,10 @@
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/font_anaheim.xml.flat",
         "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/font/anaheim.xml"
+    },
+    {
+        "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/drawable_end_btn.xml.flat",
+        "source": "/home/anshil/workspace/RubberDuck/app/src/main/res/drawable/end_btn.xml"
     },
     {
         "merged": "/home/anshil/workspace/RubberDuck/app/build/intermediates/res/merged/debug/mipmap-hdpi_ic_launcher.png.flat",

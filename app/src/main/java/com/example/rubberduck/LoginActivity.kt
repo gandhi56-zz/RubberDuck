@@ -65,15 +65,42 @@ class LoginActivity : AppCompatActivity() {
         @RequiresApi(Build.VERSION_CODES.N)
         @SuppressLint("WrongThread")
         override fun doInBackground(vararg params: Context): Boolean {
+            if (!userInfo())    return false
+            if (!userStatus())  return false
+            if (!userRating())  return false
 
-            // HTTP user.info request ---------------------------------------------------------------
-            var json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
+            return true
+        }
+
+        override fun onPostExecute(result: Boolean) {
+            super.onPostExecute(result)
+            progBar.visibility = View.GONE
+            if (result){
+                handleState = HandleInput.OK
+                startMainActivity()
+            }
+            else{
+                handleState = HandleInput.INVALID
+            }
+            handleText.isEnabled = true
+            signInBtn.isEnabled = true
+        }
+
+        private fun sendHTTPRequest(url: String): String{
+            val client = OkHttpClient()
+            val request = Request.Builder().url(url).build()
+            val response = client.newCall(request).execute()
+            return response.body()?.string().toString()
+        }
+
+        private fun userInfo(): Boolean{
+            val json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
                     + getHandle())
-            var jsonObj = JSONObject(json)
+            val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
 
             // user data
-            var resultArray = jsonObj.getJSONArray("result")
+            val resultArray = jsonObj.getJSONArray("result")
             user!!.setHandle(resultArray.getJSONObject(0).getString("handle"))
             user!!.setTitlePhoto("https:" + resultArray.getJSONObject(0)
                 .getString("titlePhoto"))
@@ -81,14 +108,15 @@ class LoginActivity : AppCompatActivity() {
             if (resultArray.getJSONObject(0).has("rank")){
                 user!!.setRank(resultArray.getJSONObject(0).getString("rank"))
             }
+            return true
+        }
 
-            // HTTP user.status request -------------------------------------------------------------
-            // submissions of the user
-            json = sendHTTPRequest("https://codeforces.com/api/user.status?handle="
+        private fun userStatus(): Boolean{
+            val json = sendHTTPRequest("https://codeforces.com/api/user.status?handle="
                     + getHandle())
-            jsonObj = JSONObject(json)
+            val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            resultArray = jsonObj.getJSONArray("result")
+            val resultArray = jsonObj.getJSONArray("result")
 
             (0 until resultArray.length()-1).forEach { i ->
                 val sub = Submission()
@@ -118,40 +146,21 @@ class LoginActivity : AppCompatActivity() {
                 }
                 user!!.submissions.add(sub)
             }
+            user!!.lastSubmId = user!!.submissions[0].id
+            return true
+        }
 
-            // HTTP user.rating request -------------------------------------------------------------
-            json = sendHTTPRequest("https://codeforces.com/api/user.rating?handle="
+        private fun userRating(): Boolean{
+            val json = sendHTTPRequest("https://codeforces.com/api/user.rating?handle="
                     + getHandle())
-            jsonObj = JSONObject(json)
+            val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            resultArray = jsonObj.getJSONArray("result")
+            val resultArray = jsonObj.getJSONArray("result")
             user!!.ratingList.add(1500) // initial rating
             (0 until resultArray.length()).forEach {i ->
                 user!!.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
             }
-
             return true
-        }
-
-        override fun onPostExecute(result: Boolean) {
-            super.onPostExecute(result)
-            progBar.visibility = View.GONE
-            if (result){
-                handleState = HandleInput.OK
-                startMainActivity()
-            }
-            else{
-                handleState = HandleInput.INVALID
-            }
-            handleText.isEnabled = true
-            signInBtn.isEnabled = true
-        }
-
-        private fun sendHTTPRequest(url: String): String{
-            val client = OkHttpClient()
-            val request = Request.Builder().url(url).build()
-            val response = client.newCall(request).execute()
-            return response.body()?.string().toString()
         }
     }
 

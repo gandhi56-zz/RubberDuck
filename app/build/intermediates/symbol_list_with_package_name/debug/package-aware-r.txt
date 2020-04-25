@@ -1360,6 +1360,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable end_btn
 drawable handle_view
 drawable ic_calendar_black_24dp
 drawable ic_clear_black_24dp
@@ -1522,6 +1523,7 @@ id disableHome
 id dropdown_menu
 id edit_query
 id end
+id end_btn
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
@@ -1704,6 +1706,7 @@ id textinput_counter
 id textinput_error
 id textinput_helper_text
 id time
+id timer_view
 id title
 id titleDividerNoCustom
 id titlePhoto
@@ -1871,6 +1874,7 @@ layout text_view_without_line_height
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
+string _00_00_00
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -1909,6 +1913,7 @@ string chip_text
 string clear_text_end_icon_content_description
 string code
 string codeforces_handle
+string end
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
