@@ -26,6 +26,7 @@ class CodeActivity : AppCompatActivity() {
     private lateinit var skipBtn: Button
     private lateinit var submitBtn: Button
     private var pIdx: Int = 0
+    private var minRating: Int = 1000
 
     @SuppressLint("StaticFieldLeak")
     internal inner class ProblemsetRequest: AsyncTask<Context, Void, Boolean>(){
@@ -68,7 +69,11 @@ class CodeActivity : AppCompatActivity() {
             progBar.visibility = View.GONE
             codeBtn.visibility = View.VISIBLE
 
-            problemSet.sortedWith(compareBy {it.rating})
+            problemSet.sortBy { it.rating }
+            pIdx = 0
+            while (problemSet[pIdx].rating < minRating){
+                pIdx += 1
+            }
 
             println("SIZE = ${problemSet.size}")
         }
@@ -102,7 +107,7 @@ class CodeActivity : AppCompatActivity() {
     }
 
     fun beginCoding(view: View) {
-        displayProblem(pIdx)
+        displayProblem()
         codeBtn.visibility = View.GONE
         probLayout.visibility = View.VISIBLE
         skipBtn.visibility = View.VISIBLE
@@ -110,15 +115,16 @@ class CodeActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun displayProblem(idx: Int){
-        probName.text = problemSet[idx].name
-        probContent.text = "ID: " + problemSet[idx].contestId.toString() +
-                "\nRating: " + problemSet[idx].rating.toString()
+    fun displayProblem(){
+        probName.text = problemSet[pIdx].name
+        probContent.text = "ID: " + problemSet[pIdx].contestId.toString() + problemSet[pIdx].index +
+                "\nRating: " + problemSet[pIdx].rating.toString()
     }
 
     fun skipProblem(view: View) {
-        pIdx += 1
-        displayProblem(pIdx)
+        pIdx += 2
+        pIdx %= problemSet.size
+        displayProblem()
     }
 
 }
