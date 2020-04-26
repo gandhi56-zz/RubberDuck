@@ -1660,7 +1660,6 @@ id showHome
 id showTitle
 id signInBtn
 id skipCollapsed
-id skip_btn
 id slide
 id smallLabel
 id snackbar_action

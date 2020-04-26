@@ -30,7 +30,6 @@ class CodeActivity : AppCompatActivity() {
     private lateinit var probLayout: LinearLayout
     private lateinit var probName: TextView
     private lateinit var probContent: TextView
-    private lateinit var skipBtn: Button
     private lateinit var submitBtn: Button
     private lateinit var endBtn: Button
     private var pIdx: Int = 0
@@ -130,7 +129,6 @@ class CodeActivity : AppCompatActivity() {
         progBar = findViewById(R.id.loadingProblems)
         codeBtn = findViewById(R.id.beginBtn)
         probLayout = findViewById(R.id.problem_layout)
-        skipBtn = findViewById(R.id.skip_btn)
         submitBtn = findViewById(R.id.submit_btn)
         probName = findViewById(R.id.problem_name)
         probContent = findViewById(R.id.problem_content)
@@ -174,17 +172,13 @@ class CodeActivity : AppCompatActivity() {
     fun displayProblem(){
         probName.text = problemSet[pIdx].name
         probContent.text = "ID: " + problemSet[pIdx].contestId.toString() + problemSet[pIdx].index +
-                "\nRating: " + problemSet[pIdx].rating.toString()
-    }
-
-    fun skipProblem(view: View) {
-        pIdx += 2
-        pIdx %= problemSet.size
-        displayProblem()
+                "\nDifficulty: " + problemSet[pIdx].rating.toString()
     }
 
     fun submitSoln(view: View) {
-        RecentSubmissionRequest().execute()
+        pIdx += 2
+        pIdx %= problemSet.size
+        displayProblem()
     }
 
     fun endGame(view: View) {
@@ -206,6 +200,7 @@ class CodeActivity : AppCompatActivity() {
 
 }
 
+// TODO upon exit
 class EndSessionDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
