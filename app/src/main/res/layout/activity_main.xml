@@ -11,26 +11,29 @@
         android:id="@+id/handleView"
         android:layout_width="313dp"
         android:layout_height="56dp"
-        android:layout_marginTop="160dp"
-        android:fontFamily="@font/assistant"
+        android:layout_marginTop="176dp"
+        android:fontFamily="@font/anaheim"
         android:gravity="center_horizontal"
         android:text="@string/handle"
         android:textAlignment="center"
         android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/font_color"/>
 
     <ImageView
         android:id="@+id/titlePhoto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/profile_pic_bg"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toTopOf="@+id/handleView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.615"
         tools:ignore="ContentDescription"
         tools:srcCompat="@tools:sample/avatars" />
 
@@ -41,14 +44,19 @@
         android:gravity="center"
         android:text="@string/rank"
         android:textSize="22sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.592"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/handleView" />
+        app:layout_constraintTop_toBottomOf="@+id/handleView"
+        app:layout_constraintVertical_bias="0.0"
+        android:textColor="@color/font_color"
+        android:fontFamily="@font/anaheim"/>
 
     <GridLayout
+        android:id="@+id/gridLayout"
         android:layout_width="match_parent"
-        android:layout_height="440dp"
+        android:layout_height="420dp"
         android:background="@drawable/handle_view"
         android:columnCount="2"
         android:orientation="vertical"
@@ -69,10 +77,10 @@
             android:layout_column="0"
             android:layout_margin="45dp"
             android:background="@color/Yellow"
-            android:onClick="startRatingActivity"
-            android:text="Code"
+            android:onClick="startCodeActivity"
+            android:text="@string/code"
             android:textColor="@color/font_color"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/ratingBtn"
@@ -83,9 +91,9 @@
             android:layout_margin="45dp"
             android:background="@color/Yellow"
             android:onClick="startRatingActivity"
-            android:text="Rating"
+            android:text="@string/rating"
             android:textColor="@color/font_color"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/verdictsBtn"
@@ -96,9 +104,9 @@
             android:layout_margin="45dp"
             android:background="@color/Yellow"
             android:onClick="startSubmissionActivity"
-            android:text="Verdicts"
+            android:text="@string/verdicts"
             android:textColor="@color/font_color"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/strengthsBtn"
@@ -109,9 +117,9 @@
             android:layout_margin="45dp"
             android:background="@color/Yellow"
             android:onClick="startCategoriesActivity"
-            android:text="Categories"
+            android:text="@string/categories"
             android:textColor="@color/font_color"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
     </GridLayout>
 

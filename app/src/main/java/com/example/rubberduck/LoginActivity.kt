@@ -3,9 +3,6 @@ package com.example.rubberduck
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.graphics.ColorFilter
 import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -34,23 +31,21 @@ class LoginActivity : AppCompatActivity() {
     lateinit var signInBtn: Button
     var handleState: HandleInput = EMPTY
     var user: User? = null
-    var problemSet = ArrayList<Problem>()
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        progBar = findViewById<ProgressBar>(R.id.progressBar)
-        handleText = findViewById<EditText>(R.id.handleText)
-        signInBtn = findViewById<Button>(R.id.signInBtn)
+        progBar = findViewById(R.id.progressBar)
+        handleText = findViewById(R.id.handleText)
+        signInBtn = findViewById(R.id.signInBtn)
         progBar.visibility = View.INVISIBLE
     }
 
     fun signIn(view: View) {
         handleState = HandleInput.WAIT
         user = User()
-        problemSet = ArrayList<Problem>()
         hideKeyboard()
         if (validateInput())
             UserProfileRequest().execute()
@@ -70,27 +65,58 @@ class LoginActivity : AppCompatActivity() {
         @RequiresApi(Build.VERSION_CODES.N)
         @SuppressLint("WrongThread")
         override fun doInBackground(vararg params: Context): Boolean {
+            if (!userInfo())    return false
+            if (!userStatus())  return false
+            if (!userRating())  return false
 
-            // HTTP user.info request ---------------------------------------------------------------
-            var json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
+            return true
+        }
+
+        override fun onPostExecute(result: Boolean) {
+            super.onPostExecute(result)
+            progBar.visibility = View.GONE
+            if (result){
+                handleState = HandleInput.OK
+                startMainActivity()
+            }
+            else{
+                handleState = HandleInput.INVALID
+            }
+            handleText.isEnabled = true
+            signInBtn.isEnabled = true
+        }
+
+        private fun sendHTTPRequest(url: String): String{
+            val client = OkHttpClient()
+            val request = Request.Builder().url(url).build()
+            val response = client.newCall(request).execute()
+            return response.body()?.string().toString()
+        }
+
+        private fun userInfo(): Boolean{
+            val json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
                     + getHandle())
-            var jsonObj = JSONObject(json)
+            val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
 
             // user data
-            var resultArray = jsonObj.getJSONArray("result")
+            val resultArray = jsonObj.getJSONArray("result")
             user!!.setHandle(resultArray.getJSONObject(0).getString("handle"))
             user!!.setTitlePhoto("https:" + resultArray.getJSONObject(0)
                 .getString("titlePhoto"))
-            user!!.setRank(resultArray.getJSONObject(0).getString("rank"))
 
-            // HTTP user.status request -------------------------------------------------------------
-            // submissions of the user
-            json = sendHTTPRequest("https://codeforces.com/api/user.status?handle="
+            if (resultArray.getJSONObject(0).has("rank")){
+                user!!.setRank(resultArray.getJSONObject(0).getString("rank"))
+            }
+            return true
+        }
+
+        private fun userStatus(): Boolean{
+            val json = sendHTTPRequest("https://codeforces.com/api/user.status?handle="
                     + getHandle())
-            jsonObj = JSONObject(json)
+            val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            resultArray = jsonObj.getJSONArray("result")
+            val resultArray = jsonObj.getJSONArray("result")
 
             (0 until resultArray.length()-1).forEach { i ->
                 val sub = Submission()
@@ -120,66 +146,21 @@ class LoginActivity : AppCompatActivity() {
                 }
                 user!!.submissions.add(sub)
             }
+            user!!.lastSubmId = user!!.submissions[0].id
+            return true
+        }
 
-            // HTTP user.rating request -------------------------------------------------------------
-            json = sendHTTPRequest("https://codeforces.com/api/user.rating?handle="
+        private fun userRating(): Boolean{
+            val json = sendHTTPRequest("https://codeforces.com/api/user.rating?handle="
                     + getHandle())
-            jsonObj = JSONObject(json)
+            val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
-            resultArray = jsonObj.getJSONArray("result")
+            val resultArray = jsonObj.getJSONArray("result")
             user!!.ratingList.add(1500) // initial rating
             (0 until resultArray.length()).forEach {i ->
                 user!!.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
             }
-
-            // HTTP problemset.problems request -----------------------------------------------------
-            json = sendHTTPRequest(" https://codeforces.com/api/problemset.problems")
-            jsonObj = JSONObject(json)
-            if (jsonObj.getString("status") == "FAILED")    return false
-            val problemsetJson = jsonObj.getJSONObject("result").getJSONArray("problems")
-
-            (0 until problemsetJson.length()).forEach{ i->
-                val prob = Problem()
-                val probJson = problemsetJson.getJSONObject(i)
-                if (probJson.has("contestId")){
-                    prob.contestId = probJson.getInt("contestId")
-                }
-                prob.index = probJson.getString("index")
-                prob.name = probJson.getString("name")
-                if (probJson.has("rating")){
-                    prob.rating = probJson.getInt("rating")
-                }
-                val tags = probJson.getJSONArray("tags")
-                (0 until tags.length()).forEach{j ->
-                    prob.tags.add(tags[j].toString())
-                }
-                problemSet.add(prob)
-                println(prob.name)
-            }
-            println(problemSet.size)
-
             return true
-        }
-
-        override fun onPostExecute(result: Boolean) {
-            super.onPostExecute(result)
-            progBar.visibility = View.GONE
-            if (result){
-                handleState = HandleInput.OK
-                startMainActivity()
-            }
-            else{
-                handleState = HandleInput.INVALID
-            }
-            handleText.isEnabled = true
-            signInBtn.isEnabled = true
-        }
-
-        private fun sendHTTPRequest(url: String): String{
-            val client = OkHttpClient()
-            val request = Request.Builder().url(url).build()
-            val response = client.newCall(request).execute()
-            return response.body()?.string().toString()
         }
     }
 
@@ -193,7 +174,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun hideKeyboard(){
-        val view = this.currentFocus
+        val view: View? = this.currentFocus
         if (view != null){
             val hideMe = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             hideMe.hideSoftInputFromWindow(view.windowToken, 0)

@@ -1360,6 +1360,7 @@ drawable design_ic_visibility
 drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
+drawable end_btn
 drawable handle_view
 drawable ic_calendar_black_24dp
 drawable ic_clear_black_24dp
@@ -1397,6 +1398,10 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable problem_name
+drawable profile_pic_bg
+drawable skip_btn
+drawable submit_btn
 drawable test_custom_background
 drawable tooltip_frame_dark
 drawable tooltip_frame_light
@@ -1474,6 +1479,7 @@ id always
 id async
 id auto
 id barrier
+id beginBtn
 id beginning
 id blocking
 id bottom
@@ -1517,6 +1523,7 @@ id disableHome
 id dropdown_menu
 id edit_query
 id end
+id end_btn
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
@@ -1535,6 +1542,7 @@ id forever
 id ghost_view
 id ghost_view_holder
 id gone
+id gridLayout
 id group_divider
 id groups
 id handleText
@@ -1558,6 +1566,7 @@ id line3
 id linearLayout
 id listMode
 id list_item
+id loadingProblems
 id masked
 id media_actions
 id message
@@ -1611,6 +1620,9 @@ id peekHeight
 id percent
 id piechart
 id pin
+id problem_content
+id problem_layout
+id problem_name
 id progressBar
 id progress_circular
 id progress_horizontal
@@ -1668,6 +1680,7 @@ id strengthsBtn
 id stretch
 id submenuarrow
 id submit_area
+id submit_btn
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -1692,6 +1705,7 @@ id textinput_counter
 id textinput_error
 id textinput_helper_text
 id time
+id timer_view
 id title
 id titleDividerNoCustom
 id titlePhoto
@@ -1776,6 +1790,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_categories
+layout activity_code
 layout activity_login
 layout activity_main
 layout activity_rating
@@ -1858,6 +1873,7 @@ layout text_view_without_line_height
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
+string _00_00_00
 string abc_action_bar_home_description
 string abc_action_bar_up_description
 string abc_action_menu_overflow_description
@@ -1885,15 +1901,21 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string ans_no
+string ans_yes
 string app_name
 string appbar_scrolling_view_behavior
+string ask_exit
 string bottom_sheet_behavior
+string categories
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string chip_text
 string clear_text_end_icon_content_description
+string code
 string codeforces_handle
+string end
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
@@ -1940,10 +1962,17 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string problem_content
+string problem_name
 string rank
+string rating
 string search_menu_title
 string sign_in
+string skip
+string start_coding
 string status_bar_notification_info_overflow
+string submit
+string verdicts
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light
 style Animation_AppCompat_Dialog

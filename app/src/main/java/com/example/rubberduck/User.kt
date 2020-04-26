@@ -2,6 +2,7 @@ package com.example.rubberduck
 
 import org.json.JSONArray
 import java.io.Serializable
+import java.math.BigInteger
 
 val verdicts = arrayOf("FAILED",
     "OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR",
@@ -18,6 +19,7 @@ class User: Serializable {
     var submissions = ArrayList<Submission>()
     var verdictStats: HashMap<String, Int> = HashMap<String, Int>()
     var classStats: HashMap<String, Int> = HashMap<String, Int>()
+    var lastSubmId: Int? = null
 
     fun User(){
         handle = ""

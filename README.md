@@ -6,7 +6,7 @@ helps competitive programmers to track and improve their problem-solving
 skills.
 
 ### Development
-* This project is currenly under development, mainly done in the alpha2 
+* This project is currently under development, mainly done in the alpha2
 branch. Features that have been implemented include:
   * fetching user profile data and storing in a user object which is passed
     between activities; the user object stores:
@@ -25,13 +25,9 @@ branch. Features that have been implemented include:
 
 ### Issues and TODOs
 * Application context
-  * store problemset which is globally accessible to activities, 
-  or is there a better solution?
   * problem suggestion algorithm formulation
   * live coding
 * User interface
-  * LoginActivity
-  * MainActivity
   * Ratings line graph
     * change the ratings array into an array of entries which are directly
     usable by the pie chart component
@@ -50,7 +46,6 @@ branch. Features that have been implemented include:
     * Fix colour issues
     * Improve labelling
     * add table
-  * Theme
   * Buttons
   * Font
   

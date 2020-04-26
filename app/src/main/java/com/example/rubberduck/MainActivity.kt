@@ -1,8 +1,10 @@
 package com.example.rubberduck
 
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.EXTRA_STREAM
 import android.content.Intent.EXTRA_USER
+import android.os.AsyncTask
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,11 +13,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
 
     var user: User? = null
-    var problemSet: ArrayList<Problem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +56,14 @@ class MainActivity : AppCompatActivity() {
 
     fun startCategoriesActivity(view: View) {
         val intent = Intent(this, CategoriesActivity::class.java)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            intent.putExtra(Intent.EXTRA_USER, user)
+        }
+        startActivity(intent)
+    }
+
+    fun startCodeActivity(view: View) {
+        val intent = Intent(this, CodeActivity::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             intent.putExtra(Intent.EXTRA_USER, user)
         }
