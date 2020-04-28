@@ -1487,6 +1487,7 @@ id bottom
 id buttonPanel
 id cancel_action
 id cancel_button
+id catLayout
 id center
 id center_horizontal
 id center_vertical
@@ -1682,6 +1683,7 @@ id submenuarrow
 id submit_area
 id submit_btn
 id tabMode
+id tableScroll
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
 id tag_accessibility_heading
@@ -1724,6 +1726,7 @@ id unlabeled
 id up
 id useLogo
 id verdictsBtn
+id verdictsScroll
 id view_offset_helper
 id visible
 id withText
@@ -1908,6 +1911,7 @@ string appbar_scrolling_view_behavior
 string ask_exit
 string bottom_sheet_behavior
 string categories
+string category
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
@@ -1915,6 +1919,7 @@ string chip_text
 string clear_text_end_icon_content_description
 string code
 string codeforces_handle
+string count
 string end
 string error_icon_content_description
 string exposed_dropdown_menu_content_description

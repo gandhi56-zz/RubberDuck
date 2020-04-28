@@ -18,6 +18,8 @@
     <string name="ask_exit">Are you sure you want to end this session?</string>
     <string name="ans_no">No</string>
     <string name="ans_yes">Yes</string>
+    <string name="category">Category</string>
+    <string name="count">Count</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
