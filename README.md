@@ -22,6 +22,7 @@ branch. Features that have been implemented include:
   * displays pie graph for submission statistics
   * displays pie graph for solved problem categories statistics
   * receives a list of all problems on codeforces
+  * code activity
 
 ### Issues and TODOs
 * Application context
@@ -30,7 +31,7 @@ branch. Features that have been implemented include:
 * User interface
   * Ratings line graph
     * change the ratings array into an array of entries which are directly
-    usable by the pie chart component
+      usable by the pie chart component
     * table of contests
     * x-axis should contain dates 
     * add colours to the chart to convey ranks
@@ -38,20 +39,6 @@ branch. Features that have been implemented include:
     contest
   * Submissions pie chart
     * Fix display of labels and numbers
-    * Fix colour issues
-    * Improve labelling
-    * add table
   * Problem categories
     * Fix display of labels and numbers
-    * Fix colour issues
-    * Improve labelling
-    * add table
-  * Buttons
-  * Font
-  
-  
-  
-  
-  
-  
 
