@@ -5,15 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RatingActivity"
-    android:background="@color/LightBlue">
+    android:background="@color/LightBlue"
+    android:paddingHorizontal="20dp">
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/RatingChart"
-        android:layout_width="372dp"
-        android:layout_height="315dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.093" />
+        app:layout_constraintVertical_bias="0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

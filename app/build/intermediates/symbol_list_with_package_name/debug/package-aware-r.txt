@@ -1488,6 +1488,7 @@ id buttonPanel
 id cancel_action
 id cancel_button
 id catLayout
+id catTable
 id center
 id center_horizontal
 id center_vertical
@@ -1725,8 +1726,8 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id verdictTable
 id verdictsBtn
-id verdictsScroll
 id view_offset_helper
 id visible
 id withText

@@ -21,10 +21,18 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.rubberduck.CodeActivity" />
-        <activity android:name="com.example.rubberduck.CategoriesActivity" />
-        <activity android:name="com.example.rubberduck.SubmissionActivity" />
-        <activity android:name="com.example.rubberduck.RatingActivity" />
+        <activity
+            android:name="com.example.rubberduck.CodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.rubberduck.CategoriesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.rubberduck.SubmissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.rubberduck.RatingActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.rubberduck.MainActivity"
             android:screenOrientation="portrait" />

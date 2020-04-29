@@ -1,6 +1,7 @@
 package com.example.rubberduck
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.ViewGroup
@@ -18,8 +19,7 @@ import com.github.mikephil.charting.utils.ColorTemplate
 class SubmissionActivity : AppCompatActivity() {
 
     var user: User? = null
-    val tableLayout by lazy{TableLayout(this)}
-    var scrollview: ScrollView? = null
+    var verdictTable: TableLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,11 +28,12 @@ class SubmissionActivity : AppCompatActivity() {
         user = intent.getSerializableExtra(Intent.EXTRA_USER) as User
 
         val pieChart = findViewById<PieChart>(R.id.piechart)
-        scrollview = findViewById(R.id.verdictsScroll)
-        val desc = Description()
-        desc.text = "Submissions statistics"
-        desc.textSize = 16f
-        pieChart.description = desc
+        verdictTable = findViewById(R.id.verdictTable)
+        pieChart.description.isEnabled = false
+        pieChart.legend.isEnabled = false
+        pieChart.setDrawCenterText(false);
+        pieChart.setDrawEntryLabels(false);
+        pieChart.setDrawMarkers(false);
 
         // add data
         val values = ArrayList<PieEntry>()
@@ -43,20 +44,13 @@ class SubmissionActivity : AppCompatActivity() {
         val dataset = PieDataSet(values, "Verdicts")
         val pieData = PieData(dataset)
         pieChart.data = pieData
-
-        dataset.colors = ColorTemplate.COLORFUL_COLORS.toMutableList()
+        dataset.colors = ColorTemplate.MATERIAL_COLORS.toMutableList()
         pieChart.animateXY(1400, 1400)
 
         createTable()
     }
 
     private fun createTable(){
-        tableLayout.apply{
-            layout(10, 10, 0, 10)
-            // TODO
-//            background = Drawable.createFromPath("drawable/handle_view.xml")
-        }
-
         for ((key, value) in user!!.verdictStats){
             val row = TableRow(this)
             row.layoutParams = ViewGroup.LayoutParams(
@@ -70,7 +64,7 @@ class SubmissionActivity : AppCompatActivity() {
                     TableRow.LayoutParams.WRAP_CONTENT,
                     TableRow.LayoutParams.WRAP_CONTENT)
                 text = key
-                textSize = 22F
+                textSize = 16F
             }
             row.addView(keyTxt)
 
@@ -84,8 +78,7 @@ class SubmissionActivity : AppCompatActivity() {
                 textSize = 22F
             }
             row.addView(valueTxt)
-            tableLayout.addView(row)
+            verdictTable!!.addView(row)
         }
-        scrollview?.addView(tableLayout)
     }
 }

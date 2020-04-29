@@ -6,16 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".SubmissionActivity"
     android:background="@color/LightBlue"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="20dp">
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart"
         android:layout_width="match_parent"
-        android:layout_height="400dp" />
+        android:layout_height="400dp"
+        android:layout_marginTop="20dp"/>
 
-    <ScrollView
-        android:id="@+id/verdictsScroll"
+    <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="@drawable/handle_view"
+        android:stretchColumns="*"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/Yellow">
+
+            <TextView
+                android:text="@string/category"
+                android:fontFamily="@font/anaheim"
+                android:textColor="@color/font_color"
+                android:textSize="22sp"
+                android:layout_margin="10dp"
+                android:paddingVertical="10dp"/>
+
+            <TextView
+                android:text="@string/count"
+                android:fontFamily="@font/anaheim"
+                android:textColor="@color/font_color"
+                android:textSize="22sp"
+                android:layout_margin="10dp"
+                android:paddingVertical="10dp"
+                android:layout_width="wrap_content"/>
+
+        </TableRow>
+        <ScrollView
+            android:id="@+id/tableScroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableLayout
+                android:id="@+id/verdictTable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                />
+        </ScrollView>
+
+    </TableLayout>
 
 </LinearLayout>
