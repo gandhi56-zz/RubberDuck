@@ -22,6 +22,7 @@ branch. Features that have been implemented include:
   * displays pie graph for submission statistics
   * displays pie graph for solved problem categories statistics
   * receives a list of all problems on codeforces
+  * code activity
 
 ### Issues and TODOs
 * Application context
@@ -29,7 +30,6 @@ branch. Features that have been implemented include:
   * live coding
 * User interface
   * Ratings line graph
-    * x-axis should contain dates 
     * add colours to the chart to convey ranks
     * each point may be tapped to link the user to the corresponding 
     contest
@@ -40,10 +40,4 @@ branch. Features that have been implemented include:
   * Problem categories
     * Fix display of labels and numbers
     * table row highlight
-  
-  
-  
-  
-  
-  
 
