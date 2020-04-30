@@ -90,7 +90,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/anshi
 	android:roundIcon
 		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:12:9-54
 	android:icon
-		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:10:9-43
+		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:10:9-40
 	android:allowBackup
 		ADDED from /home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:9:9-35
 	android:theme

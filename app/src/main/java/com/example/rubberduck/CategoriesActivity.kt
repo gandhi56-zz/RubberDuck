@@ -38,9 +38,10 @@ class CategoriesActivity : AppCompatActivity() {
 
         pieChart.description.isEnabled = false
         pieChart.legend.isEnabled = false
-        pieChart.setDrawCenterText(false)
         pieChart.setDrawEntryLabels(false)
-        pieChart.setDrawMarkers(false)
+        pieChart.holeRadius = 0F
+        pieChart.transparentCircleRadius = 0F
+        pieChart.setCenterTextSize(40F)
 
         val dataset = PieDataSet(values, "Problem categories")
         val pieData = PieData(dataset)

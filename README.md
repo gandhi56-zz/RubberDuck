@@ -26,18 +26,19 @@ branch. Features that have been implemented include:
 
 ### Issues and TODOs
 * Application context
-  * problem suggestion implementation
-  * live coding
+  * how to automatically receive submission statuses of the user?
+  * display verdicts for the problem in a table
+  * keep track of user progress in the code pond
+  * display code pond statistics
 * User interface
   * Ratings line graph
-    * add colours to the chart to convey ranks
     * each point may be tapped to link the user to the corresponding 
     contest
-    * table row highlight
   * Submissions pie chart
     * Fix display of labels and numbers
     * table row highlight
   * Problem categories
     * Fix display of labels and numbers
     * table row highlight
-
+* Contest/Problem reminders?
+* Algorithms blog?

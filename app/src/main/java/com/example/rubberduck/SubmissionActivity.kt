@@ -41,9 +41,10 @@ class SubmissionActivity : AppCompatActivity(), OnChartValueSelectedListener {
         verdictTable = findViewById(R.id.verdictTable)
         pieChart!!.description.isEnabled = false
         pieChart!!.legend.isEnabled = false
-        pieChart!!.setDrawCenterText(false)
         pieChart!!.setDrawEntryLabels(false)
-        pieChart!!.setDrawMarkers(false)
+        pieChart!!.holeRadius = 0F
+        pieChart!!.transparentCircleRadius = 0F
+        pieChart!!.setCenterTextSize(40F)
 
         // add data
         val values = ArrayList<PieEntry>()

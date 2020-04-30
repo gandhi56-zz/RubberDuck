@@ -144,14 +144,14 @@
 
             <Button
                 android:id="@+id/submit_btn"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:background="@drawable/submit_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="66dp"
+                android:background="@drawable/next_btn"
+                android:foreground="@drawable/rightarrow"
+                android:foregroundTint="#FFFFFF"
                 android:onClick="submitSoln"
-                android:text="@string/submit"
-                android:textColor="#FFFFFF"
                 android:textSize="20sp"
-                tools:ignore="ButtonStyle"/>
+                tools:ignore="ButtonStyle,UnusedAttribute" />
 
         </LinearLayout>
 
