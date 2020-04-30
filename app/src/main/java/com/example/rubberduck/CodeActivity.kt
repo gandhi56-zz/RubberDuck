@@ -150,7 +150,7 @@ class CodeActivity : AppCompatActivity() {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            minRating = max(user!!.ratingList[user!!.ratingList.size-1] - 100, 900)
+            minRating = 1200
         }
         println("MIN RATING SET TO $minRating")
 

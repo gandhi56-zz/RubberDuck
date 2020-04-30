@@ -15,7 +15,7 @@ class User: Serializable {
     private var handle: String? = null
     private var titlePhoto: String? = null
     private var rank: String? = null
-    var ratingList = ArrayList<Int>()
+    var ratingChangeList = ArrayList<RatingChange>()
     var submissions = ArrayList<Submission>()
     var verdictStats: HashMap<String, Int> = HashMap<String, Int>()
     var classStats: HashMap<String, Int> = HashMap<String, Int>()

@@ -20,6 +20,9 @@
     <string name="ans_yes">Yes</string>
     <string name="category">Category</string>
     <string name="count">Count</string>
+    <string name="contest_rank">Rank</string>
+    <string name="new_rating">New Rating</string>
+    <string name="contest">Contest</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

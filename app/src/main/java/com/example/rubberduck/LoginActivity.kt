@@ -156,9 +156,14 @@ class LoginActivity : AppCompatActivity() {
             val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
             val resultArray = jsonObj.getJSONArray("result")
-            user!!.ratingList.add(1500) // initial rating
             (0 until resultArray.length()).forEach {i ->
-                user!!.ratingList.add(resultArray.getJSONObject(i).getInt("newRating"))
+                var jsonObj = resultArray.getJSONObject(i)
+                val ratingChangeObj = RatingChange()
+                ratingChangeObj.contestId = resultArray.getJSONObject(i).getInt("contestId")
+                ratingChangeObj.contestName = resultArray.getJSONObject(i).getString("contestName")
+                ratingChangeObj.newRating = resultArray.getJSONObject(i).getInt("newRating")
+                ratingChangeObj.rank = resultArray.getJSONObject(i).getInt("rank")
+                user!!.ratingChangeList.add(ratingChangeObj)
             }
             return true
         }

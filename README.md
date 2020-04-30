@@ -25,29 +25,21 @@ branch. Features that have been implemented include:
 
 ### Issues and TODOs
 * Application context
-  * problem suggestion algorithm formulation
+  * problem suggestion implementation
   * live coding
 * User interface
   * Ratings line graph
-    * change the ratings array into an array of entries which are directly
-    usable by the pie chart component
-    * table of contests
     * x-axis should contain dates 
     * add colours to the chart to convey ranks
     * each point may be tapped to link the user to the corresponding 
     contest
+    * table row highlight
   * Submissions pie chart
     * Fix display of labels and numbers
-    * Fix colour issues
-    * Improve labelling
-    * add table
+    * table row highlight
   * Problem categories
     * Fix display of labels and numbers
-    * Fix colour issues
-    * Improve labelling
-    * add table
-  * Buttons
-  * Font
+    * table row highlight
   
   
   

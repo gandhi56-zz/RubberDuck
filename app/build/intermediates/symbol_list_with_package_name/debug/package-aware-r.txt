@@ -1507,6 +1507,7 @@ id confirm_button
 id container
 id content
 id contentPanel
+id contestsTable
 id coordinator
 id custom
 id customPanel
@@ -1920,6 +1921,8 @@ string chip_text
 string clear_text_end_icon_content_description
 string code
 string codeforces_handle
+string contest
+string contest_rank
 string count
 string end
 string error_icon_content_description
@@ -1963,6 +1966,7 @@ string mtrl_picker_toggle_to_calendar_input_mode
 string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
+string new_rating
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through

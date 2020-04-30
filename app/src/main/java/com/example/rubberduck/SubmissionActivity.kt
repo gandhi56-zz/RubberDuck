@@ -99,11 +99,11 @@ class SubmissionActivity : AppCompatActivity(), OnChartValueSelectedListener {
         }
     }
 
-    override fun onNothingSelected(){
-
+    override fun onNothingSelected() {
+        TODO("Not yet implemented")
     }
 
-
+    // TODO
     override fun onValueSelected(e: Entry?, h: Highlight?){
 //        if (e != null) {
 //            val key = pieChart!!.data.getDataSetForEntry(e).getEntryIndex(e as PieEntry?)
