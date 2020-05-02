@@ -182,6 +182,7 @@ class CodeActivity : AppCompatActivity() {
         pIdx += 2
         pIdx %= problemSet.size
         displayProblem()
+        createTable()
     }
 
     fun endGame(view: View) {
@@ -202,23 +203,8 @@ class CodeActivity : AppCompatActivity() {
     }
 
     private fun createTable(){
-        // TODO
-
+        submissionsTable!!.removeAllViews()
         if (!user!!.subm.contains(problemSet[pIdx].getId())){
-            val row = TableRow(this)
-            row.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
-
-            // add key
-            val subId = TextView(this)
-            subId.apply {
-                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT)
-                text = "No submissions yet"
-                textSize = 16F
-            }
-            submissionsTable!!.addView(row)
             return
         }
 
@@ -237,6 +223,16 @@ class CodeActivity : AppCompatActivity() {
                 textSize = 16F
             }
             row.addView(subId)
+
+            val verdict = TextView(this)
+            verdict.apply {
+                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = subObj.verdict
+                textSize = 16F
+            }
+            row.addView(verdict)
+
             submissionsTable!!.addView(row)
         }
     }

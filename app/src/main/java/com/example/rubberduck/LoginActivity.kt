@@ -120,31 +120,33 @@ class LoginActivity : AppCompatActivity() {
 
             (0 until resultArray.length()-1).forEach { i ->
                 val sub = Submission()
+
+                // set id
                 sub.id = resultArray.getJSONObject(i).getInt("id")
+
+                // add verdict
                 val verdict = resultArray.getJSONObject(i).getString("verdict")
                 user!!.addVerdict(verdict.toString())
+                sub.verdict = verdict
+
+                // add problem data
                 if (resultArray.getJSONObject(i).getJSONObject("problem").has("contestId")){
                     sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
                         .getInt("contestId")
                 }
-
-                sub.problem.index = resultArray.getJSONObject(i).getJSONObject("problem")
-                    .getString("index")
-                sub.problem.name = resultArray.getJSONObject(i).getJSONObject("problem")
-                    .getString("name")
-
+                sub.problem.index = resultArray.getJSONObject(i).getJSONObject("problem").getString("index")
+                sub.problem.name = resultArray.getJSONObject(i).getJSONObject("problem").getString("name")
                 if (resultArray.getJSONObject(i).getJSONObject("problem").has("rating")){
                     sub.problem.rating = resultArray.getJSONObject(i).getJSONObject("problem")
                         .getInt("rating")
                 }
-
                 val tags = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getJSONArray("tags")
-                (0 until tags.length()-1).forEach{j ->
+                (0 until tags.length()).forEach{j ->
                     sub.problem.tags.add(tags[j].toString())
                     user!!.addClass(tags[j].toString())
                 }
-//                user!!.submissions.add(sub)
+
                 user!!.addSubmission(sub.problem.contestId.toString() + sub.problem.index, sub)
             }
 //            user!!.lastSubmId = user!!.submissions[0].id
