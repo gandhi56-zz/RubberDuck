@@ -1608,6 +1608,7 @@ id mtrl_picker_title_text
 id multiply
 id navigation_header_container
 id never
+id next_btn
 id noScroll
 id none
 id normal
@@ -1686,8 +1687,8 @@ id status_bar_latest_event_content
 id strengthsBtn
 id stretch
 id submenuarrow
+id submissionsTable
 id submit_area
-id submit_btn
 id tabMode
 id tableScroll
 id tag_accessibility_actions
@@ -1938,6 +1939,8 @@ string fab_transformation_sheet_behavior
 string handle
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
+string id
+string memory
 string mtrl_badge_numberless_content_description
 string mtrl_chip_close_icon_content_description
 string mtrl_exceed_max_badge_number_suffix
@@ -1988,6 +1991,8 @@ string skip
 string start_coding
 string status_bar_notification_info_overflow
 string submit
+string time
+string verdict
 string verdicts
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

@@ -20,6 +20,7 @@ class User: Serializable {
     var verdictStats: HashMap<String, Int> = HashMap<String, Int>()
     var classStats: HashMap<String, Int> = HashMap<String, Int>()
     var lastSubmId: Int? = null
+    var subm = HashMap<String, ArrayList<Submission>>()
 
     fun User(){
         handle = ""
@@ -63,6 +64,13 @@ class User: Serializable {
         else{
             classStats[tag] = 1
         }
+    }
+
+    fun addSubmission(key: String, sub: Submission){
+        if (!subm.containsKey(key)){
+            subm[key] = ArrayList<Submission>()
+        }
+        subm[key]!!.add(sub)
     }
 
 }

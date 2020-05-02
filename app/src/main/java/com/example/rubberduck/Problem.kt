@@ -11,4 +11,8 @@ class Problem : Serializable{
     fun Problem(){
 
     }
+
+    fun getId(): String {
+        return contestId.toString() + index
+    }
 }

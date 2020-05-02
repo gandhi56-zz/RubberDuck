@@ -144,9 +144,10 @@ class LoginActivity : AppCompatActivity() {
                     sub.problem.tags.add(tags[j].toString())
                     user!!.addClass(tags[j].toString())
                 }
-                user!!.submissions.add(sub)
+//                user!!.submissions.add(sub)
+                user!!.addSubmission(sub.problem.contestId.toString() + sub.problem.index, sub)
             }
-            user!!.lastSubmId = user!!.submissions[0].id
+//            user!!.lastSubmId = user!!.submissions[0].id
             return true
         }
 
@@ -157,7 +158,7 @@ class LoginActivity : AppCompatActivity() {
             if (jsonObj.getString("status") == "FAILED")    return false
             val resultArray = jsonObj.getJSONArray("result")
             (0 until resultArray.length()).forEach {i ->
-                var jsonObj = resultArray.getJSONObject(i)
+                resultArray.getJSONObject(i)
                 val ratingChangeObj = RatingChange()
                 ratingChangeObj.contestId = resultArray.getJSONObject(i).getInt("contestId")
                 ratingChangeObj.contestName = resultArray.getJSONObject(i).getString("contestName")

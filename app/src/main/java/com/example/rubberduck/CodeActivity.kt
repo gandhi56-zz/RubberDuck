@@ -11,6 +11,7 @@ import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +31,7 @@ class CodeActivity : AppCompatActivity() {
     private lateinit var probLayout: LinearLayout
     private lateinit var probName: TextView
     private lateinit var probContent: TextView
-    private lateinit var submitBtn: Button
+    private lateinit var nextBtn: Button
     private lateinit var endBtn: Button
     private var pIdx: Int = 0
     private var minRating: Int = 1000
@@ -129,7 +130,7 @@ class CodeActivity : AppCompatActivity() {
         progBar = findViewById(R.id.loadingProblems)
         codeBtn = findViewById(R.id.beginBtn)
         probLayout = findViewById(R.id.problem_layout)
-        submitBtn = findViewById(R.id.submit_btn)
+        nextBtn = findViewById(R.id.next_btn)
         probName = findViewById(R.id.problem_name)
         probContent = findViewById(R.id.problem_content)
         endBtn = findViewById(R.id.end_btn)
@@ -157,6 +158,7 @@ class CodeActivity : AppCompatActivity() {
         probLayout.visibility = View.INVISIBLE
         codeBtn.visibility = View.INVISIBLE
         progBar.visibility = View.INVISIBLE
+        nextBtn.visibility = View.INVISIBLE
         ProblemsetRequest().execute()
     }
 
@@ -164,6 +166,7 @@ class CodeActivity : AppCompatActivity() {
         displayProblem()
         codeBtn.visibility = View.GONE
         probLayout.visibility = View.VISIBLE
+        nextBtn.visibility = View.VISIBLE
         timer_view.base = SystemClock.elapsedRealtime()
         timer_view.start()
     }
@@ -175,27 +178,67 @@ class CodeActivity : AppCompatActivity() {
                 "\nDifficulty: " + problemSet[pIdx].rating.toString()
     }
 
-    fun submitSoln(view: View) {
+    fun getProblem(view: View) {
         pIdx += 2
         pIdx %= problemSet.size
         displayProblem()
     }
 
     fun endGame(view: View) {
-        val builder = AlertDialog.Builder(this)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setMessage("Are you sure about ending this session?")
         builder.setPositiveButton("Yes"){
-            dialog: DialogInterface?, which: Int ->
+                _: DialogInterface?, _: Int ->
             this.finish()
         }
 
         builder.setNegativeButton("No"){
-            dialog: DialogInterface?, which: Int ->
+                _: DialogInterface?, _: Int ->
             Toast.makeText(applicationContext,"Stay focused, you can solve this problem!",Toast.LENGTH_LONG).show()
         }
         val alertdiag = builder.create()
         alertdiag.setCancelable(false)
         alertdiag.show()
+    }
+
+    private fun createTable(){
+        // TODO
+
+        if (!user!!.subm.contains(problemSet[pIdx].getId())){
+            val row = TableRow(this)
+            row.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
+
+            // add key
+            val subId = TextView(this)
+            subId.apply {
+                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = "No submissions yet"
+                textSize = 16F
+            }
+            submissionsTable!!.addView(row)
+            return
+        }
+
+        for (subObj in user!!.subm[problemSet[pIdx].getId()]!!){
+            val row = TableRow(this)
+            row.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
+
+            // add key
+            val subId = TextView(this)
+            subId.apply {
+                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = subObj.id.toString()
+                textSize = 16F
+            }
+            row.addView(subId)
+            submissionsTable!!.addView(row)
+        }
     }
 
 }

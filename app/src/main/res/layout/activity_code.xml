@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -39,8 +40,8 @@
 
     <LinearLayout
         android:id="@+id/problem_layout"
-        android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_width="371dp"
+        android:layout_height="473dp"
         android:orientation="vertical"
         android:paddingHorizontal="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,8 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             android:orientation="horizontal"
-            android:paddingVertical="10dp"
-            >
+            android:paddingVertical="10dp">
 
             <Chronometer
                 android:id="@+id/timer_view"
@@ -85,18 +85,22 @@
                 android:layout_marginRight="0dp"
                 android:background="@drawable/end_btn"
                 android:fontFamily="@font/anaheim"
+                android:onClick="endGame"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="5dp"
                 android:text="@string/end"
                 android:textColor="@color/font_color"
                 android:textSize="24sp"
-                android:onClick="endGame"/>
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"
+                tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/problem_name"
+            android:orientation="vertical"
             android:paddingHorizontal="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -110,51 +114,108 @@
                 android:fontFamily="@font/anaheim"
                 android:text="@string/problem_name"
                 android:textColor="#FFFFFF"
-                android:textSize="28sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:background="@drawable/handle_view"
-            android:paddingHorizontal="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.14"
-            tools:layout_editor_absoluteX="0dp">
+                android:textSize="22sp" />
 
             <TextView
                 android:id="@+id/problem_content"
-                android:layout_width="300dp"
-                android:layout_height="200dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/anaheim"
                 android:text="@string/problem_content"
-                android:textColor="@color/font_color"
-                android:textSize="28sp" />
+                android:textColor="#FFFFFF"
+                android:textSize="22sp" />
 
         </LinearLayout>
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingVertical="40dp"
-            android:gravity="center">
+            android:background="@drawable/handle_view"
+            android:stretchColumns="*"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
-            <Button
-                android:id="@+id/submit_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="66dp"
-                android:background="@drawable/next_btn"
-                android:foreground="@drawable/rightarrow"
-                android:foregroundTint="#FFFFFF"
-                android:onClick="submitSoln"
-                android:textSize="20sp"
-                tools:ignore="ButtonStyle,UnusedAttribute" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Yellow">
 
-        </LinearLayout>
+                <TextView
+                    android:text="@string/id"
+                    android:fontFamily="@font/anaheim"
+                    android:textColor="@color/font_color"
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
+                    android:paddingVertical="10dp"/>
+
+                <TextView
+                    android:text="@string/verdict"
+                    android:fontFamily="@font/anaheim"
+                    android:textColor="@color/font_color"
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
+                    android:paddingVertical="10dp"
+                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"/>
+
+                <TextView
+                    android:text="@string/time"
+                    android:fontFamily="@font/anaheim"
+                    android:textColor="@color/font_color"
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
+                    android:paddingVertical="10dp"
+                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"/>
+
+                <TextView
+                    android:text="@string/memory"
+                    android:fontFamily="@font/anaheim"
+                    android:textColor="@color/font_color"
+                    android:textSize="18sp"
+                    android:layout_margin="10dp"
+                    android:paddingVertical="10dp"
+                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"/>
+
+            </TableRow>
+            <ScrollView
+                android:id="@+id/tableScroll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableLayout
+                    android:id="@+id/submissionsTable"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:stretchColumns="*"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    />
+            </ScrollView>
+
+        </TableLayout>
+
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/next_btn"
+        android:layout_width="147dp"
+        android:layout_height="78dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/next_btn"
+        android:foreground="@drawable/rightarrow"
+        android:foregroundTint="#FFFFFF"
+        android:onClick="getProblem"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/problem_layout"
+        tools:ignore="ButtonStyle,UnusedAttribute" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

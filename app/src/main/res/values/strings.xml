@@ -23,6 +23,10 @@
     <string name="contest_rank">Rank</string>
     <string name="new_rating">New Rating</string>
     <string name="contest">Contest</string>
+    <string name="time">Time</string>
+    <string name="verdict">Verdict</string>
+    <string name="id">ID</string>
+    <string name="memory">Memory</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
