@@ -16,10 +16,9 @@ class User: Serializable {
     private var titlePhoto: String? = null
     private var rank: String? = null
     var ratingChangeList = ArrayList<RatingChange>()
-    var submissions = ArrayList<Submission>()
     var verdictStats: HashMap<String, Int> = HashMap<String, Int>()
     var classStats: HashMap<String, Int> = HashMap<String, Int>()
-    var lastSubmId: Int? = null
+    var lastSubmId = -1
     var subm = HashMap<String, ArrayList<Submission>>()
 
     fun User(){

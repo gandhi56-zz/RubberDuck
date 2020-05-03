@@ -16,6 +16,7 @@ import com.example.rubberduck.HandleInput.EMPTY
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
+import kotlin.math.max
 
 enum class HandleInput{
     WAIT, EMPTY, INVALID, OK
@@ -68,7 +69,6 @@ class LoginActivity : AppCompatActivity() {
             if (!userInfo())    return false
             if (!userStatus())  return false
             if (!userRating())  return false
-
             return true
         }
 
@@ -148,8 +148,8 @@ class LoginActivity : AppCompatActivity() {
                 }
 
                 user!!.addSubmission(sub.problem.contestId.toString() + sub.problem.index, sub)
+                user!!.lastSubmId = max(user!!.lastSubmId, sub.id)
             }
-//            user!!.lastSubmId = user!!.submissions[0].id
             return true
         }
 

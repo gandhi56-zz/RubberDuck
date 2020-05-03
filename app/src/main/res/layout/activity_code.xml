@@ -129,7 +129,7 @@
 
         <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:background="@drawable/handle_view"
             android:stretchColumns="*"
             android:layout_marginTop="10dp"
@@ -150,28 +150,6 @@
 
                 <TextView
                     android:text="@string/verdict"
-                    android:fontFamily="@font/anaheim"
-                    android:textColor="@color/font_color"
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"
-                    android:paddingVertical="10dp"
-                    android:layout_width="wrap_content"
-                    android:textAlignment="center"
-                    android:gravity="center_horizontal"/>
-
-                <TextView
-                    android:text="@string/time"
-                    android:fontFamily="@font/anaheim"
-                    android:textColor="@color/font_color"
-                    android:textSize="18sp"
-                    android:layout_margin="10dp"
-                    android:paddingVertical="10dp"
-                    android:layout_width="wrap_content"
-                    android:textAlignment="center"
-                    android:gravity="center_horizontal"/>
-
-                <TextView
-                    android:text="@string/memory"
                     android:fontFamily="@font/anaheim"
                     android:textColor="@color/font_color"
                     android:textSize="18sp"

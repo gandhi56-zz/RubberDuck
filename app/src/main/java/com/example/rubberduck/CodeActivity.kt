@@ -20,7 +20,6 @@ import kotlinx.android.synthetic.main.activity_code.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
-import java.lang.Integer.max
 
 class CodeActivity : AppCompatActivity() {
 
@@ -35,6 +34,7 @@ class CodeActivity : AppCompatActivity() {
     private lateinit var endBtn: Button
     private var pIdx: Int = 0
     private var minRating: Int = 1000
+    private var inPond = false
 
     fun String.sendHTTPRequest(): String{
         val client = OkHttpClient()
@@ -83,40 +83,55 @@ class CodeActivity : AppCompatActivity() {
             super.onPostExecute(result)
             progBar.visibility = View.GONE
             codeBtn.visibility = View.VISIBLE
-
             problemSet.sortBy { it.rating }
-            pIdx = 0
-            while (problemSet[pIdx].rating < minRating){
-                pIdx += 1
-            }
-
-            println("SIZE = ${problemSet.size}")
+            ratingLowerBound(minRating)
+            println("# problems = ${problemSet.size}")
         }
+    }
 
+    fun ratingLowerBound(boundValue: Int){
+        // TODO implement binary search version
+        pIdx = 0
+        while (problemSet[pIdx].rating < minRating){
+            pIdx += 1
+        }
+    }
+
+    fun getElapsedSeconds(): Long{
+        return SystemClock.currentThreadTimeMillis() / 1000
     }
 
     @SuppressLint("StaticFieldLeak")
     internal inner class RecentSubmissionRequest: AsyncTask<Context, Void, Boolean>(){
-        override fun doInBackground(vararg params: Context?): Boolean {
-            val url = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
-            val jsonObj = JSONObject(url.sendHTTPRequest())
-            if (jsonObj.getString("status") == "FAILED")    return false
-            val submissions = jsonObj.getJSONArray("result")
+         override fun doInBackground(vararg params: Context): Boolean {
+             val url = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
+             while (inPond) {
 
-            if (submissions.getJSONObject(0).getInt("id") != user!!.lastSubmId){
-                // new submission was made
-                val prob = submissions.getJSONObject(0).getJSONObject("problem")
-                println("last problem solved was ${prob.getString("name")}")
-            }
-            else{
-                println("no new submission was made")
-            }
+                 // TODO debug
+                 val currSeconds = getElapsedSeconds()
+                 if (currSeconds % 10L == 0L) {
+                     val jsonObj = JSONObject(url.sendHTTPRequest())
+                     if (jsonObj.getString("status") != "OK") continue
+                     val subId = jsonObj.getJSONArray("result").getJSONObject(0)
+                         .getInt("id")
+                     if (subId == user!!.lastSubmId)    continue
 
-            println("SUBMIT = ${submissions[0]}")
+                     val resultArray = jsonObj.getJSONArray("result")
+                     var problemId = ""
+                     val problemJson = resultArray.getJSONObject(0).getJSONObject("problem")
+                     if (problemJson.has("contestId") and problemJson.has("index")){
+                        problemId = problemJson.getString("contestId") + problemJson.getString("index")
+                         searchProblem(problemId)
+                     }
+                     else{
+                         problemId = "ERROR"
+                     }
 
-            return true
-        }
-
+                     // navigate to the problem the user recently submitted
+                 }
+             }
+             return true
+         }
     }
 
     @SuppressLint("SetTextI18n")
@@ -126,7 +141,6 @@ class CodeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_code)
 
         user = intent.getSerializableExtra(Intent.EXTRA_USER) as User
-
         progBar = findViewById(R.id.loadingProblems)
         codeBtn = findViewById(R.id.beginBtn)
         probLayout = findViewById(R.id.problem_layout)
@@ -153,7 +167,7 @@ class CodeActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             minRating = 1200
         }
-        println("MIN RATING SET TO $minRating")
+        println("Minimum difficulty set to $minRating")
 
         probLayout.visibility = View.INVISIBLE
         codeBtn.visibility = View.INVISIBLE
@@ -163,33 +177,41 @@ class CodeActivity : AppCompatActivity() {
     }
 
     fun beginCoding(view: View) {
-        displayProblem()
         codeBtn.visibility = View.GONE
         probLayout.visibility = View.VISIBLE
         nextBtn.visibility = View.VISIBLE
         timer_view.base = SystemClock.elapsedRealtime()
         timer_view.start()
+
+        displayProblem()
+
+        RecentSubmissionRequest().execute()
+        inPond = true
     }
 
     @SuppressLint("SetTextI18n")
     fun displayProblem(){
+        // TODO erase difficulty, not required to display
         probName.text = problemSet[pIdx].name
         probContent.text = "ID: " + problemSet[pIdx].contestId.toString() + problemSet[pIdx].index +
                 "\nDifficulty: " + problemSet[pIdx].rating.toString()
+        createTable()
     }
 
+    // onClick event handler for next problem button
     fun getProblem(view: View) {
         pIdx += 2
         pIdx %= problemSet.size
         displayProblem()
-        createTable()
     }
 
+    // onClick event handler for end game button
     fun endGame(view: View) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setMessage("Are you sure about ending this session?")
         builder.setPositiveButton("Yes"){
                 _: DialogInterface?, _: Int ->
+            inPond = false
             this.finish()
         }
 
@@ -202,9 +224,54 @@ class CodeActivity : AppCompatActivity() {
         alertdiag.show()
     }
 
+    override fun onBackPressed() {
+        // do nothing here :)
+    }
+
+    private fun noSubmissionView(): TextView {
+        val noSubmitView = TextView(this)
+        noSubmitView.apply {
+            layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT)
+            text = "No submissions"
+            textSize = 22F
+            gravity = 1
+        }
+        return noSubmitView
+    }
+
+    private fun submissionIdView(subObj: Submission): TextView {
+        val subId = TextView(this)
+        subId.apply {
+            layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT)
+            text = subObj.id.toString()
+            textSize = 16F
+        }
+        return subId
+    }
+
+    private fun verdictView(subObj: Submission): TextView{
+        val verdict = TextView(this)
+        verdict.apply {
+            layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                TableRow.LayoutParams.WRAP_CONTENT)
+            text = subObj.verdict
+            textSize = 16F
+        }
+        return verdict
+    }
+
+    @SuppressLint("SetTextI18n")
     private fun createTable(){
         submissionsTable!!.removeAllViews()
         if (!user!!.subm.contains(problemSet[pIdx].getId())){
+            val row = TableRow(this)
+            row.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
+            row.addView(noSubmissionView())
+            submissionsTable!!.addView(row)
             return
         }
 
@@ -213,33 +280,24 @@ class CodeActivity : AppCompatActivity() {
             row.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
-
-            // add key
-            val subId = TextView(this)
-            subId.apply {
-                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT)
-                text = subObj.id.toString()
-                textSize = 16F
-            }
-            row.addView(subId)
-
-            val verdict = TextView(this)
-            verdict.apply {
-                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                    TableRow.LayoutParams.WRAP_CONTENT)
-                text = subObj.verdict
-                textSize = 16F
-            }
-            row.addView(verdict)
-
+            row.addView(submissionIdView(subObj))
+            row.addView(verdictView(subObj))
             submissionsTable!!.addView(row)
         }
     }
 
+    private fun searchProblem(problemId: String){
+        // TODO improve time complexity
+        (0 until problemSet.size).forEach(){i->
+            if (problemSet[i].getId() == problemId){
+                pIdx = i
+                println("pIdx = $pIdx")
+                return
+            }
+        }
+    }
 }
 
-// TODO upon exit
 class EndSessionDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
