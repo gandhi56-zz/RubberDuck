@@ -3,6 +3,7 @@ package com.example.rubberduck
 import org.json.JSONArray
 import java.io.Serializable
 import java.math.BigInteger
+import kotlin.math.max
 
 val verdicts = arrayOf("FAILED",
     "OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR",
@@ -70,6 +71,7 @@ class User: Serializable {
             subm[key] = ArrayList<Submission>()
         }
         subm[key]!!.add(sub)
+        lastSubmId = max(lastSubmId, sub.id)
     }
 
 }

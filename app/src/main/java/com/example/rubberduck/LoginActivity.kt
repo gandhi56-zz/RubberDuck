@@ -125,9 +125,14 @@ class LoginActivity : AppCompatActivity() {
                 sub.id = resultArray.getJSONObject(i).getInt("id")
 
                 // add verdict
-                val verdict = resultArray.getJSONObject(i).getString("verdict")
-                user!!.addVerdict(verdict.toString())
-                sub.verdict = verdict
+                if (resultArray.getJSONObject(i).has("verdict")){
+                    val verdict = resultArray.getJSONObject(i).getString("verdict")
+                    user!!.addVerdict(verdict.toString())
+                    sub.verdict = verdict
+                }
+                else{
+                    sub.verdict = "Running"
+                }
 
                 // add problem data
                 if (resultArray.getJSONObject(i).getJSONObject("problem").has("contestId")){
