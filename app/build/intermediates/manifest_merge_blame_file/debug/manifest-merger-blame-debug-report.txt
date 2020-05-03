@@ -29,62 +29,63 @@
 19-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:12:9-54
 20        android:supportsRtl="true"
 20-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:13:9-35
-21        android:theme="@style/AppTheme" >
-21-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:9-40
-22        <activity
-22-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:9-17:56
-23            android:name="com.example.rubberduck.CodeActivity"
-23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:19-47
-24            android:screenOrientation="portrait" />
-24-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:16:13-49
-25        <activity
-25-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:18:9-21:15
-26            android:name="com.example.rubberduck.CategoriesActivity"
-26-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:18:19-53
-27            android:screenOrientation="portrait" />
-27-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:19:13-49
-28        <activity
-28-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:22:9-24:55
-29            android:name="com.example.rubberduck.SubmissionActivity"
-29-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:22:19-53
-30            android:screenOrientation="portrait" />
-30-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:23:13-49
-31        <activity
-31-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:25:9-27:55
-32            android:name="com.example.rubberduck.RatingActivity"
-32-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:25:19-49
-33            android:screenOrientation="portrait" />
-33-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:26:13-49
-34        <activity
-34-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:28:9-31:56
-35            android:name="com.example.rubberduck.MainActivity"
-35-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:29:13-41
-36            android:screenOrientation="portrait" />
-36-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:30:13-49
-37        <activity
-37-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:32:9-40:20
-38            android:name="com.example.rubberduck.LoginActivity"
-38-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:33:13-42
-39            android:screenOrientation="portrait" >
-39-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:34:13-49
-40            <intent-filter>
-40-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:36:13-39:29
-41                <action android:name="android.intent.action.MAIN" />
-41-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:37:17-69
-41-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:37:25-66
-42
-43                <category android:name="android.intent.category.LAUNCHER" />
-43-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:38:17-77
-43-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:38:27-74
-44            </intent-filter>
-45        </activity>
-46
-47        <meta-data
-47-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:42:9-44:57
-48            android:name="preloaded_fonts"
-48-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:43:13-43
-49            android:resource="@array/preloaded_fonts" />
-49-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:44:13-54
-50    </application>
-51
-52</manifest>
+21        android:testOnly="true"
+22        android:theme="@style/AppTheme" >
+22-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:9-40
+23        <activity
+23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:9-17:56
+24            android:name="com.example.rubberduck.CodeActivity"
+24-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:19-47
+25            android:screenOrientation="portrait" />
+25-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:16:13-49
+26        <activity
+26-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:18:9-21:15
+27            android:name="com.example.rubberduck.CategoriesActivity"
+27-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:18:19-53
+28            android:screenOrientation="portrait" />
+28-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:19:13-49
+29        <activity
+29-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:22:9-24:55
+30            android:name="com.example.rubberduck.SubmissionActivity"
+30-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:22:19-53
+31            android:screenOrientation="portrait" />
+31-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:23:13-49
+32        <activity
+32-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:25:9-27:55
+33            android:name="com.example.rubberduck.RatingActivity"
+33-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:25:19-49
+34            android:screenOrientation="portrait" />
+34-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:26:13-49
+35        <activity
+35-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:28:9-31:56
+36            android:name="com.example.rubberduck.MainActivity"
+36-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:29:13-41
+37            android:screenOrientation="portrait" />
+37-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:30:13-49
+38        <activity
+38-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:32:9-40:20
+39            android:name="com.example.rubberduck.LoginActivity"
+39-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:33:13-42
+40            android:screenOrientation="portrait" >
+40-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:34:13-49
+41            <intent-filter>
+41-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:36:13-39:29
+42                <action android:name="android.intent.action.MAIN" />
+42-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:37:17-69
+42-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:37:25-66
+43
+44                <category android:name="android.intent.category.LAUNCHER" />
+44-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:38:17-77
+44-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:38:27-74
+45            </intent-filter>
+46        </activity>
+47
+48        <meta-data
+48-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:42:9-44:57
+49            android:name="preloaded_fonts"
+49-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:43:13-43
+50            android:resource="@array/preloaded_fonts" />
+50-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:44:13-54
+51    </application>
+52
+53</manifest>

@@ -19,6 +19,12 @@ import kotlinx.android.synthetic.main.activity_code.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
+import java.net.URLEncoder
 
 class CodeActivity : AppCompatActivity() {
 
@@ -84,7 +90,6 @@ class CodeActivity : AppCompatActivity() {
             codeBtn.visibility = View.VISIBLE
             problemSet.sortBy { it.rating }
             ratingLowerBound(minRating)
-            println("# problems = ${problemSet.size}")
         }
     }
 
@@ -105,7 +110,6 @@ class CodeActivity : AppCompatActivity() {
          override fun doInBackground(vararg params: Context): Boolean {
              val url = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
              while (true) {
-                 println("LOOP")
                  // TODO debug
                  val currSeconds = getElapsedSeconds()
                  if (currSeconds % 10L == 0L) {
@@ -220,7 +224,6 @@ class CodeActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             minRating = 1200
         }
-        println("Minimum difficulty set to $minRating")
         hideAll()
 
         ProblemsetRequest().execute()
@@ -367,6 +370,38 @@ class CodeActivity : AppCompatActivity() {
                 pIdx = i
                 break
             }
+        }
+    }
+
+    fun sendHttpPOST(view: View) {
+        println("Sending POST request...")
+        var reqParam = URLEncoder.encode("contestId", "UTF-8") + "=" +
+                URLEncoder.encode("1338", "UTF-8")
+        reqParam += "&" + URLEncoder.encode("index", "UTF-8") + "=" +
+                URLEncoder.encode("A", "UTF-8")
+        val mURL = URL("http://192.168.1.74:8080/")
+
+        with(mURL.openConnection() as HttpURLConnection) {
+            // optional default is GET
+            requestMethod = "POST"
+//
+//            val wr = OutputStreamWriter(outputStream);
+//            wr.write(reqParam);
+//            wr.flush();
+//
+//            println("URL : $url")
+//            println("Response Code : $responseCode")
+//
+//            BufferedReader(InputStreamReader(inputStream)).use {
+//                val response = StringBuffer()
+//
+//                var inputLine = it.readLine()
+//                while (inputLine != null) {
+//                    response.append(inputLine)
+//                    inputLine = it.readLine()
+//                }
+//                println("Response : $response")
+//            }
         }
     }
 }

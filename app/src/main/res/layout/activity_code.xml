@@ -104,7 +104,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.14"
-            tools:layout_editor_absoluteX="0dp">
+            tools:layout_editor_absoluteX="0dp"
+            android:onClick="sendHttpPOST">
 
             <TextView
                 android:id="@+id/problem_name"
