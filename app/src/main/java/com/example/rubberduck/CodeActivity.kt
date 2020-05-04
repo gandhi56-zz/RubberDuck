@@ -256,7 +256,7 @@ class CodeActivity : AppCompatActivity() {
 
         displayProblem()
 
-        RecentSubmissionRequest().execute()
+//        RecentSubmissionRequest().execute()
         inPond = true
         searchProblem("1348B")
     }
@@ -270,7 +270,7 @@ class CodeActivity : AppCompatActivity() {
                 "\nDifficulty: " + problemSet[pIdx].rating.toString()
         createTable()
 
-        RecentSubmissionRequest().execute()
+//        RecentSubmissionRequest().execute()
     }
 
     // onClick event handler for next problem button
@@ -379,7 +379,7 @@ class CodeActivity : AppCompatActivity() {
                 URLEncoder.encode("1338", "UTF-8")
         reqParam += "&" + URLEncoder.encode("index", "UTF-8") + "=" +
                 URLEncoder.encode("A", "UTF-8")
-        val mURL = URL("http://192.168.1.74:8080/")
+        val mURL = URL("http://localhost/8080")
 
         with(mURL.openConnection() as HttpURLConnection) {
             // optional default is GET

@@ -26,8 +26,6 @@ branch. Features that have been implemented include:
 
 ### Issues and TODOs
 * Application context
-  * how to automatically receive submission statuses of the user?
-  * display verdicts for the problem in a table
   * keep track of user progress in the code pond
   * display code pond statistics
 * User interface
@@ -41,4 +39,9 @@ branch. Features that have been implemented include:
     * Fix display of labels and numbers
     * table row highlight
 * Contest/Problem reminders?
-* Algorithms blog?
+* Bugs
+  * Code pond cannot be reentered, the progress bar keeps running indefinitely
+    * Reason: polling thread did not join properly
+* Complementary programs
+  * implement a local python3 HTTP server to handle POST requests
+  * send POST to local host to open the requested URL on PC browser

@@ -20,7 +20,7 @@ class User: Serializable {
     var verdictStats: HashMap<String, Int> = HashMap<String, Int>()
     var classStats: HashMap<String, Int> = HashMap<String, Int>()
     var lastSubmId = -1
-    var subm = HashMap<String, ArrayList<Submission>>()
+    var subm = HashMap<String, MutableSet<Submission>>()
 
     fun User(){
         handle = ""
@@ -68,10 +68,24 @@ class User: Serializable {
 
     fun addSubmission(key: String, sub: Submission){
         if (!subm.containsKey(key)){
-            subm[key] = ArrayList<Submission>()
+            subm[key] = hashSetOf()
         }
         subm[key]!!.add(sub)
         lastSubmId = max(lastSubmId, sub.id)
+        if (constantVerdict(sub.verdict))
+            addVerdict(sub.verdict)
+        for (tag in sub.problem.tags){
+            addClass(tag)
+        }
+    }
+
+    private fun constantVerdict(verdict: String): Boolean {
+        for (v in arrayOf("OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR", "WRONG_ANSWER",
+            "PRESENTATION_ERROR", "TIME_LIMIT_EXCEEDED", "MEMORY_LIMIT_EXCEEDED")){
+            if (verdict == v)
+                return true
+        }
+        return false
     }
 
 }

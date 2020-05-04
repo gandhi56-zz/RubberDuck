@@ -128,9 +128,7 @@ class LoginActivity : AppCompatActivity() {
 
                 // add verdict
                 if (resultArray.getJSONObject(i).has("verdict")){
-                    val verdict = resultArray.getJSONObject(i).getString("verdict")
-                    user!!.addVerdict(verdict.toString())
-                    sub.verdict = verdict
+                    sub.verdict = resultArray.getJSONObject(i).getString("verdict")
                 }
                 else{
                     sub.verdict = "Running"
