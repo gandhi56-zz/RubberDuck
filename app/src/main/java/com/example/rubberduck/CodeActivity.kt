@@ -255,7 +255,7 @@ class CodeActivity : AppCompatActivity() {
         timer_view.start()
 
         displayProblem()
-
+//        FIXME
 //        RecentSubmissionRequest().execute()
         inPond = true
         searchProblem("1348B")
@@ -269,8 +269,6 @@ class CodeActivity : AppCompatActivity() {
         probContent.text = "ID: " + problemSet[pIdx].contestId.toString() + problemSet[pIdx].index +
                 "\nDifficulty: " + problemSet[pIdx].rating.toString()
         createTable()
-
-//        RecentSubmissionRequest().execute()
     }
 
     // onClick event handler for next problem button
@@ -374,34 +372,7 @@ class CodeActivity : AppCompatActivity() {
     }
 
     fun sendHttpPOST(view: View) {
-        println("Sending POST request...")
-        var reqParam = URLEncoder.encode("contestId", "UTF-8") + "=" +
-                URLEncoder.encode("1338", "UTF-8")
-        reqParam += "&" + URLEncoder.encode("index", "UTF-8") + "=" +
-                URLEncoder.encode("A", "UTF-8")
-        val mURL = URL("http://localhost/8080")
+        var url = URL("https://192.168.1.255:8080/800/A")
 
-        with(mURL.openConnection() as HttpURLConnection) {
-            // optional default is GET
-            requestMethod = "POST"
-//
-//            val wr = OutputStreamWriter(outputStream);
-//            wr.write(reqParam);
-//            wr.flush();
-//
-//            println("URL : $url")
-//            println("Response Code : $responseCode")
-//
-//            BufferedReader(InputStreamReader(inputStream)).use {
-//                val response = StringBuffer()
-//
-//                var inputLine = it.readLine()
-//                while (inputLine != null) {
-//                    response.append(inputLine)
-//                    inputLine = it.readLine()
-//                }
-//                println("Response : $response")
-//            }
-        }
     }
 }
