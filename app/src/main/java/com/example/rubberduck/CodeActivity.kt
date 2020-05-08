@@ -48,6 +48,9 @@ class CodeActivity : AppCompatActivity() {
         return response.body()?.string().toString()
     }
 
+    // ######################################################################################################
+    // problemset request asynctask                                                                         #
+    // ######################################################################################################
     @SuppressLint("StaticFieldLeak")
     internal inner class ProblemsetRequest: AsyncTask<Context, Void, Boolean>(){
 
@@ -57,9 +60,7 @@ class CodeActivity : AppCompatActivity() {
         }
 
         override fun doInBackground(vararg params: Context?): Boolean {
-            val jsonObj = JSONObject(
-                " https://codeforces.com/api/problemset.problems".sendHTTPRequest()
-            )
+            val jsonObj = JSONObject(" https://codeforces.com/api/problemset.problems".sendHTTPRequest())
             if (jsonObj.getString("status") == "FAILED")    return false
             val problemsetJson = jsonObj.getJSONObject("result")
                 .getJSONArray("problems")
@@ -93,94 +94,82 @@ class CodeActivity : AppCompatActivity() {
         }
     }
 
-    fun ratingLowerBound(boundValue: Int){
-        // TODO implement binary search version
-        pIdx = 0
-        while (problemSet[pIdx].rating < boundValue){
-            pIdx += 1
-        }
-    }
-
-    fun getElapsedSeconds(): Long{
-        return SystemClock.currentThreadTimeMillis() / 1000
-    }
+    // ######################################################################################################
 
     @SuppressLint("StaticFieldLeak")
     internal inner class RecentSubmissionRequest: AsyncTask<Context, Void, Boolean>(){
          override fun doInBackground(vararg params: Context): Boolean {
              val url = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
-             while (true) {
-                 // TODO debug
-                 val currSeconds = getElapsedSeconds()
-                 if (currSeconds % 10L == 0L) {
-                     val jsonObj = JSONObject(url.sendHTTPRequest())
-                     if (jsonObj.getString("status") != "OK") continue
-                     val subId = jsonObj.getJSONArray("result").getJSONObject(0)
-                         .getInt("id")
-                     if (subId == user!!.lastSubmId)    continue
-
-                     val resultArray = jsonObj.getJSONArray("result")
-                     val problemId: String
-                     val problemJson = resultArray.getJSONObject(0)
-                         .getJSONObject("problem")
-                     println("Receiving problem JSON...")
-                     if (problemJson.has("contestId") and problemJson.has("index")){
-                         problemId = problemJson.getString("contestId") +
-                                 problemJson.getString("index")
-
-                         // add submission #########################################################
-                         val sub = Submission()
-
-                         // set id
-                         sub.id = resultArray.getJSONObject(0).getInt("id")
-
-                         // add verdict
-                         if (resultArray.getJSONObject(0).has("verdict")){
-                             val verdict = resultArray.getJSONObject(0)
-                                 .getString("verdict")
-                             user!!.addVerdict(verdict.toString())
-                             sub.verdict = verdict
-                         }
-                         else{
-                             sub.verdict = "Running"
-                         }
-
-                         // add problem data
-                         if (resultArray.getJSONObject(0).getJSONObject("problem")
-                                 .has("contestId")){
-                             sub.problem.contestId = resultArray.getJSONObject(0)
-                                 .getJSONObject("problem")
-                                 .getInt("contestId")
-                         }
-                         sub.problem.index = resultArray.getJSONObject(0)
-                             .getJSONObject("problem").getString("index")
-                         sub.problem.name = resultArray.getJSONObject(0)
-                             .getJSONObject("problem").getString("name")
-                         if (resultArray.getJSONObject(0).getJSONObject("problem")
-                                 .has("rating")){
-                             sub.problem.rating = resultArray.getJSONObject(0)
-                                 .getJSONObject("problem")
-                                 .getInt("rating")
-                         }
-                         val tags = resultArray.getJSONObject(0)
-                             .getJSONObject("problem")
-                             .getJSONArray("tags")
-                         (0 until tags.length()).forEach{j ->
-                             sub.problem.tags.add(tags[j].toString())
-                             user!!.addClass(tags[j].toString())
-                         }
-                         if (constantVerdict(sub.verdict)) {
-                             user!!.addSubmission(problemId, sub)
-                         }
-                         searchProblem(problemId)
-                         break
-                     }
-                     else{
-                         println("Error 101")
-                     }
-                     println("done")
-                 }
+             val jsonObj = JSONObject(url.sendHTTPRequest())
+             if (jsonObj.getString("status") != "OK"){
+                 println("Request failed...")
+                 return false
              }
+
+             val resultArray = jsonObj.getJSONArray("result")
+             val problemId: String
+             val problemJson = resultArray.getJSONObject(0)
+                 .getJSONObject("problem")
+             println("Receiving problem JSON...")
+             if (problemJson.has("contestId") and problemJson.has("index")){
+                 problemId = problemJson.getString("contestId") +
+                         problemJson.getString("index")
+                 println("JSON $problemId")
+
+                 // add submission #########################################################
+                 val sub = Submission()
+
+                 // set id
+                 sub.id = resultArray.getJSONObject(0).getInt("id")
+
+                 // add verdict
+                 if (resultArray.getJSONObject(0).has("verdict")){
+                     val verdict = resultArray.getJSONObject(0)
+                         .getString("verdict")
+                     user!!.addVerdict(verdict.toString())
+                     sub.verdict = verdict
+                 }
+                 else{
+                     sub.verdict = "Running"
+                 }
+
+                 // add problem data
+                 if (resultArray.getJSONObject(0).getJSONObject("problem")
+                         .has("contestId")){
+                     sub.problem.contestId = resultArray.getJSONObject(0)
+                         .getJSONObject("problem")
+                         .getInt("contestId")
+                 }
+                 else{
+                     println("Error: Problem does not have a value for contestId tag")
+                 }
+                 sub.problem.index = resultArray.getJSONObject(0)
+                     .getJSONObject("problem").getString("index")
+                 sub.problem.name = resultArray.getJSONObject(0)
+                     .getJSONObject("problem").getString("name")
+                 if (resultArray.getJSONObject(0).getJSONObject("problem")
+                         .has("rating")){
+                     sub.problem.rating = resultArray.getJSONObject(0)
+                         .getJSONObject("problem")
+                         .getInt("rating")
+                 }
+                 val tags = resultArray.getJSONObject(0)
+                     .getJSONObject("problem")
+                     .getJSONArray("tags")
+                 (0 until tags.length()).forEach{j ->
+                     sub.problem.tags.add(tags[j].toString())
+                     user!!.addClass(tags[j].toString())
+                 }
+                 if (constantVerdict(sub.verdict)) {
+                     user!!.addSubmission(problemId, sub)
+                 }
+                 println("166 $problemId")
+                 searchProblem(problemId)
+             }
+             else{
+                 println("Error: problem ID not found...")
+             }
+             println("done")
              return true
          }
 
@@ -188,15 +177,6 @@ class CodeActivity : AppCompatActivity() {
             super.onPostExecute(result)
             displayProblem()
         }
-    }
-
-    private fun constantVerdict(verdict: String): Boolean {
-        for (v in arrayOf("OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR", "WRONG_ANSWER",
-            "PRESENTATION_ERROR", "TIME_LIMIT_EXCEEDED", "MEMORY_LIMIT_EXCEEDED")){
-            if (verdict == v)
-                return true
-        }
-        return false
     }
 
     @SuppressLint("SetTextI18n")
@@ -229,6 +209,27 @@ class CodeActivity : AppCompatActivity() {
         ProblemsetRequest().execute()
     }
 
+    private fun constantVerdict(verdict: String): Boolean {
+        for (v in arrayOf("OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR", "WRONG_ANSWER",
+            "PRESENTATION_ERROR", "TIME_LIMIT_EXCEEDED", "MEMORY_LIMIT_EXCEEDED")){
+            if (verdict == v)
+                return true
+        }
+        return false
+    }
+
+    fun ratingLowerBound(boundValue: Int){
+        // TODO implement binary search version
+        pIdx = 0
+        while (problemSet[pIdx].rating < boundValue){
+            pIdx += 1
+        }
+    }
+
+    fun getElapsedSeconds(): Long{
+        return SystemClock.currentThreadTimeMillis() / 1000
+    }
+
     private fun hideAll(){
         probLayout.visibility = View.INVISIBLE
         codeBtn.visibility = View.INVISIBLE
@@ -253,10 +254,12 @@ class CodeActivity : AppCompatActivity() {
         nextBtn.visibility = View.VISIBLE
         timer_view.base = SystemClock.elapsedRealtime()
         timer_view.start()
-
         displayProblem()
-//        FIXME
-//        RecentSubmissionRequest().execute()
+
+        pullToRefresh.setOnRefreshListener {
+            RecentSubmissionRequest().execute()
+        }
+        RecentSubmissionRequest().execute()
         inPond = true
         searchProblem("1348B")
     }
@@ -265,6 +268,7 @@ class CodeActivity : AppCompatActivity() {
     fun displayProblem(){
         // TODO erase difficulty, not required to display
         println("display problem at pIdx = $pIdx")
+        pullToRefresh.isRefreshing = false
         probName.text = problemSet[pIdx].name
         probContent.text = "ID: " + problemSet[pIdx].contestId.toString() + problemSet[pIdx].index +
                 "\nDifficulty: " + problemSet[pIdx].rating.toString()
@@ -298,7 +302,21 @@ class CodeActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        // do nothing here :)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure about ending this session?")
+        builder.setPositiveButton("Yes"){
+                _: DialogInterface?, _: Int ->
+            inPond = false
+            this.finish()
+        }
+
+        builder.setNegativeButton("No"){
+                _: DialogInterface?, _: Int ->
+            Toast.makeText(applicationContext,"Stay focused, you can solve this problem!",Toast.LENGTH_LONG).show()
+        }
+        val alertdiag = builder.create()
+        alertdiag.setCancelable(false)
+        alertdiag.show()
     }
 
     @SuppressLint("SetTextI18n")
@@ -360,6 +378,7 @@ class CodeActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ShowToast")
     private fun searchProblem(problemId: String){
         // TODO improve time complexity
         println("searching problem $problemId")

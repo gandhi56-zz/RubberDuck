@@ -1634,6 +1634,7 @@ id problem_name
 id progressBar
 id progress_circular
 id progress_horizontal
+id pullToRefresh
 id radio
 id rankView
 id ratingBtn
