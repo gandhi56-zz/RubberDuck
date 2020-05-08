@@ -37,12 +37,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        app:layout_constraintBottom_toTopOf="@+id/next_btn"
+        android:layout_height="550dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.058"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +51,7 @@
         <LinearLayout
             android:id="@+id/problem_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,6 +59,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.206">
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:queryHint="Problem ID or name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -111,7 +117,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/problem_name"
-                android:onClick="sendHttpPOST"
                 android:orientation="vertical"
                 android:paddingHorizontal="30dp"
                 tools:layout_editor_absoluteX="0dp">
@@ -190,19 +195,19 @@
 
     <Button
         android:id="@+id/next_btn"
-        android:layout_width="147dp"
-        android:layout_height="78dp"
+        android:layout_width="92dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="88dp"
         android:background="@drawable/next_btn"
         android:foreground="@drawable/rightarrow"
         android:foregroundTint="#FFFFFF"
         android:gravity="center_horizontal"
         android:onClick="getProblem"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.811"
+        app:layout_constraintTop_toBottomOf="@+id/pullToRefresh"
         tools:ignore="ButtonStyle,UnusedAttribute" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

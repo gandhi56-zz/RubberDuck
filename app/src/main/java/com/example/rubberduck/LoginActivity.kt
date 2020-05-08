@@ -96,9 +96,7 @@ class LoginActivity : AppCompatActivity() {
         private fun userInfo(): Boolean{
             val json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
                     + getHandle())
-            println(json)
             val jsonObj = JSONObject(json)
-            println("jsonObj converted")
             if (jsonObj.getString("status") == "FAILED")    return false
 
             // user data

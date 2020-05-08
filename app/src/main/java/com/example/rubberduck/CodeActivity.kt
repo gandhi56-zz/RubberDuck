@@ -9,9 +9,10 @@ import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.os.SystemClock
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -19,14 +20,8 @@ import kotlinx.android.synthetic.main.activity_code.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
-import java.io.BufferedReader
-import java.io.InputStreamReader
-import java.io.OutputStreamWriter
-import java.net.HttpURLConnection
-import java.net.URL
-import java.net.URLEncoder
 
-class CodeActivity : AppCompatActivity() {
+class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     var user: User? = null
     var problemSet = ArrayList<Problem>()
@@ -41,12 +36,83 @@ class CodeActivity : AppCompatActivity() {
     private var minRating: Int = 1000
     private var inPond = false
 
+    private var submissionTable: SubmissionTable? = null
+
     fun String.sendHTTPRequest(): String{
         val client = OkHttpClient()
         val request = Request.Builder().url(this).build()
         val response = client.newCall(request).execute()
         return response.body()?.string().toString()
     }
+
+    // ######################################################################################################
+    // submissionTable class                                                                                #
+    // ######################################################################################################
+
+    internal inner class SubmissionTable(ctx: Context) {
+
+        private var appCtx: Context? = ctx
+        @SuppressLint("SetTextI18n")
+        private fun noSubmissionView(): TextView {
+            val noSubmitView = TextView(appCtx)
+            noSubmitView.apply {
+                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = "No submissions"
+                textSize = 22F
+                gravity = 1
+            }
+            return noSubmitView
+        }
+
+        private fun submissionIdView(subObj: Submission): TextView {
+            val subId = TextView(appCtx)
+            subId.apply {
+                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = subObj.id.toString()
+                textSize = 16F
+            }
+            return subId
+        }
+
+        private fun verdictView(subObj: Submission): TextView{
+            val verdict = TextView(appCtx)
+            verdict.apply {
+                layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = subObj.verdict
+                textSize = 16F
+            }
+            return verdict
+        }
+
+        @SuppressLint("SetTextI18n")
+        fun createTable(){
+            submissionsTable!!.removeAllViews()
+            if (!user!!.subm.contains(problemSet[pIdx].getId())){
+                val row = TableRow(appCtx)
+                row.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT)
+                row.addView(noSubmissionView())
+                submissionsTable!!.addView(row)
+                return
+            }
+
+            for (subObj in user!!.subm[problemSet[pIdx].getId()]!!){
+                val row = TableRow(appCtx)
+                row.layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT)
+                row.addView(submissionIdView(subObj))
+                row.addView(verdictView(subObj))
+                submissionsTable!!.addView(row)
+            }
+        }
+
+    }
+
 
     // ######################################################################################################
     // problemset request asynctask                                                                         #
@@ -94,6 +160,8 @@ class CodeActivity : AppCompatActivity() {
         }
     }
 
+    // ######################################################################################################
+    // recentSubmission request asynctask                                                                   #
     // ######################################################################################################
 
     @SuppressLint("StaticFieldLeak")
@@ -179,6 +247,10 @@ class CodeActivity : AppCompatActivity() {
         }
     }
 
+    // ######################################################################################################
+    // Activity driver function                                                                             #
+    // ######################################################################################################
+
     @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -205,8 +277,8 @@ class CodeActivity : AppCompatActivity() {
             minRating = 1200
         }
         hideAll()
-
         ProblemsetRequest().execute()
+        submissionTable = SubmissionTable(applicationContext)
     }
 
     private fun constantVerdict(verdict: String): Boolean {
@@ -261,7 +333,23 @@ class CodeActivity : AppCompatActivity() {
         }
         RecentSubmissionRequest().execute()
         inPond = true
-        searchProblem("1348B")
+
+        searchView.setOnQueryTextListener(this)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        println("search query = $query")
+        if (searchProblem(query!!)){
+            displayProblem()
+            hideKeyboard()
+            searchView.isEnabled = false
+            return true
+        }
+        return false
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        return false
     }
 
     @SuppressLint("SetTextI18n")
@@ -272,7 +360,7 @@ class CodeActivity : AppCompatActivity() {
         probName.text = problemSet[pIdx].name
         probContent.text = "ID: " + problemSet[pIdx].contestId.toString() + problemSet[pIdx].index +
                 "\nDifficulty: " + problemSet[pIdx].rating.toString()
-        createTable()
+        submissionTable!!.createTable()
     }
 
     // onClick event handler for next problem button
@@ -319,79 +407,35 @@ class CodeActivity : AppCompatActivity() {
         alertdiag.show()
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun noSubmissionView(): TextView {
-        val noSubmitView = TextView(this)
-        noSubmitView.apply {
-            layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT)
-            text = "No submissions"
-            textSize = 22F
-            gravity = 1
-        }
-        return noSubmitView
-    }
-
-    private fun submissionIdView(subObj: Submission): TextView {
-        val subId = TextView(this)
-        subId.apply {
-            layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT)
-            text = subObj.id.toString()
-            textSize = 16F
-        }
-        return subId
-    }
-
-    private fun verdictView(subObj: Submission): TextView{
-        val verdict = TextView(this)
-        verdict.apply {
-            layoutParams = TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT,
-                TableRow.LayoutParams.WRAP_CONTENT)
-            text = subObj.verdict
-            textSize = 16F
-        }
-        return verdict
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun createTable(){
-        submissionsTable!!.removeAllViews()
-        if (!user!!.subm.contains(problemSet[pIdx].getId())){
-            val row = TableRow(this)
-            row.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
-            row.addView(noSubmissionView())
-            submissionsTable!!.addView(row)
-            return
-        }
-
-        for (subObj in user!!.subm[problemSet[pIdx].getId()]!!){
-            val row = TableRow(this)
-            row.layoutParams = ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT)
-            row.addView(submissionIdView(subObj))
-            row.addView(verdictView(subObj))
-            submissionsTable!!.addView(row)
-        }
-    }
-
     @SuppressLint("ShowToast")
-    private fun searchProblem(problemId: String){
+    private fun searchProblem(query: String?):Boolean{
         // TODO improve time complexity
-        println("searching problem $problemId")
+        println("searching problem $query")
         for (i in 0 until problemSet.size){
-            if (problemSet[i].getId() == problemId){
+            if ((problemSet[i].getId() == query) or (problemSet[i].name == query)){
                 pIdx = i
-                break
+                println("found problem")
+                return true
             }
         }
+        println("problem not found")
+        return false
     }
 
-    fun sendHttpPOST(view: View) {
-        var url = URL("https://192.168.1.255:8080/800/A")
-
+    override fun onSearchRequested(): Boolean {
+        val appData = Bundle().apply {
+            putBoolean("Searching and searching...", true)
+        }
+        return true
     }
+
+    private fun hideKeyboard(){
+        val view: View? = this.currentFocus
+        if (view != null){
+            val hideMe = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            hideMe.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
 }
