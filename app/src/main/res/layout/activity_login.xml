@@ -22,60 +22,40 @@
         android:textColor="@color/FontColor"
         android:paddingHorizontal="30dp"/>
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="319dp"
-        android:layout_height="196dp"
-        android:layout_marginBottom="220dp"
-        android:background="@drawable/handle_view"
-        android:orientation="vertical"
-        android:paddingHorizontal="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.578">
-
-
-        <EditText
-            android:id="@+id/handleText"
-            android:layout_width="261dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:autofillHints="gandhi21299"
-            android:fontFamily="@font/anaheim"
-            android:hint="@string/handle"
-            android:inputType="text"
-            android:textColor="@color/font_color"
-            android:textSize="26dp"/>
-
-        <Button
-            android:id="@+id/signInBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/gen_btn"
-            android:fontFamily="@font/anaheim"
-            android:onClick="signIn"
-            android:text="@string/sign_in"
-            android:textColor="#051633"
-            android:textSize="20dp"
-            tools:layout_conversion_absoluteHeight="100dp"
-            tools:layout_conversion_absoluteWidth="100dp"
-            tools:layout_editor_absoluteX="20dp"
-            tools:layout_editor_absoluteY="241dp"
-            android:layout_gravity="center"/>
-
-    </LinearLayout>
-
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="198dp"
         android:layout_height="85dp"
+        android:layout_marginBottom="40dp"
+        android:indeterminateTint="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        android:indeterminateTint="@color/colorPrimaryDark"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.109"
+        android:background="@drawable/problem_name"
+        app:tabTextColor="#FFFFFF"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="300dp"
+        android:layout_height="276dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:layout_constraintVertical_bias="0.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

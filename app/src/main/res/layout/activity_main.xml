@@ -56,7 +56,7 @@
             <Button
                 android:id="@+id/codeBtn"
                 android:background="@drawable/gen_btn"
-                android:text="@string/code"
+                android:text="@string/code_pond"
                 android:fontFamily="@font/anaheim"
                 android:textColor="@color/font_color"
                 android:textSize="22sp"

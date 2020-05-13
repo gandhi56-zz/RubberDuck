@@ -39,9 +39,3 @@ branch. Features that have been implemented include:
     * Fix display of labels and numbers
     * table row highlight
 * Contest/Problem reminders?
-* Bugs
-  * Code pond cannot be reentered, the progress bar keeps running indefinitely
-    * Reason: polling thread did not join properly
-* Complementary programs
-  * implement a local python3 HTTP server to handle POST requests
-  * send POST to local host to open the requested URL on PC browser
