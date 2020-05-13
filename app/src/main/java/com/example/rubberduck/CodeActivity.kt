@@ -25,18 +25,19 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     var user: User? = null
     var problemSet = ArrayList<Problem>()
+    var problemTitles = ArrayList<String>()
     private lateinit var progBar: ProgressBar
     private lateinit var codeBtn: Button
     private lateinit var probLayout: LinearLayout
     private lateinit var probName: TextView
     private lateinit var probContent: TextView
     private lateinit var nextBtn: Button
-    private lateinit var endBtn: Button
     private var pIdx: Int = 0
     private var minRating: Int = 1000
-    private var inPond = false
 
     private var submissionTable: SubmissionTable? = null
+
+    private var adapter: ArrayAdapter<String>? = null
 
     fun String.sendHTTPRequest(): String{
         val client = OkHttpClient()
@@ -100,7 +101,8 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 return
             }
 
-            for (subObj in user!!.subm[problemSet[pIdx].getId()]!!){
+            for (subObj
+                in user!!.subm[problemSet[pIdx].getId()]!!.sortedBy { it-> it.id }){
                 val row = TableRow(appCtx)
                 row.layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -147,6 +149,7 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                     prob.tags.add(tags[j].toString())
                 }
                 problemSet.add(prob)
+                problemTitles.add(prob.getTitle())
             }
             return true
         }
@@ -228,7 +231,7 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                      sub.problem.tags.add(tags[j].toString())
                      user!!.addClass(tags[j].toString())
                  }
-                 if (constantVerdict(sub.verdict)) {
+                 if (constantVerdict(sub.verdict) and isNewSubmission(problemId, sub)) {
                      user!!.addSubmission(problemId, sub)
                  }
                  println("166 $problemId")
@@ -240,6 +243,14 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
              println("done")
              return true
          }
+
+        private fun isNewSubmission(problemId: String, sub: Submission): Boolean {
+            for (subObj in user!!.subm[problemId]!!){
+                if (subObj.id == sub.id)
+                    return false
+            }
+            return true
+        }
 
         override fun onPostExecute(result: Boolean?) {
             super.onPostExecute(result)
@@ -298,10 +309,6 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
     }
 
-    fun getElapsedSeconds(): Long{
-        return SystemClock.currentThreadTimeMillis() / 1000
-    }
-
     private fun hideAll(){
         probLayout.visibility = View.INVISIBLE
         codeBtn.visibility = View.INVISIBLE
@@ -316,7 +323,6 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         nextBtn = findViewById(R.id.next_btn)
         probName = findViewById(R.id.problem_name)
         probContent = findViewById(R.id.problem_content)
-        endBtn = findViewById(R.id.end_btn)
     }
 
     @SuppressLint("SetTextI18n")
@@ -332,24 +338,60 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             RecentSubmissionRequest().execute()
         }
         RecentSubmissionRequest().execute()
-        inPond = true
-
+        adapter = ArrayAdapter(this, R.layout.problems_list, problemTitles)
         searchView.setOnQueryTextListener(this)
+
+        searchListView.onItemClickListener = object :AdapterView.OnItemClickListener{
+            override fun onItemClick(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val item = searchListView.getItemAtPosition(position) as String
+                var probId = ""
+                var i = 0
+                while (i < item.length){
+                    probId += item[i]
+                    i++
+                    if (item[i] == ' ') break
+                }
+                if (searchProblem(probId))
+                    displayProblem()
+                else
+                    Toast.makeText(applicationContext, "Problem $item not found", Toast.LENGTH_LONG).show()
+                searchListView.adapter = null
+                hideKeyboard()
+            }
+
+        }
+
+    }
+
+    fun initSearch(view: View) {
+        println("initSearch called.......................")
+        searchListView.adapter = adapter
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        println("search query = $query")
-        if (searchProblem(query!!)){
-            displayProblem()
-            hideKeyboard()
-            searchView.isEnabled = false
-            return true
-        }
+//        println("search query = $query")
+//        if (searchProblem(query!!)){
+//            displayProblem()
+//            hideKeyboard()
+//            searchView.isEnabled = false
+//            searchListView.adapter = null
+//            return true
+//        }
+//        searchListView.adapter = null
         return false
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        return false
+        if (searchListView.adapter == null) {
+            searchListView.adapter = adapter
+        }
+        adapter!!.filter.filter(newText)
+        return true
     }
 
     @SuppressLint("SetTextI18n")
@@ -370,31 +412,15 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         displayProblem()
     }
 
-    // onClick event handler for end game button
-    fun endGame(@Suppress("UNUSED_PARAMETER")view: View) {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder.setMessage("Are you sure about ending this session?")
-        builder.setPositiveButton("Yes"){
-                _: DialogInterface?, _: Int ->
-            inPond = false
-            this.finish()
-        }
-
-        builder.setNegativeButton("No"){
-                _: DialogInterface?, _: Int ->
-            Toast.makeText(applicationContext,"Stay focused, you can solve this problem!",Toast.LENGTH_LONG).show()
-        }
-        val alertdiag = builder.create()
-        alertdiag.setCancelable(false)
-        alertdiag.show()
-    }
-
     override fun onBackPressed() {
+        if (searchListView.adapter != null){
+            searchListView.adapter = null
+            return
+        }
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setMessage("Are you sure about ending this session?")
         builder.setPositiveButton("Yes"){
                 _: DialogInterface?, _: Int ->
-            inPond = false
             this.finish()
         }
 
@@ -423,7 +449,7 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onSearchRequested(): Boolean {
-        val appData = Bundle().apply {
+        Bundle().apply {
             putBoolean("Searching and searching...", true)
         }
         return true

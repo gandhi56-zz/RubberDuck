@@ -13,6 +13,7 @@ MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/anshil/.gradle/cache
 MERGED from [com.android.volley:volley:1.1.1] /home/anshil/.gradle/caches/transforms-2/files-2.1/6c89d50ee97dbd4eb43f1d731ae414b6/jetified-volley-1.1.1/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.cardview:cardview:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/73e1622e0283f301bc23a23ce077ad8e/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/80ab11731f015223616277d743ce584c/legacy-support-core-ui-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/409924cd016c6c5d22217b64333b2716/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a8b5f2f918ccd5b61b38ba8ba7a0ef9d/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/000ad8ee5f29acfc65944a32f3753966/jetified-viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/035f3ead55434a936fac43666c47076e/fragment-1.1.0/AndroidManifest.xml:17:1-24:12
@@ -30,14 +31,13 @@ MERGED from [androidx.activity:activity:1.0.0] /home/anshil/.gradle/caches/trans
 MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/223164d984eb07f0c5b83727b8e85906/slidingpanelayout-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/01e4967e0f2302a16a9b2fcd8f96fcc1/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.customview:customview:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/e09806fedcaf73ee0e22595e708735dc/customview-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/409924cd016c6c5d22217b64333b2716/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/8f6f53577df462b883a0f29071a5c359/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a3eef63a1949ce565e26a68908e433ce/core-1.2.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/b438d021203b1b2cd4bf7ee7b187a00e/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/2b5a4cd18c0e85677b51f808520e4d53/versionedparcelable-1.1.0/AndroidManifest.xml:17:1-27:12
 MERGED from [androidx.documentfile:documentfile:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/0c4a303e4845c1d71d38de564f7d7815/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/490bc29f7bf8bb8ad4dea60f819b0f75/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.print:print:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/e968a761718dd842e4b2f47e5238a64b/print-1.0.0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/b438d021203b1b2cd4bf7ee7b187a00e/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/bc3d08ee1c4710b4b0c8f772d2326f42/lifecycle-runtime-2.1.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/61045485808293e5346b591a420d3959/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.savedstate:savedstate:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/8fb84686ddcc564983df753d3c52ba17/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
@@ -181,6 +181,8 @@ MERGED from [androidx.cardview:cardview:1.0.0] /home/anshil/.gradle/caches/trans
 MERGED from [androidx.cardview:cardview:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/73e1622e0283f301bc23a23ce077ad8e/cardview-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/80ab11731f015223616277d743ce584c/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/80ab11731f015223616277d743ce584c/legacy-support-core-ui-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/409924cd016c6c5d22217b64333b2716/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/409924cd016c6c5d22217b64333b2716/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a8b5f2f918ccd5b61b38ba8ba7a0ef9d/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a8b5f2f918ccd5b61b38ba8ba7a0ef9d/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager2:viewpager2:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/000ad8ee5f29acfc65944a32f3753966/jetified-viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
@@ -215,12 +217,12 @@ MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/anshil/.gradle/cach
 MERGED from [androidx.recyclerview:recyclerview:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/01e4967e0f2302a16a9b2fcd8f96fcc1/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.customview:customview:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/e09806fedcaf73ee0e22595e708735dc/customview-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/e09806fedcaf73ee0e22595e708735dc/customview-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/409924cd016c6c5d22217b64333b2716/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/409924cd016c6c5d22217b64333b2716/swiperefreshlayout-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/8f6f53577df462b883a0f29071a5c359/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/8f6f53577df462b883a0f29071a5c359/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a3eef63a1949ce565e26a68908e433ce/core-1.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core:1.2.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/a3eef63a1949ce565e26a68908e433ce/core-1.2.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/b438d021203b1b2cd4bf7ee7b187a00e/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/b438d021203b1b2cd4bf7ee7b187a00e/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/2b5a4cd18c0e85677b51f808520e4d53/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/2b5a4cd18c0e85677b51f808520e4d53/versionedparcelable-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.documentfile:documentfile:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/0c4a303e4845c1d71d38de564f7d7815/documentfile-1.0.0/AndroidManifest.xml:20:5-44
@@ -229,8 +231,6 @@ MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/a
 MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/490bc29f7bf8bb8ad4dea60f819b0f75/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/e968a761718dd842e4b2f47e5238a64b/print-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.print:print:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/e968a761718dd842e4b2f47e5238a64b/print-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/b438d021203b1b2cd4bf7ee7b187a00e/interpolator-1.0.0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/b438d021203b1b2cd4bf7ee7b187a00e/interpolator-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/bc3d08ee1c4710b4b0c8f772d2326f42/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/bc3d08ee1c4710b4b0c8f772d2326f42/lifecycle-runtime-2.1.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.1.0] /home/anshil/.gradle/caches/transforms-2/files-2.1/61045485808293e5346b591a420d3959/lifecycle-viewmodel-2.1.0/AndroidManifest.xml:20:5-44

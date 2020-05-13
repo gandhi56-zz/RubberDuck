@@ -60,12 +60,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.206">
 
-            <SearchView
-                android:id="@+id/searchView"
-                android:queryHint="Problem ID or name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                <SearchView
+                    android:id="@+id/searchView"
+                    android:queryHint="Problem ID or name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:iconifiedByDefault="false"
+                    android:onClick="initSearch"/>
+
+                <ListView
+                    android:id="@+id/searchListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -91,25 +99,6 @@
                     android:textColor="#ffffff"
                     android:textSize="24sp" />
 
-                <Button
-                    android:id="@+id/end_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="13dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="0dp"
-                    android:background="@drawable/end_btn"
-                    android:fontFamily="@font/anaheim"
-                    android:onClick="endGame"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="5dp"
-                    android:text="@string/end"
-                    android:textColor="@color/font_color"
-                    android:textSize="24sp"
-                    tools:ignore="RelativeOverlap" />
             </RelativeLayout>
 
 
