@@ -27,7 +27,6 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     var problemSet = ArrayList<Problem>()
     var problemTitles = ArrayList<String>()
     private lateinit var progBar: ProgressBar
-    private lateinit var codeBtn: Button
     private lateinit var probLayout: LinearLayout
     private lateinit var probName: TextView
     private lateinit var probContent: TextView
@@ -157,9 +156,9 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         override fun onPostExecute(result: Boolean?) {
             super.onPostExecute(result)
             progBar.visibility = View.GONE
-            codeBtn.visibility = View.VISIBLE
             problemSet.sortBy { it.rating }
             ratingLowerBound(minRating)
+            beginCoding()
         }
     }
 
@@ -311,23 +310,19 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private fun hideAll(){
         probLayout.visibility = View.INVISIBLE
-        codeBtn.visibility = View.INVISIBLE
         progBar.visibility = View.INVISIBLE
         nextBtn.visibility = View.INVISIBLE
     }
 
     private fun getUIComponents(){
         progBar = findViewById(R.id.loadingProblems)
-        codeBtn = findViewById(R.id.beginBtn)
         probLayout = findViewById(R.id.problem_layout)
         nextBtn = findViewById(R.id.next_btn)
         probName = findViewById(R.id.problem_name)
         probContent = findViewById(R.id.problem_content)
     }
 
-    @SuppressLint("SetTextI18n")
-    fun beginCoding(@Suppress("UNUSED_PARAMETER")view: View) {
-        codeBtn.visibility = View.GONE
+    fun beginCoding() {
         probLayout.visibility = View.VISIBLE
         nextBtn.visibility = View.VISIBLE
         timer_view.base = SystemClock.elapsedRealtime()

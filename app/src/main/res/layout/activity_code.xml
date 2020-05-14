@@ -22,21 +22,6 @@
         android:visibility="invisible"
         style="@style/Platform.MaterialComponents.Light"/>
 
-    <Button
-        android:id="@+id/beginBtn"
-        android:layout_width="221dp"
-        android:layout_height="128dp"
-        android:background="@drawable/handle_view"
-        android:onClick="beginCoding"
-        android:text="@string/start_coding"
-        android:textColor="@color/font_color"
-        android:textSize="20sp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/pullToRefresh"
         android:layout_width="match_parent"
