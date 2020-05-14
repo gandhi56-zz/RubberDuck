@@ -22,12 +22,6 @@ class User: Serializable {
     var lastSubmId = -1
     var subm = HashMap<String, MutableSet<Submission>>()
 
-    fun User(){
-        handle = ""
-        titlePhoto = ""
-        rank = ""
-    }
-
     fun setHandle(handleValue: String){
         handle = handleValue
     }
@@ -79,7 +73,7 @@ class User: Serializable {
         }
     }
 
-    private fun constantVerdict(verdict: String): Boolean {
+    fun constantVerdict(verdict: String): Boolean {
         for (v in arrayOf("OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR", "WRONG_ANSWER",
             "PRESENTATION_ERROR", "TIME_LIMIT_EXCEEDED", "MEMORY_LIMIT_EXCEEDED")){
             if (verdict == v)

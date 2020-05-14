@@ -23,4 +23,8 @@ class CodePond : AppCompatActivity() {
         }
         startActivity(intent)
     }
+
+    fun addReportView(){
+
+    }
 }

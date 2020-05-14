@@ -230,7 +230,7 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                      sub.problem.tags.add(tags[j].toString())
                      user!!.addClass(tags[j].toString())
                  }
-                 if (constantVerdict(sub.verdict) and isNewSubmission(problemId, sub)) {
+                 if (user!!.constantVerdict(sub.verdict) and isNewSubmission(problemId, sub)) {
                      user!!.addSubmission(problemId, sub)
                  }
                  println("166 $problemId")
@@ -289,15 +289,6 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         hideAll()
         ProblemsetRequest().execute()
         submissionTable = SubmissionTable(applicationContext)
-    }
-
-    private fun constantVerdict(verdict: String): Boolean {
-        for (v in arrayOf("OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR", "WRONG_ANSWER",
-            "PRESENTATION_ERROR", "TIME_LIMIT_EXCEEDED", "MEMORY_LIMIT_EXCEEDED")){
-            if (verdict == v)
-                return true
-        }
-        return false
     }
 
     fun ratingLowerBound(boundValue: Int){
