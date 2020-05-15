@@ -324,9 +324,9 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             RecentSubmissionRequest().execute()
         }
         RecentSubmissionRequest().execute()
+
         adapter = ArrayAdapter(this, R.layout.problems_list, problemTitles)
         searchView.setOnQueryTextListener(this)
-
         searchListView.onItemClickListener = object :AdapterView.OnItemClickListener{
             override fun onItemClick(
                 parent: AdapterView<*>?,

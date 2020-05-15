@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
     lateinit var progBar: ProgressBar
     lateinit var handleText: EditText
     lateinit var signInBtn: Button
-    var handleState: HandleInput = EMPTY
     var user: User? = null
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -45,13 +44,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun signIn(view: View) {
-        handleState = HandleInput.WAIT
         user = User()
         hideKeyboard()
         if (validateInput())
             UserProfileRequest().execute()
-        else
-            handleState = EMPTY
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -76,11 +72,7 @@ class LoginActivity : AppCompatActivity() {
             super.onPostExecute(result)
             progBar.visibility = View.GONE
             if (result){
-                handleState = HandleInput.OK
                 startMainActivity()
-            }
-            else{
-                handleState = HandleInput.INVALID
             }
             handleText.isEnabled = true
             signInBtn.isEnabled = true
@@ -97,7 +89,10 @@ class LoginActivity : AppCompatActivity() {
             val json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
                     + getHandle())
             val jsonObj = JSONObject(json)
-            if (jsonObj.getString("status") == "FAILED")    return false
+            if (jsonObj.getString("status") == "FAILED"){
+                Toast.makeText(applicationContext, "Codeforces handle not found", Toast.LENGTH_LONG).show()
+                return false
+            }
 
             // user data
             val resultArray = jsonObj.getJSONArray("result")
@@ -118,30 +113,24 @@ class LoginActivity : AppCompatActivity() {
             if (jsonObj.getString("status") == "FAILED")    return false
             val resultArray = jsonObj.getJSONArray("result")
 
-            (0 until resultArray.length()-1).forEach { i ->
+            (0 until resultArray.length()).forEach { i ->
                 val sub = Submission()
-
-                // set id
                 sub.id = resultArray.getJSONObject(i).getInt("id")
-
-                // add verdict
-                if (resultArray.getJSONObject(i).has("verdict")){
-                    sub.verdict = resultArray.getJSONObject(i).getString("verdict")
-                }
-                else{
-                    sub.verdict = "Running"
-                }
-
-                // add problem data
-                if (resultArray.getJSONObject(i).getJSONObject("problem").has("contestId")){
-                    sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
-                        .getInt("contestId")
-                }
-                sub.problem.index = resultArray.getJSONObject(i).getJSONObject("problem").getString("index")
-                sub.problem.name = resultArray.getJSONObject(i).getJSONObject("problem").getString("name")
+                if (!resultArray.getJSONObject(i).getJSONObject("problem").has("contestId"))  return false
+                if (!resultArray.getJSONObject(i).has("verdict"))   return false
+                sub.verdict = resultArray.getJSONObject(i).getString("verdict")
+                sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
+                    .getInt("contestId")
+                sub.problem.index = resultArray.getJSONObject(i).getJSONObject("problem")
+                    .getString("index")
+                sub.problem.name = resultArray.getJSONObject(i).getJSONObject("problem")
+                    .getString("name")
                 if (resultArray.getJSONObject(i).getJSONObject("problem").has("rating")){
                     sub.problem.rating = resultArray.getJSONObject(i).getJSONObject("problem")
                         .getInt("rating")
+                }
+                else{
+                    sub.problem.rating = 0
                 }
                 val tags = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getJSONArray("tags")

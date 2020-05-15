@@ -1734,6 +1734,7 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id updateRating
 id useLogo
 id verdictTable
 id verdictsBtn
