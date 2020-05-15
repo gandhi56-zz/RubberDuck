@@ -29,6 +29,7 @@ branch. Features that have been implemented include:
   * keep track of user progress in the code pond
   * display code pond statistics
 * User interface
+  * animations
   * Ratings line graph
     * each point may be tapped to link the user to the corresponding 
     contest
@@ -39,9 +40,4 @@ branch. Features that have been implemented include:
     * Fix display of labels and numbers
     * table row highlight
 * Contest/Problem reminders?
-* Bugs
-  * Code pond cannot be reentered, the progress bar keeps running indefinitely
-    * Reason: polling thread did not join properly
-* Complementary programs
-  * implement a local python3 HTTP server to handle POST requests
-  * send POST to local host to open the requested URL on PC browser
+* filter out categories, only keep the big ones

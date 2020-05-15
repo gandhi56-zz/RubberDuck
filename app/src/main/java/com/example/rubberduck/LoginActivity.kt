@@ -90,7 +90,7 @@ class LoginActivity : AppCompatActivity() {
                     + getHandle())
             val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED"){
-                Toast.makeText(applicationContext, "Codeforces handle not found", Toast.LENGTH_LONG).show()
+//                Toast.makeText(applicationContext, "Codeforces handle not found", Toast.LENGTH_LONG).show()
                 return false
             }
 
