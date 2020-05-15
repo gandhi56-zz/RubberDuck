@@ -30,7 +30,7 @@ class LoginActivity : AppCompatActivity() {
     lateinit var progBar: ProgressBar
     lateinit var handleText: EditText
     lateinit var signInBtn: Button
-    var user: User? = null
+    lateinit var user: User
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,13 +96,14 @@ class LoginActivity : AppCompatActivity() {
 
             // user data
             val resultArray = jsonObj.getJSONArray("result")
-            user!!.setHandle(resultArray.getJSONObject(0).getString("handle"))
-            user!!.setTitlePhoto("https:" + resultArray.getJSONObject(0)
+            user.setHandle(resultArray.getJSONObject(0).getString("handle"))
+            user.setTitlePhoto("https:" + resultArray.getJSONObject(0)
                 .getString("titlePhoto"))
 
             if (resultArray.getJSONObject(0).has("rank")){
-                user!!.setRank(resultArray.getJSONObject(0).getString("rank"))
+                user.setRank(resultArray.getJSONObject(0).getString("rank"))
             }
+            println("User info received")
             return true
         }
 
@@ -113,11 +114,13 @@ class LoginActivity : AppCompatActivity() {
             if (jsonObj.getString("status") == "FAILED")    return false
             val resultArray = jsonObj.getJSONArray("result")
 
-            (0 until resultArray.length()).forEach { i ->
+            println("#submissions = ${resultArray.length()}")
+
+            for (i in 0 until resultArray.length()) {
                 val sub = Submission()
                 sub.id = resultArray.getJSONObject(i).getInt("id")
-                if (!resultArray.getJSONObject(i).getJSONObject("problem").has("contestId"))  return false
-                if (!resultArray.getJSONObject(i).has("verdict"))   return false
+                if (!resultArray.getJSONObject(i).getJSONObject("problem").has("contestId"))    continue
+                if (!resultArray.getJSONObject(i).has("verdict"))   continue
                 sub.verdict = resultArray.getJSONObject(i).getString("verdict")
                 sub.problem.contestId = resultArray.getJSONObject(i).getJSONObject("problem")
                     .getInt("contestId")
@@ -136,18 +139,20 @@ class LoginActivity : AppCompatActivity() {
                     .getJSONArray("tags")
                 (0 until tags.length()).forEach{j ->
                     sub.problem.tags.add(tags[j].toString())
-                    user!!.addClass(tags[j].toString())
+                    user.addClass(tags[j].toString())
                 }
 
-                user!!.addSubmission(sub.problem.contestId.toString() + sub.problem.index, sub)
-                user!!.lastSubmId = max(user!!.lastSubmId, sub.id)
+                user.addSubmission(sub.problem.contestId.toString() + sub.problem.index, sub)
+                user.lastSubmId = max(user.lastSubmId, sub.id)
+                println("submission $i added")
             }
+            println("user status received")
             return true
         }
 
         private fun userRating(): Boolean{
             val json = sendHTTPRequest("https://codeforces.com/api/user.rating?handle="
-                    + getHandle())
+                    + user.getHandle())
             val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
             val resultArray = jsonObj.getJSONArray("result")
@@ -158,7 +163,7 @@ class LoginActivity : AppCompatActivity() {
                 ratingChangeObj.contestName = resultArray.getJSONObject(i).getString("contestName")
                 ratingChangeObj.newRating = resultArray.getJSONObject(i).getInt("newRating")
                 ratingChangeObj.rank = resultArray.getJSONObject(i).getInt("rank")
-                user!!.ratingChangeList.add(ratingChangeObj)
+                user.ratingChangeList.add(ratingChangeObj)
             }
             return true
         }

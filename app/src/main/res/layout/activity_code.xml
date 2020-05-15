@@ -177,6 +177,7 @@
         android:foregroundTint="#FFFFFF"
         android:gravity="center_horizontal"
         android:onClick="getProblem"
+        android:longClickable="true"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

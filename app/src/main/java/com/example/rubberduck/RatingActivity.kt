@@ -84,11 +84,12 @@ class RatingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rating)
         user = intent.getSerializableExtra(Intent.EXTRA_USER) as User
-        drawChart()
-        createTable()
+        UpdateRating().execute()
         updateRating.setOnRefreshListener {
             UpdateRating().execute()
         }
+        RatingChart.viewport.isScrollable = true
+        RatingChart.viewport.isScalable = true
     }
 
     private fun drawChart(){
@@ -100,7 +101,6 @@ class RatingActivity : AppCompatActivity() {
                 true,
                 40)
         }
-
         RatingChart.addSeries(series)
     }
 
