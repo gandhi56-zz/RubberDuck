@@ -1,126 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:orientation="vertical"
     android:background="@color/LightBlue">
-
-    <TextView
-        android:id="@+id/handleView"
-        android:layout_width="313dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="176dp"
-        android:fontFamily="@font/anaheim"
-        android:gravity="center_horizontal"
-        android:text="@string/handle"
-        android:textAlignment="center"
-        android:textSize="32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textColor="@color/font_color"/>
 
     <ImageView
         android:id="@+id/titlePhoto"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/profile_pic_bg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:scaleType="fitCenter"
-        app:layout_constraintBottom_toTopOf="@+id/handleView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.615"
         tools:ignore="ContentDescription"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:srcCompat="@tools:sample/avatars"
+        android:background="@drawable/profile_pic_bg"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"/>
+
+    <TextView
+        android:id="@+id/handleView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/anaheim"
+        android:gravity="center_horizontal"
+        android:text="@string/handle"
+        android:textSize="32sp"
+        android:textColor="@color/font_color"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/rankView"
-        android:layout_width="391dp"
-        android:layout_height="36dp"
-        android:gravity="center"
-        android:text="@string/rank"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/handleView"
-        app:layout_constraintVertical_bias="0.0"
-        android:textColor="@color/font_color"
-        android:fontFamily="@font/anaheim"/>
-
-    <GridLayout
-        android:id="@+id/gridLayout"
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="wrap_content"
+        android:text="@string/rank"
+        android:textSize="28sp"
+        android:fontFamily="@font/anaheim"
+        android:textColor="@color/font_color"
+        android:gravity="center"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/handle_view"
-        android:columnCount="2"
-        android:orientation="vertical"
-        android:rowCount="2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        android:stretchColumns="*"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/codeBtn"
+                android:background="@drawable/gen_btn"
+                android:text="@string/code_pond"
+                android:fontFamily="@font/anaheim"
+                android:textColor="@color/font_color"
+                android:textSize="22sp"
+                tools:ignore="ButtonStyle"
+                android:onClick="startCodeActivity"
+                android:layout_margin="30dp"
+                android:paddingVertical="30dp"/>
+
+            <Button
+                android:id="@+id/ratingBtn"
+                android:background="@drawable/gen_btn"
+                android:text="@string/rating"
+                android:fontFamily="@font/anaheim"
+                android:textColor="@color/font_color"
+                android:textSize="22sp"
+                android:onClick="startRatingActivity"
+                tools:ignore="ButtonStyle"
+                android:layout_margin="30dp"
+                android:paddingVertical="30dp"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/verdictsBtn"
+                android:background="@drawable/gen_btn"
+                android:text="@string/verdicts"
+                android:fontFamily="@font/anaheim"
+                android:textColor="@color/font_color"
+                android:textSize="22sp"
+                android:onClick="startSubmissionActivity"
+                tools:ignore="ButtonStyle"
+                android:layout_margin="30dp"
+                android:paddingVertical="30dp"/>
+
+            <Button
+                android:id="@+id/strengthsBtn"
+                android:background="@drawable/gen_btn"
+                android:text="@string/categories"
+                android:fontFamily="@font/anaheim"
+                android:textColor="@color/font_color"
+                android:textSize="22sp"
+                android:onClick="startCategoriesActivity"
+                tools:ignore="ButtonStyle"
+                android:layout_margin="30dp"
+                android:paddingVertical="30dp"/>
+
+        </TableRow>
 
 
-        <Button
-            android:id="@+id/codeBtn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:layout_margin="45dp"
-            android:background="@color/Yellow"
-            android:onClick="startCodeActivity"
-            android:text="@string/code"
-            android:textColor="@color/font_color"
-            android:textSize="18sp" />
+    </TableLayout>
 
-        <Button
-            android:id="@+id/ratingBtn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_row="0"
-            android:layout_column="1"
-            android:layout_margin="45dp"
-            android:background="@color/Yellow"
-            android:onClick="startRatingActivity"
-            android:text="@string/rating"
-            android:textColor="@color/font_color"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/verdictsBtn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:layout_margin="45dp"
-            android:background="@color/Yellow"
-            android:onClick="startSubmissionActivity"
-            android:text="@string/verdicts"
-            android:textColor="@color/font_color"
-            android:textSize="18sp" />
-
-        <Button
-            android:id="@+id/strengthsBtn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_margin="45dp"
-            android:background="@color/Yellow"
-            android:onClick="startCategoriesActivity"
-            android:text="@string/categories"
-            android:textColor="@color/font_color"
-            android:textSize="18sp" />
-
-    </GridLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.example.rubberduck
 import org.json.JSONArray
 import java.io.Serializable
 import java.math.BigInteger
+import kotlin.math.max
 
 val verdicts = arrayOf("FAILED",
     "OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR",
@@ -15,11 +16,11 @@ class User: Serializable {
     private var handle: String? = null
     private var titlePhoto: String? = null
     private var rank: String? = null
-    var ratingList = ArrayList<Int>()
-    var submissions = ArrayList<Submission>()
+    var ratingChangeList = ArrayList<RatingChange>()
     var verdictStats: HashMap<String, Int> = HashMap<String, Int>()
     var classStats: HashMap<String, Int> = HashMap<String, Int>()
-    var lastSubmId: Int? = null
+    var lastSubmId = -1
+    var subm = HashMap<String, MutableSet<Submission>>()
 
     fun User(){
         handle = ""
@@ -63,6 +64,28 @@ class User: Serializable {
         else{
             classStats[tag] = 1
         }
+    }
+
+    fun addSubmission(key: String, sub: Submission){
+        if (!subm.containsKey(key)){
+            subm[key] = hashSetOf()
+        }
+        subm[key]!!.add(sub)
+        lastSubmId = max(lastSubmId, sub.id)
+        if (constantVerdict(sub.verdict))
+            addVerdict(sub.verdict)
+        for (tag in sub.problem.tags){
+            addClass(tag)
+        }
+    }
+
+    private fun constantVerdict(verdict: String): Boolean {
+        for (v in arrayOf("OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR", "WRONG_ANSWER",
+            "PRESENTATION_ERROR", "TIME_LIMIT_EXCEEDED", "MEMORY_LIMIT_EXCEEDED")){
+            if (verdict == v)
+                return true
+        }
+        return false
     }
 
 }

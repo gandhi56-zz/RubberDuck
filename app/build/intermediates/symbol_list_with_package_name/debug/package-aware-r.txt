@@ -728,6 +728,7 @@ bool abc_action_bar_embed_tabs
 bool abc_allow_stacked_button_bar
 bool abc_config_actionMenuItemAllCaps
 bool mtrl_btn_textappearance_all_caps
+color DarkBlue
 color FontColor
 color LightBlue
 color LightYellow
@@ -758,6 +759,7 @@ color abc_tint_spinner
 color abc_tint_switch_track
 color accent_material_dark
 color accent_material_light
+color app_icon_background
 color background_floating_material_dark
 color background_floating_material_light
 color background_material_dark
@@ -1344,6 +1346,7 @@ drawable abc_textfield_search_activated_mtrl_alpha
 drawable abc_textfield_search_default_mtrl_alpha
 drawable abc_textfield_search_material
 drawable abc_vector_test
+drawable app_icon_foreground
 drawable avd_hide_password
 drawable avd_show_password
 drawable btn_checkbox_checked_mtrl
@@ -1361,6 +1364,7 @@ drawable design_ic_visibility_off
 drawable design_password_eye
 drawable design_snackbar_background
 drawable end_btn
+drawable gen_btn
 drawable handle_view
 drawable ic_calendar_black_24dp
 drawable ic_clear_black_24dp
@@ -1368,7 +1372,6 @@ drawable ic_edit_black_24dp
 drawable ic_keyboard_arrow_left_black_24dp
 drawable ic_keyboard_arrow_right_black_24dp
 drawable ic_launcher_background
-drawable ic_launcher_foreground
 drawable ic_menu_arrow_down_black_24dp
 drawable ic_menu_arrow_up_black_24dp
 drawable ic_mtrl_checked_circle
@@ -1386,6 +1389,7 @@ drawable mtrl_popupmenu_background
 drawable mtrl_popupmenu_background_dark
 drawable mtrl_tabs_default_indicator
 drawable navigation_empty_icon
+drawable next_btn
 drawable notification_action_background
 drawable notification_bg
 drawable notification_bg_low
@@ -1400,6 +1404,7 @@ drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
 drawable problem_name
 drawable profile_pic_bg
+drawable rightarrow
 drawable skip_btn
 drawable submit_btn
 drawable test_custom_background
@@ -1486,6 +1491,8 @@ id bottom
 id buttonPanel
 id cancel_action
 id cancel_button
+id catLayout
+id catTable
 id center
 id center_horizontal
 id center_vertical
@@ -1504,6 +1511,7 @@ id confirm_button
 id container
 id content
 id contentPanel
+id contestsTable
 id coordinator
 id custom
 id customPanel
@@ -1522,8 +1530,8 @@ id direct
 id disableHome
 id dropdown_menu
 id edit_query
+id emailText
 id end
-id end_btn
 id end_padder
 id enterAlways
 id enterAlwaysCollapsed
@@ -1542,7 +1550,6 @@ id forever
 id ghost_view
 id ghost_view_holder
 id gone
-id gridLayout
 id group_divider
 id groups
 id handleText
@@ -1558,15 +1565,16 @@ id info
 id invisible
 id italic
 id item_touch_helper_previous_elevation
+id label
 id labeled
 id largeLabel
 id left
 id line1
 id line3
-id linearLayout
 id listMode
 id list_item
 id loadingProblems
+id loginBtn
 id masked
 id media_actions
 id message
@@ -1601,6 +1609,7 @@ id mtrl_picker_title_text
 id multiply
 id navigation_header_container
 id never
+id next_btn
 id noScroll
 id none
 id normal
@@ -1615,6 +1624,7 @@ id parallax
 id parent
 id parentPanel
 id parent_matrix
+id passwordText
 id password_toggle
 id peekHeight
 id percent
@@ -1626,6 +1636,7 @@ id problem_name
 id progressBar
 id progress_circular
 id progress_horizontal
+id pullToRefresh
 id radio
 id rankView
 id ratingBtn
@@ -1642,6 +1653,8 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
+id searchListView
+id searchView
 id search_badge
 id search_bar
 id search_button
@@ -1658,7 +1671,7 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
-id signInBtn
+id signupBtn
 id skipCollapsed
 id slide
 id smallLabel
@@ -1679,9 +1692,11 @@ id status_bar_latest_event_content
 id strengthsBtn
 id stretch
 id submenuarrow
+id submissionsTable
 id submit_area
-id submit_btn
+id tabLayout
 id tabMode
+id tableScroll
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
 id tag_accessibility_heading
@@ -1723,7 +1738,10 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id usernameText
+id verdictTable
 id verdictsBtn
+id viewPager
 id view_offset_helper
 id visible
 id withText
@@ -1791,6 +1809,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_categories
 layout activity_code
+layout activity_code_pond_home
 layout activity_login
 layout activity_main
 layout activity_rating
@@ -1811,6 +1830,8 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout fragment_login
+layout fragment_signup
 layout mtrl_alert_dialog
 layout mtrl_alert_dialog_actions
 layout mtrl_alert_dialog_title
@@ -1854,6 +1875,7 @@ layout notification_template_media
 layout notification_template_media_custom
 layout notification_template_part_chronometer
 layout notification_template_part_time
+layout problems_list
 layout select_dialog_item_material
 layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
@@ -1870,6 +1892,8 @@ layout text_view_with_line_height_from_layout
 layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
+mipmap app_icon
+mipmap app_icon_round
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
@@ -1908,21 +1932,31 @@ string appbar_scrolling_view_behavior
 string ask_exit
 string bottom_sheet_behavior
 string categories
+string category
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
 string chip_text
 string clear_text_end_icon_content_description
 string code
+string code_pond
 string codeforces_handle
+string contest
+string contest_rank
+string count
+string email_address
 string end
 string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
 string handle
+string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
+string id
+string log_in
+string memory
 string mtrl_badge_numberless_content_description
 string mtrl_chip_close_icon_content_description
 string mtrl_exceed_max_badge_number_suffix
@@ -1957,6 +1991,8 @@ string mtrl_picker_toggle_to_calendar_input_mode
 string mtrl_picker_toggle_to_day_selection
 string mtrl_picker_toggle_to_text_input_mode
 string mtrl_picker_toggle_to_year_selection
+string new_rating
+string password
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through
@@ -1968,10 +2004,14 @@ string rank
 string rating
 string search_menu_title
 string sign_in
+string sign_up
 string skip
 string start_coding
 string status_bar_notification_info_overflow
 string submit
+string time
+string username
+string verdict
 string verdicts
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

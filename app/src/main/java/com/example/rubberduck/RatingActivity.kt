@@ -5,7 +5,11 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.view.ViewGroup
+import android.widget.TableRow
+import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.marginTop
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.LineGraphSeries
@@ -28,9 +32,10 @@ class RatingActivity : AppCompatActivity() {
         val graphView = findViewById<GraphView>(R.id.RatingChart)
         val series = LineGraphSeries<DataPoint>()
 
-        (0 until user!!.ratingList.size).forEach{ i ->
+        series.appendData(DataPoint(0.0, 1500.0), true, 40)
+        (0 until user!!.ratingChangeList.size).forEach{ i ->
             series.appendData(
-                DataPoint(i.toDouble(), user!!.ratingList[i].toDouble()),
+                DataPoint((i+1).toDouble(), user!!.ratingChangeList[i].newRating.toDouble()),
                 true,
                 40)
         }
@@ -38,5 +43,57 @@ class RatingActivity : AppCompatActivity() {
         graphView.addSeries(series)
         graphView.viewport.isScalable = true
         graphView.viewport.isScrollable = true
+
+        createTable()
+    }
+
+    private fun createTable(){
+        for (i in user!!.ratingChangeList.size-1 downTo 0){
+            val row = TableRow(this)
+            row.layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            row.setPadding(0, 20, 0, 20)
+
+
+            // add contest name
+            val keyTxt = TextView(this)
+            keyTxt.apply {
+                layoutParams = TableRow.LayoutParams(
+                    50,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = user!!.ratingChangeList[i].contestName
+                textSize = 16F
+            }
+            row.addView(keyTxt)
+
+            // add rank
+            val valueTxt = TextView(this)
+            valueTxt.apply {
+                layoutParams = TableRow.LayoutParams(
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = user!!.ratingChangeList[i].rank.toString()
+                textSize = 16F
+            }
+            valueTxt.gravity = 1
+            row.addView(valueTxt)
+
+            // add new rating
+            val ratingTxt = TextView(this)
+            ratingTxt.apply {
+                layoutParams = TableRow.LayoutParams(
+                    TableRow.LayoutParams.WRAP_CONTENT,
+                    TableRow.LayoutParams.WRAP_CONTENT)
+                text = user!!.ratingChangeList[i].newRating.toString()
+                textSize = 16F
+            }
+            ratingTxt.gravity = 1
+            row.addView(ratingTxt)
+
+            contestsTable!!.addView(row)
+        }
     }
 }

@@ -15,16 +15,25 @@
         android:allowBackup="true"
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="com.example.rubberduck.CodeActivity" />
-        <activity android:name="com.example.rubberduck.CategoriesActivity" />
-        <activity android:name="com.example.rubberduck.SubmissionActivity" />
-        <activity android:name="com.example.rubberduck.RatingActivity" />
+        <activity android:name="com.example.rubberduck.CodePondHome" />
+        <activity
+            android:name="com.example.rubberduck.CodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.rubberduck.CategoriesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.rubberduck.SubmissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.rubberduck.RatingActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.example.rubberduck.MainActivity"
             android:screenOrientation="portrait" />

@@ -18,6 +18,24 @@
     <string name="ask_exit">Are you sure you want to end this session?</string>
     <string name="ans_no">No</string>
     <string name="ans_yes">Yes</string>
+    <string name="category">Category</string>
+    <string name="count">Count</string>
+    <string name="contest_rank">Rank</string>
+    <string name="new_rating">New Rating</string>
+    <string name="contest">Contest</string>
+    <string name="time">Time</string>
+    <string name="verdict">Verdict</string>
+    <string name="id">ID</string>
+    <string name="memory">Memory</string>
+    <string name="code_pond">Code pond</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="email_address">email address</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
