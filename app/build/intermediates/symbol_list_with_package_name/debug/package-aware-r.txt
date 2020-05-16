@@ -1738,6 +1738,7 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id updateRating
 id useLogo
 id usernameLogin
 id verdictTable
@@ -1810,7 +1811,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_categories
 layout activity_code
-layout activity_code_pond_home
+layout activity_code_pond
 layout activity_login
 layout activity_main
 layout activity_rating

@@ -32,9 +32,9 @@
 21        android:testOnly="true"
 22        android:theme="@style/AppTheme" >
 22-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:14:9-40
-23        <activity android:name="com.example.rubberduck.CodePondHome" />
-23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:9-59
-23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:19-47
+23        <activity android:name="com.example.rubberduck.CodePond" />
+23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:9-46
+23-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:15:19-43
 24        <activity
 24-->/home/anshil/workspace/RubberDuck/app/src/main/AndroidManifest.xml:16:9-19:56
 25            android:name="com.example.rubberduck.CodeActivity"

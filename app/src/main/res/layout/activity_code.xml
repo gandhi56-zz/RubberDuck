@@ -45,20 +45,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.206">
 
-                <SearchView
-                    android:id="@+id/searchView"
-                    android:queryHint="Problem ID or name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:iconifiedByDefault="false"
-                    />
+            <SearchView
+                android:id="@+id/searchView"
+                android:queryHint="Problem ID or name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:iconifiedByDefault="false"
+                android:onClick="initSearch"/>
 
-                <ListView
-                    android:id="@+id/searchListView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp" />
+            <ListView
+                android:id="@+id/searchListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -177,6 +177,7 @@
         android:foregroundTint="#FFFFFF"
         android:gravity="center_horizontal"
         android:onClick="getProblem"
+        android:longClickable="true"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

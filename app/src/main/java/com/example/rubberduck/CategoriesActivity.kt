@@ -1,6 +1,7 @@
 package com.example.rubberduck
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,12 +14,11 @@ import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
-import com.github.mikephil.charting.utils.ColorTemplate
 
 class CategoriesActivity : AppCompatActivity() {
 
-    var user: User? = null
-    var catTable: TableLayout? = null
+    private lateinit var user: User
+    private lateinit var catTable: TableLayout
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,7 @@ class CategoriesActivity : AppCompatActivity() {
 
         // add data
         val values = ArrayList<PieEntry>()
-        for ((key, value) in user!!.classStats){
+        for ((key, value) in user.classStats){
             values.add(PieEntry(value.toFloat(), key))
         }
 
@@ -47,15 +47,47 @@ class CategoriesActivity : AppCompatActivity() {
         val pieData = PieData(dataset)
         pieChart.data = pieData
 
-        dataset.colors = ColorTemplate.MATERIAL_COLORS.toMutableList()
+        val colors = arrayOf(
+            Color.parseColor("#ED0A3F"),
+            Color.parseColor("#FF8833"),
+            Color.parseColor("#FFAE42"),
+            Color.parseColor("#FED85D"),
+            Color.parseColor("#AFE313"),
+            Color.parseColor("#9DE093"),
+            Color.parseColor("#63B76C"),
+            Color.parseColor("#93CCEA"),
+            Color.parseColor("#6456B7"),
+            Color.parseColor("#00CCCC"),
+            Color.parseColor("#C154C1"),
+            Color.parseColor("#F653A6"),
+            Color.parseColor("#E30B5C"),
+            Color.parseColor("#FFFF66"),
+            Color.parseColor("#1CAC78"),
+            Color.parseColor("#EE34D2"),
+            Color.parseColor("#FF9966"),
+            Color.parseColor("#66FF66"),
+            Color.parseColor("#93DFB8"),
+            Color.parseColor("#0095B7"),
+            Color.parseColor("#0066CC"),
+            Color.parseColor("#652DC1"),
+            Color.parseColor("#BB3385"),
+            Color.parseColor("#F8FC98"),
+            Color.parseColor("#00755E"),
+            Color.parseColor("#6CDAE7"),
+            Color.parseColor("#D6AEDD"),
+            Color.parseColor("#FFB7D5")
+        )
+
+//        dataset.colors = ColorTemplate.MATERIAL_COLORS.toMutableList()
         pieChart.animateXY(1400, 1400)
+        dataset.colors = colors.toMutableList()
 
         createTable()
     }
 
     private fun createTable(){
 
-        for ((key, value) in user!!.classStats){
+        for ((key, value) in user.classStats){
             val row = TableRow(this)
             row.layoutParams = ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
@@ -80,17 +112,8 @@ class CategoriesActivity : AppCompatActivity() {
                 textSize = 22F
             }
             row.addView(valueTxt)
-            catTable!!.addView(row)
+            catTable.addView(row)
         }
     }
 
 }
-
-
-
-
-
-
-
-
-

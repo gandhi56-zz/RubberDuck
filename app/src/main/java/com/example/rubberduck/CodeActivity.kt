@@ -23,7 +23,7 @@ import org.json.JSONObject
 
 class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
-    var user: User? = null
+    lateinit var user: User
     var problemSet = ArrayList<Problem>()
     var problemTitles = ArrayList<String>()
     private lateinit var progBar: ProgressBar
@@ -32,7 +32,10 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private lateinit var probContent: TextView
     private lateinit var nextBtn: Button
     private var pIdx: Int = 0
+    private var leftIdx: Int = 0
+    private var rightIdx: Int = 0
     private var minRating: Int = 1000
+    private var maxRating: Int = 1200
 
     private var submissionTable: SubmissionTable? = null
 
@@ -90,7 +93,7 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         @SuppressLint("SetTextI18n")
         fun createTable(){
             submissionsTable!!.removeAllViews()
-            if (!user!!.subm.contains(problemSet[pIdx].getId())){
+            if (!user.subm.contains(problemSet[pIdx].getId())){
                 val row = TableRow(appCtx)
                 row.layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -100,8 +103,8 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 return
             }
 
-            for (subObj
-                in user!!.subm[problemSet[pIdx].getId()]!!.sortedBy { it-> it.id }){
+            for ((i, subObj)
+            in user.subm[problemSet[pIdx].getId()]!!.sortedBy { it-> it.id }.withIndex()){
                 val row = TableRow(appCtx)
                 row.layoutParams = ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -157,6 +160,10 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             super.onPostExecute(result)
             progBar.visibility = View.GONE
             problemSet.sortBy { it.rating }
+            minRating = 100*((user.ratingChangeList[user.ratingChangeList.size-1].newRating)/100)
+            maxRating = minRating + 200
+            leftIdx = ratingLowerBound(minRating)
+            rightIdx = ratingLowerBound((maxRating))
             ratingLowerBound(minRating)
             beginCoding()
         }
@@ -168,92 +175,74 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     @SuppressLint("StaticFieldLeak")
     internal inner class RecentSubmissionRequest: AsyncTask<Context, Void, Boolean>(){
-         override fun doInBackground(vararg params: Context): Boolean {
-             val url = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
-             val jsonObj = JSONObject(url.sendHTTPRequest())
-             if (jsonObj.getString("status") != "OK"){
-                 println("Request failed...")
-                 return false
-             }
+        override fun doInBackground(vararg params: Context): Boolean {
+            val url = "https://codeforces.com/api/user.status?handle=${user.getHandle()}&from=1&count=1"
+            val jsonObj = JSONObject(url.sendHTTPRequest())
+            if (jsonObj.getString("status") != "OK"){
+                println("Request failed...")
+                return false
+            }
+            val resultArray = jsonObj.getJSONArray("result")
+            val problemId: String
+            val problemJson = resultArray.getJSONObject(0)
+                .getJSONObject("problem")
+            if (!problemJson.has("contestId") or !problemJson.has("index")){
+                return false
+            }
+            problemId = problemJson.getString("contestId") + problemJson.getString("index")
+            if (!resultArray.getJSONObject(0).has("verdict")){
+                return false
+            }
+            if (!resultArray.getJSONObject(0).getJSONObject("problem").has("contestId")){
+                println("Error: Problem does not have a value for contestId tag")
+                return false
+            }
+            val verdict = resultArray.getJSONObject(0).getString("verdict")
+            if (!user.constantVerdict(verdict)){
+                return false
+            }
 
-             val resultArray = jsonObj.getJSONArray("result")
-             val problemId: String
-             val problemJson = resultArray.getJSONObject(0)
-                 .getJSONObject("problem")
-             println("Receiving problem JSON...")
-             if (problemJson.has("contestId") and problemJson.has("index")){
-                 problemId = problemJson.getString("contestId") +
-                         problemJson.getString("index")
-                 println("JSON $problemId")
-
-                 // add submission #########################################################
-                 val sub = Submission()
-
-                 // set id
-                 sub.id = resultArray.getJSONObject(0).getInt("id")
-
-                 // add verdict
-                 if (resultArray.getJSONObject(0).has("verdict")){
-                     val verdict = resultArray.getJSONObject(0)
-                         .getString("verdict")
-                     user!!.addVerdict(verdict.toString())
-                     sub.verdict = verdict
-                 }
-                 else{
-                     sub.verdict = "Running"
-                 }
-
-                 // add problem data
-                 if (resultArray.getJSONObject(0).getJSONObject("problem")
-                         .has("contestId")){
-                     sub.problem.contestId = resultArray.getJSONObject(0)
-                         .getJSONObject("problem")
-                         .getInt("contestId")
-                 }
-                 else{
-                     println("Error: Problem does not have a value for contestId tag")
-                 }
-                 sub.problem.index = resultArray.getJSONObject(0)
-                     .getJSONObject("problem").getString("index")
-                 sub.problem.name = resultArray.getJSONObject(0)
-                     .getJSONObject("problem").getString("name")
-                 if (resultArray.getJSONObject(0).getJSONObject("problem")
-                         .has("rating")){
-                     sub.problem.rating = resultArray.getJSONObject(0)
-                         .getJSONObject("problem")
-                         .getInt("rating")
-                 }
-                 val tags = resultArray.getJSONObject(0)
-                     .getJSONObject("problem")
-                     .getJSONArray("tags")
-                 (0 until tags.length()).forEach{j ->
-                     sub.problem.tags.add(tags[j].toString())
-                     user!!.addClass(tags[j].toString())
-                 }
-                 if (constantVerdict(sub.verdict) and isNewSubmission(problemId, sub)) {
-                     user!!.addSubmission(problemId, sub)
-                 }
-                 println("166 $problemId")
-                 searchProblem(problemId)
-             }
-             else{
-                 println("Error: problem ID not found...")
-             }
-             println("done")
-             return true
-         }
+            val sub = Submission()
+            sub.verdict = verdict
+            sub.id = resultArray.getJSONObject(0).getInt("id")
+            sub.problem.contestId = resultArray.getJSONObject(0)
+                .getJSONObject("problem")
+                .getInt("contestId")
+            sub.problem.index = resultArray.getJSONObject(0)
+                .getJSONObject("problem").getString("index")
+            sub.problem.name = resultArray.getJSONObject(0)
+                .getJSONObject("problem").getString("name")
+            if (resultArray.getJSONObject(0).getJSONObject("problem").has("rating")){
+                sub.problem.rating = resultArray.getJSONObject(0)
+                    .getJSONObject("problem")
+                    .getInt("rating")
+            }
+            val tags = resultArray.getJSONObject(0)
+                .getJSONObject("problem")
+                .getJSONArray("tags")
+            (0 until tags.length()).forEach{j ->
+                sub.problem.tags.add(tags[j].toString())
+                user.addClass(tags[j].toString())
+            }
+            if (user.constantVerdict(sub.verdict) and isNewSubmission(problemId, sub)) {
+                user.addSubmission(problemId, sub)
+            }
+            searchProblem(problemId)
+            return true
+        }
 
         private fun isNewSubmission(problemId: String, sub: Submission): Boolean {
-            for (subObj in user!!.subm[problemId]!!){
-                if (subObj.id == sub.id)
-                    return false
-            }
+//            for (subObj in user.subm[problemId]!!){
+//                if (subObj.id == sub.id)
+//                    return false
+//            }
             return true
         }
 
         override fun onPostExecute(result: Boolean?) {
             super.onPostExecute(result)
-            displayProblem()
+            if (result!!)
+                displayProblem()
         }
     }
 
@@ -285,27 +274,31 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             minRating = 1200
+            maxRating = 1400
         }
+
+        nextBtn.setOnLongClickListener {
+            translateRating(100)
+            return@setOnLongClickListener true
+        }
+
         hideAll()
         ProblemsetRequest().execute()
         submissionTable = SubmissionTable(applicationContext)
     }
 
-    private fun constantVerdict(verdict: String): Boolean {
-        for (v in arrayOf("OK", "PARTIAL", "COMPILATION_ERROR", "RUNTIME_ERROR", "WRONG_ANSWER",
-            "PRESENTATION_ERROR", "TIME_LIMIT_EXCEEDED", "MEMORY_LIMIT_EXCEEDED")){
-            if (verdict == v)
-                return true
+    fun ratingLowerBound(boundValue: Int): Int{
+        var lo = 0
+        var hi = problemSet.size-1
+        while (lo < hi){
+            val mid = (lo + hi)/2
+            val diff = problemSet[mid].rating
+            if (diff >= boundValue)
+                hi = mid
+            else
+                lo = mid+1
         }
-        return false
-    }
-
-    fun ratingLowerBound(boundValue: Int){
-        // TODO implement binary search version
-        pIdx = 0
-        while (problemSet[pIdx].rating < boundValue){
-            pIdx += 1
-        }
+        return lo
     }
 
     private fun hideAll(){
@@ -322,8 +315,7 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         probContent = findViewById(R.id.problem_content)
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun beginCoding() {
+    fun beginCoding() {
         probLayout.visibility = View.VISIBLE
         nextBtn.visibility = View.VISIBLE
         timer_view.base = SystemClock.elapsedRealtime()
@@ -334,9 +326,9 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             RecentSubmissionRequest().execute()
         }
         RecentSubmissionRequest().execute()
+
         adapter = ArrayAdapter(this, R.layout.problems_list, problemTitles)
         searchView.setOnQueryTextListener(this)
-
         searchListView.onItemClickListener = object :AdapterView.OnItemClickListener{
             override fun onItemClick(
                 parent: AdapterView<*>?,
@@ -362,6 +354,10 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         }
 
+    }
+
+    fun initSearch(view: View) {
+        searchListView.adapter = adapter
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -398,9 +394,24 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     // onClick event handler for next problem button
     fun getProblem(@Suppress("UNUSED_PARAMETER")view: View) {
-        pIdx += 2
-        pIdx %= problemSet.size
+        pIdx = getRandomIndex()
         displayProblem()
+    }
+
+    private fun getRandomIndex(): Int {
+        return (leftIdx..rightIdx).random()
+    }
+
+    private fun translateRating(delta: Int): Boolean{
+        if ((rightIdx + delta >= problemSet.size) or (leftIdx - delta < 0))    return false
+        leftIdx += delta
+        rightIdx += delta
+        minRating = problemSet[leftIdx].rating
+        maxRating = problemSet[rightIdx].rating
+        pIdx = leftIdx
+        displayProblem()
+        Toast.makeText(applicationContext, "Difficulty level has been increased", Toast.LENGTH_SHORT).show()
+        return true
     }
 
     override fun onBackPressed() {
