@@ -1,21 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CategoriesActivity"
-    android:background="@color/LightBlue">
+    android:background="@color/LightBlue"
+    android:orientation="vertical"
+    android:id="@+id/catLayout"
+    android:paddingHorizontal="20dp">
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.006" />
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/handle_view"
+            android:stretchColumns="*"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Yellow">
+
+                <TextView
+                    android:text="@string/category"
+                    android:fontFamily="@font/anaheim"
+                    android:textColor="@color/font_color"
+                    android:textSize="22sp"
+                    android:layout_margin="10dp"
+                    android:paddingVertical="10dp"/>
+
+                <TextView
+                    android:text="@string/count"
+                    android:fontFamily="@font/anaheim"
+                    android:textColor="@color/font_color"
+                    android:textSize="22sp"
+                    android:layout_margin="10dp"
+                    android:paddingVertical="10dp"
+                    android:layout_width="wrap_content"
+                    android:textAlignment="center"
+                    android:gravity="center_horizontal"/>
+
+            </TableRow>
+                <ScrollView
+                    android:id="@+id/tableScroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TableLayout
+                        android:id="@+id/catTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:stretchColumns="*"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp"
+                        />
+                </ScrollView>
+
+        </TableLayout>
+
+</LinearLayout>

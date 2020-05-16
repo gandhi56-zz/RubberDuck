@@ -18,6 +18,15 @@
     <string name="ask_exit">Are you sure you want to end this session?</string>
     <string name="ans_no">No</string>
     <string name="ans_yes">Yes</string>
+    <string name="category">Category</string>
+    <string name="count">Count</string>
+    <string name="contest_rank">Rank</string>
+    <string name="new_rating">New Rating</string>
+    <string name="contest">Contest</string>
+    <string name="time">Time</string>
+    <string name="verdict">Verdict</string>
+    <string name="id">ID</string>
+    <string name="memory">Memory</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

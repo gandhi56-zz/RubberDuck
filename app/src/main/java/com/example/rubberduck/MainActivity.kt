@@ -1,6 +1,8 @@
 package com.example.rubberduck
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.Intent.EXTRA_STREAM
 import android.content.Intent.EXTRA_USER
@@ -12,6 +14,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.squareup.picasso.Picasso
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -36,6 +39,22 @@ class MainActivity : AppCompatActivity() {
 
         handleTxt.text = user!!.getHandle()
         rankTxt.text = user!!.getRank()
+    }
+
+    override fun onBackPressed() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+        builder.setMessage("Are you sure about logging out?")
+        builder.setPositiveButton("Yes"){
+                _: DialogInterface?, _: Int ->
+            this.finish()
+        }
+
+        builder.setNegativeButton("No"){
+                _: DialogInterface?, _: Int ->
+        }
+        val alert = builder.create()
+        alert.setCancelable(false)
+        alert.show()
     }
 
     fun startRatingActivity(view: View) {
@@ -63,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun startCodeActivity(view: View) {
-        val intent = Intent(this, CodeActivity::class.java)
+        val intent = Intent(this, CodePond::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             intent.putExtra(Intent.EXTRA_USER, user)
         }

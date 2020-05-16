@@ -22,36 +22,23 @@ branch. Features that have been implemented include:
   * displays pie graph for submission statistics
   * displays pie graph for solved problem categories statistics
   * receives a list of all problems on codeforces
+  * code activity
 
 ### Issues and TODOs
 * Application context
-  * problem suggestion algorithm formulation
-  * live coding
+  * keep track of user progress in the code pond
+  * display code pond statistics
 * User interface
+  * animations
   * Ratings line graph
-    * change the ratings array into an array of entries which are directly
-    usable by the pie chart component
-    * table of contests
-    * x-axis should contain dates 
-    * add colours to the chart to convey ranks
     * each point may be tapped to link the user to the corresponding 
     contest
   * Submissions pie chart
     * Fix display of labels and numbers
-    * Fix colour issues
-    * Improve labelling
-    * add table
+    * table row highlight
   * Problem categories
     * Fix display of labels and numbers
-    * Fix colour issues
-    * Improve labelling
-    * add table
-  * Buttons
-  * Font
-  
-  
-  
-  
-  
-  
-
+    * table row highlight
+* Contest/Problem reminders?
+* filter out categories, only keep the big ones
+* live coding bug in recent submission

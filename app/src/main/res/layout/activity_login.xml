@@ -54,7 +54,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@color/Yellow"
+            android:background="@drawable/gen_btn"
             android:fontFamily="@font/anaheim"
             android:onClick="signIn"
             android:text="@string/sign_in"
