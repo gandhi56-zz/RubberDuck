@@ -176,46 +176,38 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     @SuppressLint("StaticFieldLeak")
     internal inner class RecentSubmissionRequest: AsyncTask<Context, Void, Boolean>(){
          override fun doInBackground(vararg params: Context): Boolean {
-             val url = "https://codeforces.com/api/user.status?handle=${user!!.getHandle()}&from=1&count=1"
+             val url = "https://codeforces.com/api/user.status?handle=${user.getHandle()}&from=1&count=1"
              val jsonObj = JSONObject(url.sendHTTPRequest())
              if (jsonObj.getString("status") != "OK"){
                  println("Request failed...")
                  return false
              }
-
              val resultArray = jsonObj.getJSONArray("result")
              val problemId: String
              val problemJson = resultArray.getJSONObject(0)
                  .getJSONObject("problem")
-             println("Receiving problem JSON...")
              if (!problemJson.has("contestId") or !problemJson.has("index")){
                  return false
              }
              problemId = problemJson.getString("contestId") + problemJson.getString("index")
-             val sub = Submission()
-             sub.id = resultArray.getJSONObject(0).getInt("id")
-
-             if (resultArray.getJSONObject(0).has("verdict")){
-                 val verdict = resultArray.getJSONObject(0)
-                     .getString("verdict")
-                 user.addVerdict(verdict.toString())
-                 sub.verdict = verdict
+             if (!resultArray.getJSONObject(0).has("verdict")){
+                 return false
              }
-             else{
-                 sub.verdict = "Running"
-             }
-
-             // add problem data
-             if (resultArray.getJSONObject(0).getJSONObject("problem")
-                     .has("contestId")){
-                 sub.problem.contestId = resultArray.getJSONObject(0)
-                     .getJSONObject("problem")
-                     .getInt("contestId")
-             }
-             else{
+             if (!resultArray.getJSONObject(0).getJSONObject("problem").has("contestId")){
                  println("Error: Problem does not have a value for contestId tag")
                  return false
              }
+             val verdict = resultArray.getJSONObject(0).getString("verdict")
+             if (!user.constantVerdict(verdict)){
+                return false
+             }
+
+             val sub = Submission()
+             sub.verdict = verdict
+             sub.id = resultArray.getJSONObject(0).getInt("id")
+             sub.problem.contestId = resultArray.getJSONObject(0)
+                 .getJSONObject("problem")
+                 .getInt("contestId")
              sub.problem.index = resultArray.getJSONObject(0)
                  .getJSONObject("problem").getString("index")
              sub.problem.name = resultArray.getJSONObject(0)
@@ -240,10 +232,10 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
          }
 
         private fun isNewSubmission(problemId: String, sub: Submission): Boolean {
-            for (subObj in user.subm[problemId]!!){
-                if (subObj.id == sub.id)
-                    return false
-            }
+//            for (subObj in user.subm[problemId]!!){
+//                if (subObj.id == sub.id)
+//                    return false
+//            }
             return true
         }
 
@@ -296,13 +288,17 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     fun ratingLowerBound(boundValue: Int): Int{
-        // TODO implement binary search version
-        var i = 0
-        while ((i < problemSet.size) and (problemSet[i].rating < boundValue)){
-            println("i = $i")
-            i++
+        var lo = 0
+        var hi = problemSet.size-1
+        while (lo < hi){
+            val mid = (lo + hi)/2
+            val diff = problemSet[mid].rating
+            if (diff >= boundValue)
+                hi = mid
+            else
+                lo = mid+1
         }
-        return i
+        return lo
     }
 
     private fun hideAll(){
@@ -361,7 +357,6 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     fun initSearch(view: View) {
-        println("initSearch called.......................")
         searchListView.adapter = adapter
     }
 

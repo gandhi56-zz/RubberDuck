@@ -41,3 +41,4 @@ branch. Features that have been implemented include:
     * table row highlight
 * Contest/Problem reminders?
 * filter out categories, only keep the big ones
+* live coding bug in recent submission

@@ -114,8 +114,6 @@ class LoginActivity : AppCompatActivity() {
             if (jsonObj.getString("status") == "FAILED")    return false
             val resultArray = jsonObj.getJSONArray("result")
 
-            println("#submissions = ${resultArray.length()}")
-
             for (i in 0 until resultArray.length()) {
                 val sub = Submission()
                 sub.id = resultArray.getJSONObject(i).getInt("id")
@@ -144,7 +142,6 @@ class LoginActivity : AppCompatActivity() {
 
                 user.addSubmission(sub.problem.contestId.toString() + sub.problem.index, sub)
                 user.lastSubmId = max(user.lastSubmId, sub.id)
-                println("submission $i added")
             }
             println("user status received")
             return true

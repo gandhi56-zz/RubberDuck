@@ -88,19 +88,20 @@ class RatingActivity : AppCompatActivity() {
         updateRating.setOnRefreshListener {
             UpdateRating().execute()
         }
-        RatingChart.viewport.isScrollable = true
-        RatingChart.viewport.isScalable = true
     }
 
     private fun drawChart(){
         val series = LineGraphSeries<DataPoint>()
-        series.appendData(DataPoint(0.0, 1500.0), true, 40)
-        (0 until user.ratingChangeList.size).forEach{ i ->
+        series.appendData(DataPoint(0.0, 1500.0), true, 100)
+        for (i in 0 until user.ratingChangeList.size){
             series.appendData(
                 DataPoint((i+1).toDouble(), user.ratingChangeList[i].newRating.toDouble()),
                 true,
-                40)
+                100)
+            println(i+1)
         }
+        RatingChart.viewport.isScalable = true
+        RatingChart.viewport.setMaxX((user.ratingChangeList.size+2).toDouble())
         RatingChart.addSeries(series)
     }
 
