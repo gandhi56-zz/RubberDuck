@@ -1624,6 +1624,7 @@ id parallax
 id parent
 id parentPanel
 id parent_matrix
+id passwordLogin
 id passwordText
 id password_toggle
 id peekHeight
@@ -1738,7 +1739,7 @@ id uniform
 id unlabeled
 id up
 id useLogo
-id usernameText
+id usernameLogin
 id verdictTable
 id verdictsBtn
 id viewPager
