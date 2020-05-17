@@ -83,7 +83,6 @@ class User: Serializable {
     }
 
     fun destroy() {
-        TODO("Not yet implemented")
         println("destroying user")
     }
 

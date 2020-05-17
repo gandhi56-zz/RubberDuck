@@ -36,6 +36,7 @@
     <string name="log_in">Log in</string>
     <string name="sign_up">Sign up</string>
     <string name="email_address">email address</string>
+    <string name="password_reset">password reset</string>
 
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

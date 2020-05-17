@@ -4,7 +4,7 @@
             "outputFile": "/home/anshil/workspace/RubberDuck/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
             "map": [
                 {
-                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/bd9eaa2992ad422b7eac643b0aac27f7/appcompat-1.1.0/res/values-v23/values-v23.xml",
+                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/434a8ebd0bdb8e83cf7ce87b99116a31/appcompat-1.1.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,20,34,35,36,37,41,42,43,44",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -15,7 +15,7 @@
                     }
                 },
                 {
-                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/73e1622e0283f301bc23a23ce077ad8e/cardview-1.0.0/res/values-v23/values-v23.xml",
+                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/b9368830ac7eb0ce50f2070abe71cf30/cardview-1.0.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -34,7 +34,7 @@
                     }
                 },
                 {
-                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/0cbb3851e4b63e68b75aa6e0a1a2998e/material-1.1.0/res/values-v23/values-v23.xml",
+                    "source": "/home/anshil/.gradle/caches/transforms-2/files-2.1/79337e00db26de04b4b4c44cba60a9d4/material-1.1.0/res/values-v23/values-v23.xml",
                     "from": {
                         "startLines": "2,6",
                         "startColumns": "4,4",

@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.OkHttpClient
@@ -24,6 +25,7 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
 
     lateinit var user: User
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         Picasso.with(this).load(user.getTitlePhoto()).into(titlePhoto)
         handleView.text = user.getHandle()
         rankView.text = user.getRank()
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onBackPressed() {
@@ -40,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         builder.setPositiveButton("Yes"){
                 _: DialogInterface?, _: Int ->
             user.destroy()
+            auth.signOut()
             this.finish()
         }
 

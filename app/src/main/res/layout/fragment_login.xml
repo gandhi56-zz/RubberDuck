@@ -4,23 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context=".LoginFragment"
     android:background="@drawable/handle_view"
-    android:paddingVertical="20dp">
+    android:paddingVertical="20dp"
+    tools:context=".LoginFragment">
 
     <EditText
-        android:id="@+id/usernameLogin"
+        android:id="@+id/emailLogin"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/anaheim"
-        android:hint="@string/username"
+        android:hint="@string/email_address"
         android:textColor="@color/font_color"
-        android:textSize="26sp"
+        android:textSize="22sp"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toTopOf="@+id/passwordLogin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/passwordLogin"
@@ -30,26 +31,47 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textColor="@color/font_color"
-        android:textSize="26sp"
-        app:layout_constraintTop_toBottomOf="@+id/usernameLogin"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/loginBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailLogin" />
 
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:background="@drawable/gen_btn"
         android:fontFamily="@font/anaheim"
         android:text="@string/log_in"
         android:textColor="#051633"
         android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/passwordReset"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="0.339"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp" />
+
+    <Button
+        android:id="@+id/passwordReset"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/end_btn"
+        android:fontFamily="@font/anaheim"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="2dp"
+        android:text="@string/password_reset"
+        android:textColor="#051633"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_conversion_absoluteHeight="100dp"
-        tools:layout_conversion_absoluteWidth="100dp" />
+        app:layout_constraintVertical_bias="0.339"
+        android:layout_marginEnd="30dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

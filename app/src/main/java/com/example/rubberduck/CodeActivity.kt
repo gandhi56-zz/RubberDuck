@@ -37,9 +37,9 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     private var minRating: Int = 1000
     private var maxRating: Int = 1200
 
-    private var submissionTable: SubmissionTable? = null
+    private lateinit var submissionTable: SubmissionTable
 
-    private var adapter: ArrayAdapter<String>? = null
+    private lateinit var adapter: ArrayAdapter<String>
 
     fun String.sendHTTPRequest(): String{
         val client = OkHttpClient()
@@ -329,13 +329,8 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
         adapter = ArrayAdapter(this, R.layout.problems_list, problemTitles)
         searchView.setOnQueryTextListener(this)
-        searchListView.onItemClickListener = object :AdapterView.OnItemClickListener{
-            override fun onItemClick(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
+        searchListView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
                 val item = searchListView.getItemAtPosition(position) as String
                 var probId = ""
                 var i = 0
@@ -351,8 +346,6 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 searchListView.adapter = null
                 hideKeyboard()
             }
-
-        }
 
     }
 
@@ -377,7 +370,7 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         if (searchListView.adapter == null) {
             searchListView.adapter = adapter
         }
-        adapter!!.filter.filter(newText)
+        adapter.filter.filter(newText)
         return true
     }
 
@@ -389,7 +382,7 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         probName.text = problemSet[pIdx].name
         probContent.text = "ID: " + problemSet[pIdx].contestId.toString() + problemSet[pIdx].index +
                 "\nDifficulty: " + problemSet[pIdx].rating.toString()
-        submissionTable!!.createTable()
+        submissionTable.createTable()
     }
 
     // onClick event handler for next problem button
@@ -430,9 +423,9 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 _: DialogInterface?, _: Int ->
             Toast.makeText(applicationContext,"Stay focused, you can solve this problem!",Toast.LENGTH_LONG).show()
         }
-        val alertdiag = builder.create()
-        alertdiag.setCancelable(false)
-        alertdiag.show()
+        val alert = builder.create()
+        alert.setCancelable(false)
+        alert.show()
     }
 
     @SuppressLint("ShowToast")

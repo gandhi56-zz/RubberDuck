@@ -1,18 +1,22 @@
 package com.example.rubberduck
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
+import kotlinx.android.synthetic.main.fragment_signup.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
@@ -20,13 +24,14 @@ import kotlin.math.max
 
 class LoginFragment : Fragment() {
 
+    private lateinit var auth: FirebaseAuth
     val user = User()
 
     @SuppressLint("StaticFieldLeak")
     internal inner class UserProfileRequest : AsyncTask<Context, Void, Boolean>(){
         override fun onPreExecute() {
             super.onPreExecute()
-            usernameLogin.isEnabled = false
+            emailLogin.isEnabled = false
             passwordLogin.isEnabled = false
             loginBtn.isEnabled = false
         }
@@ -41,12 +46,14 @@ class LoginFragment : Fragment() {
         override fun onPostExecute(result: Boolean) {
             super.onPostExecute(result)
             if (result){
+//                emailLogin.text.clear()
+//                passwordText.text.clear()
                 startMainActivity()
             }
             else{
                 println("Error logging in")
             }
-            usernameLogin.isEnabled = true
+            emailLogin.isEnabled = true
             passwordLogin.isEnabled = true
             loginBtn.isEnabled = true
         }
@@ -136,6 +143,7 @@ class LoginFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        auth = FirebaseAuth.getInstance()
     }
 
     override fun onCreateView(
@@ -145,30 +153,50 @@ class LoginFragment : Fragment() {
 
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
+        auth = FirebaseAuth.getInstance()
         view.loginBtn.setOnClickListener {
             loginEventHandler()
+        }
+        view.passwordReset.setOnClickListener {
+            val email = emailLogin.text.toString()
+            if (email.isEmpty())    return@setOnClickListener
+            auth.sendPasswordResetEmail(email).addOnCompleteListener{
+                task ->
+                if (task.isSuccessful){
+                    Toast.makeText(context, "Check your inbox", Toast.LENGTH_LONG).show()
+                }
+                else{
+                    Toast.makeText(context, "Password reset email could not be sent", Toast.LENGTH_LONG).show()
+                }
+            }
         }
         return view
     }
 
     private fun loginEventHandler(){
-        println("Logging user in")
-        val username = usernameLogin.text.toString()
-        val password = passwordLogin.text.toString()
-        if (valid(username, password)){
-            UserProfileRequest().execute()
+        view!!.loginBtn.setOnClickListener {
+            val email = emailLogin.text.toString()
+            val password = passwordLogin.text.toString()
+            if (email.isEmpty() or password.isEmpty())  return@setOnClickListener
+            activity?.let {
+                auth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(it){ task->
+                        if (task.isSuccessful){
+                            Log.d(TAG, "createUserWithEmail:success")
+                            val user = auth.currentUser
+                            Toast.makeText(context, "Authentication successful", Toast.LENGTH_SHORT).show()
+                            UserProfileRequest().execute()
+                        }
+                        else{
+                            Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+            }
         }
-        else{
-            Toast.makeText(context, "Invalid username or password", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun valid(username: String, password: String): Boolean{
-        return true
     }
 
     private fun getHandle(): String{
-        return usernameLogin.text.toString()
+        return "gandhi21299"
     }
 
     private fun startMainActivity(){

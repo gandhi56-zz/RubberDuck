@@ -13,12 +13,12 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/anaheim"
-        android:hint="@string/username"
+        android:hint="codeforces handle"
         android:textColor="@color/font_color"
-        android:textSize="26sp"
+        android:textSize="22sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
         android:id="@+id/emailText"
@@ -28,7 +28,7 @@
         android:hint="@string/email_address"
         android:inputType="textEmailAddress"
         android:textColor="@color/font_color"
-        android:textSize="26sp"
+        android:textSize="22sp"
         app:layout_constraintTop_toBottomOf="@id/handleText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -41,7 +41,7 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:textColor="@color/font_color"
-        android:textSize="26sp"
+        android:textSize="22sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/emailText"/>
@@ -56,9 +56,10 @@
         android:text="@string/sign_up"
         android:textColor="#051633"
         android:textSize="20sp"
-        app:layout_constraintTop_toBottomOf="@id/passwordText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/passwordText"
+        app:layout_constraintVertical_bias="0.339" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

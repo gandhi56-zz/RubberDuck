@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "782098337546",
+    "firebase_url": "https://rubberduck-2fffe.firebaseio.com",
+    "project_id": "rubberduck-2fffe",
+    "storage_bucket": "rubberduck-2fffe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782098337546:android:1270c6f74f46521bc4f4f3",
+        "android_client_info": {
+          "package_name": "com.example.rubberduck"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782098337546-q15pr2b3g7b7d2pcjiin064tmgpmkvah.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnEqnCAvw-GZsRYyZJRSx4CGWJZSEKkPQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782098337546-q15pr2b3g7b7d2pcjiin064tmgpmkvah.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
