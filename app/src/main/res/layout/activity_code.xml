@@ -93,7 +93,8 @@
                 android:background="@drawable/problem_name"
                 android:orientation="vertical"
                 android:paddingHorizontal="30dp"
-                tools:layout_editor_absoluteX="0dp">
+                tools:layout_editor_absoluteX="0dp"
+                android:onClick="sendProblemToServer">
 
                 <TextView
                     android:id="@+id/problem_name"

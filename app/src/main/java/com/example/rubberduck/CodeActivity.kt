@@ -20,10 +20,15 @@ import kotlinx.android.synthetic.main.activity_code.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
+import java.io.DataOutputStream
+import java.net.Socket
 
 class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     lateinit var user: User
+    lateinit var socket: Socket
+    lateinit var dos: DataOutputStream
+
     var problemSet = ArrayList<Problem>()
     var problemTitles = ArrayList<String>()
     private lateinit var progBar: ProgressBar
@@ -247,6 +252,30 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     // ######################################################################################################
+    // Client socket implementation                                                                         #
+    // ######################################################################################################
+
+    @SuppressLint("StaticFieldLeak")
+    internal inner class ClientSocket: AsyncTask<Context, Void, Boolean>(){
+
+        override fun onPreExecute() {
+
+        }
+
+        override fun doInBackground(vararg params: Context?): Boolean {
+            socket = Socket("192.168.1.74", 8080)
+            dos = DataOutputStream(socket.getOutputStream())
+            dos.writeUTF("Iloveyou3000")
+            return true
+        }
+
+        override fun onPostExecute(result: Boolean?) {
+            socket.close()
+        }
+    }
+
+
+    // ######################################################################################################
     // Activity driver function                                                                             #
     // ######################################################################################################
 
@@ -414,9 +443,10 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
         val builder: AlertDialog.Builder = AlertDialog.Builder(this)
         builder.setMessage("Are you sure about ending this session?")
-        builder.setPositiveButton("Yes"){
-                _: DialogInterface?, _: Int ->
-            this.finish()
+        builder.setPositiveButton("Yes"){ _: DialogInterface?, _: Int ->
+            run {
+                this.finish()
+            }
         }
 
         builder.setNegativeButton("No"){
@@ -457,6 +487,10 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             hideMe.hideSoftInputFromWindow(view.windowToken, 0)
         }
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
+
+    fun sendProblemToServer(view: View) {
+        ClientSocket().execute()
     }
 
 }
