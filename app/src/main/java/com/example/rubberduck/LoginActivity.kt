@@ -23,14 +23,5 @@ class LoginActivity : AppCompatActivity() {
         tabLayout.setupWithViewPager(viewPager)
         progressBar.visibility = View.INVISIBLE
     }
-
-    private fun hideKeyboard(){
-        val view: View? = this.currentFocus
-        if (view != null){
-            val hideMe = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            hideMe.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-    }
 }
 

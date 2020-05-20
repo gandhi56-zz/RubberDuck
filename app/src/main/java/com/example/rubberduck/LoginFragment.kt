@@ -12,7 +12,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
@@ -34,6 +38,7 @@ class LoginFragment : Fragment() {
             emailLogin.isEnabled = false
             passwordLogin.isEnabled = false
             loginBtn.isEnabled = false
+            activity!!.findViewById<ProgressBar>(R.id.progressBar).visibility = View.VISIBLE
         }
 
         override fun doInBackground(vararg params: Context): Boolean {
@@ -51,11 +56,14 @@ class LoginFragment : Fragment() {
                 startMainActivity()
             }
             else{
-                println("Error logging in")
+                Toast.makeText(context, "Error receiving info from Codeforces", Toast.LENGTH_SHORT).show()
+                return
             }
             emailLogin.isEnabled = true
             passwordLogin.isEnabled = true
             loginBtn.isEnabled = true
+            activity!!.findViewById<ProgressBar>(R.id.progressBar).visibility = View.GONE
+            Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
         }
 
         private fun sendHTTPRequest(url: String): String{
@@ -155,7 +163,23 @@ class LoginFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         auth = FirebaseAuth.getInstance()
         view.loginBtn.setOnClickListener {
-            loginEventHandler()
+            println("HIT")
+            val email = emailLogin.text.toString()
+            val password = passwordLogin.text.toString()
+            if (email.isEmpty() or password.isEmpty())  return@setOnClickListener
+            activity?.let {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(it){ task->
+                    if (task.isSuccessful){
+                        Log.d(TAG, "createUserWithEmail:success")
+                        val user = auth.currentUser
+                        UserProfileRequest().execute()
+                    }
+                    else{
+                        Toast.makeText(context, "Invalid email or password", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
         view.passwordReset.setOnClickListener {
             val email = emailLogin.text.toString()
@@ -173,28 +197,6 @@ class LoginFragment : Fragment() {
         return view
     }
 
-    private fun loginEventHandler(){
-        view!!.loginBtn.setOnClickListener {
-            val email = emailLogin.text.toString()
-            val password = passwordLogin.text.toString()
-            if (email.isEmpty() or password.isEmpty())  return@setOnClickListener
-            activity?.let {
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(it){ task->
-                        if (task.isSuccessful){
-                            Log.d(TAG, "createUserWithEmail:success")
-                            val user = auth.currentUser
-                            Toast.makeText(context, "Authentication successful", Toast.LENGTH_SHORT).show()
-                            UserProfileRequest().execute()
-                        }
-                        else{
-                            Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-            }
-        }
-    }
-
     private fun getHandle(): String{
         return "gandhi21299"
     }
@@ -207,5 +209,13 @@ class LoginFragment : Fragment() {
         startActivity(intent)
     }
 
+    private fun hideKeyboard(){
+        val view: View? = activity!!.currentFocus
+        if (view != null){
+            val hideMe = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            hideMe.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+    }
 
 }
