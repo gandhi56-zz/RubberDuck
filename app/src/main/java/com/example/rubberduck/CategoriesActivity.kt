@@ -10,15 +10,19 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.annotation.RequiresApi
-import com.github.mikephil.charting.charts.PieChart
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
+import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import com.github.mikephil.charting.highlight.Highlight
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener
+import kotlinx.android.synthetic.main.activity_categories.*
 
-class CategoriesActivity : AppCompatActivity() {
+class CategoriesActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
     private lateinit var user: User
-    private lateinit var catTable: TableLayout
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,25 +31,21 @@ class CategoriesActivity : AppCompatActivity() {
 
         user = intent.getSerializableExtra(Intent.EXTRA_USER) as User
 
-        val pieChart = findViewById<PieChart>(R.id.piechart)
-        catTable = findViewById(R.id.catTable)
-
         // add data
         val values = ArrayList<PieEntry>()
         for ((key, value) in user.classStats){
             values.add(PieEntry(value.toFloat(), key))
         }
 
-        pieChart.description.isEnabled = false
-        pieChart.legend.isEnabled = false
-        pieChart.setDrawEntryLabels(false)
-        pieChart.holeRadius = 0F
-        pieChart.transparentCircleRadius = 0F
-        pieChart.setCenterTextSize(40F)
+        piechart.description.isEnabled = false
+        piechart.legend.isEnabled = false
+        piechart.holeRadius = 0F
+        piechart.transparentCircleRadius = 0F
+        piechart.setDrawEntryLabels(false)
 
         val dataset = PieDataSet(values, "Problem categories")
         val pieData = PieData(dataset)
-        pieChart.data = pieData
+        piechart.data = pieData
 
         val colors = arrayOf(
             Color.parseColor("#ED0A3F"),
@@ -79,8 +79,9 @@ class CategoriesActivity : AppCompatActivity() {
         )
 
 //        dataset.colors = ColorTemplate.MATERIAL_COLORS.toMutableList()
-        pieChart.animateXY(1400, 1400)
+        piechart.animateXY(1400, 1400)
         dataset.colors = colors.toMutableList()
+        piechart.setOnChartValueSelectedListener(this)
 
         createTable()
     }
@@ -112,7 +113,27 @@ class CategoriesActivity : AppCompatActivity() {
                 textSize = 22F
             }
             row.addView(valueTxt)
+            row.background = ContextCompat.getDrawable(this, R.drawable.ground_btn)
             catTable.addView(row)
+        }
+    }
+
+    override fun onNothingSelected() {
+        println("nothing selected")
+        for (i in 0 until user.classStats.size){
+            catTable[i].background = ContextCompat.getDrawable(this, R.drawable.ground_btn)
+        }
+    }
+
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+        println("Selected ${h!!.x}")
+        for (i in 0 until user.classStats.size){
+            if (i == h.x.toInt()){
+                catTable[i].background = ContextCompat.getDrawable(this, R.drawable.selected_btn)
+            }
+            else{
+                catTable[i].background = ContextCompat.getDrawable(this, R.drawable.ground_btn)
+            }
         }
     }
 

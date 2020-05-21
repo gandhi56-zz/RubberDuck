@@ -22,6 +22,7 @@ import okhttp3.Request
 import org.json.JSONObject
 import java.io.DataOutputStream
 import java.net.Socket
+import java.net.UnknownHostException
 
 class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
@@ -263,14 +264,21 @@ class CodeActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         }
 
         override fun doInBackground(vararg params: Context?): Boolean {
-            socket = Socket("192.168.1.74", 8080)
-            dos = DataOutputStream(socket.getOutputStream())
-            dos.writeUTF("Iloveyou3000")
-            return true
+            try{
+                socket = Socket("192.168.1.74", 8080)
+                dos = DataOutputStream(socket.getOutputStream())
+                dos.writeUTF("Iloveyou3000")
+                return true
+            }
+            catch(e: Exception){
+                Toast.makeText(applicationContext, "Unknown host exception caught", Toast.LENGTH_LONG).show()
+                return false
+            }
         }
 
         override fun onPostExecute(result: Boolean?) {
-            socket.close()
+            if (result!!)
+                socket.close()
         }
     }
 

@@ -20,20 +20,18 @@
         android:layout_height="wrap_content"
         android:background="@drawable/handle_view"
         android:stretchColumns="*"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="20dp">
 
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Yellow">
+            android:background="@drawable/problem_name">
 
             <TextView
                 android:text="@string/category"
                 android:fontFamily="@font/anaheim"
-                android:textColor="@color/font_color"
+                android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:layout_margin="10dp"
                 android:paddingVertical="10dp"/>
@@ -41,7 +39,7 @@
             <TextView
                 android:text="@string/count"
                 android:fontFamily="@font/anaheim"
-                android:textColor="@color/font_color"
+                android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:layout_margin="10dp"
                 android:paddingVertical="10dp"

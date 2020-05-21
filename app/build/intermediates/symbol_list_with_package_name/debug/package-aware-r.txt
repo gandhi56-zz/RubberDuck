@@ -1403,6 +1403,7 @@ drawable end_btn
 drawable gen_btn
 drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
+drawable ground_btn
 drawable handle_view
 drawable ic_calendar_black_24dp
 drawable ic_clear_black_24dp
@@ -1443,6 +1444,7 @@ drawable notify_panel_notification_icon_bg
 drawable problem_name
 drawable profile_pic_bg
 drawable rightarrow
+drawable selected_btn
 drawable skip_btn
 drawable submit_btn
 drawable test_custom_background
@@ -1783,7 +1785,6 @@ id unchecked
 id uniform
 id unlabeled
 id up
-id updateRating
 id useLogo
 id verdictTable
 id verdictsBtn

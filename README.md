@@ -29,13 +29,11 @@ branch. Features that have been implemented include:
   * keep track of user progress in the code pond
   * display code pond statistics
 * User interface
-  * Ratings line graph
-    * each point may be tapped to link the user to the corresponding 
-    contest
   * Submissions pie chart
     * Fix display of labels and numbers
-    * table row highlight
   * Problem categories
     * Fix display of labels and numbers
-    * table row highlight
 * Contest/Problem reminders?
+* RubberDuck Web: set up server and connect it with RubberDuck mobile
+client socket
+

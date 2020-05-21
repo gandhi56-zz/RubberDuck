@@ -48,7 +48,6 @@ class RatingActivity : AppCompatActivity() {
 
         override fun onPostExecute(result: Boolean) {
             super.onPostExecute(result)
-            updateRating.isRefreshing = false
             drawChart()
             createTable()
         }
@@ -85,9 +84,6 @@ class RatingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_rating)
         user = intent.getSerializableExtra(Intent.EXTRA_USER) as User
         UpdateRating().execute()
-        updateRating.setOnRefreshListener {
-            UpdateRating().execute()
-        }
     }
 
     private fun drawChart(){

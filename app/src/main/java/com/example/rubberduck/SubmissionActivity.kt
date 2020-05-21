@@ -1,5 +1,6 @@
 package com.example.rubberduck
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -12,7 +13,10 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.core.view.get
+import androidx.core.view.marginBottom
+import androidx.core.view.size
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.data.Entry
@@ -22,29 +26,22 @@ import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
 import com.github.mikephil.charting.utils.ColorTemplate
+import kotlinx.android.synthetic.main.activity_submission.*
 
 class SubmissionActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
     var user: User? = null
-    var verdictTable: TableLayout? = null
-    var pieChart: PieChart? = null
-    var lastKey = 0
-
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_submission)
 
         user = intent.getSerializableExtra(Intent.EXTRA_USER) as User
-
-        pieChart = findViewById<PieChart>(R.id.piechart)
-        verdictTable = findViewById(R.id.verdictTable)
-        pieChart!!.description.isEnabled = false
-        pieChart!!.legend.isEnabled = false
-        pieChart!!.setDrawEntryLabels(false)
-        pieChart!!.holeRadius = 0F
-        pieChart!!.transparentCircleRadius = 0F
-        pieChart!!.setCenterTextSize(40F)
+        piechart.description.isEnabled = false
+        piechart.legend.isEnabled = false
+        piechart.holeRadius = 0F
+        piechart.transparentCircleRadius = 0F
+        piechart.setDrawEntryLabels(false)
 
         // add data
         val values = ArrayList<PieEntry>()
@@ -54,10 +51,10 @@ class SubmissionActivity : AppCompatActivity(), OnChartValueSelectedListener {
 
         val dataset = PieDataSet(values, "Verdicts")
         val pieData = PieData(dataset)
-        pieChart!!.data = pieData
+        piechart.data = pieData
         dataset.colors = ColorTemplate.MATERIAL_COLORS.toMutableList()
-        pieChart!!.animateXY(1400, 1400)
-        pieChart!!.setOnChartValueSelectedListener(this)
+        piechart.animateXY(1400, 1400)
+        piechart.setOnChartValueSelectedListener(this)
 
         createTable()
 //        selectRow(0)
@@ -96,30 +93,28 @@ class SubmissionActivity : AppCompatActivity(), OnChartValueSelectedListener {
                 textSize = 22F
             }
             row.addView(valueTxt)
-            verdictTable!!.addView(row)
+            row.background = ContextCompat.getDrawable(this, R.drawable.ground_btn)
+            verdictTable.addView(row)
         }
     }
 
     override fun onNothingSelected() {
-        TODO("Not yet implemented")
+        println("nothing selected")
+        for (i in 0 until user!!.verdictStats.size){
+            verdictTable[i].background = ContextCompat.getDrawable(this, R.drawable.ground_btn)
+        }
     }
 
-    // TODO
-    override fun onValueSelected(e: Entry?, h: Highlight?){
-//        if (e != null) {
-//            val key = pieChart!!.data.getDataSetForEntry(e).getEntryIndex(e as PieEntry?)
-//            println("FOOOOOOOOO")
-//            println(key)
-//            if (key != lastKey){
-//                verdictTable!!.getChildAt(lastKey).setBackgroundColor(Color.WHITE)
-//                verdictTable!!.getChildAt(key).setBackgroundColor(Color.YELLOW)
-//                lastKey = key
-//            }
-//        }
-
-    }
-
-    private fun selectRow(idx: Int){
-        verdictTable!!.getChildAt(idx).setBackgroundColor(Color.YELLOW)
+    @SuppressLint("ResourceAsColor")
+    override fun onValueSelected(e: Entry?, h: Highlight?) {
+        println("Selected ${h!!.x}")
+        for (i in 0 until user!!.verdictStats.size){
+            if (i == h.x.toInt()){
+                verdictTable[i].background = ContextCompat.getDrawable(this, R.drawable.selected_btn)
+            }
+            else{
+                verdictTable[i].background = ContextCompat.getDrawable(this, R.drawable.ground_btn)
+            }
+        }
     }
 }
