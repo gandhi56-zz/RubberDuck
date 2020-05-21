@@ -1,1 +1,0 @@
-web: gunicorn rubberduck56.wsgi
