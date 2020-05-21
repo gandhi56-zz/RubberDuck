@@ -28,11 +28,6 @@ branch. Features that have been implemented include:
 * Application context
   * keep track of user progress in the code pond
   * display code pond statistics
-* User interface
-  * Submissions pie chart
-    * Fix display of labels and numbers
-  * Problem categories
-    * Fix display of labels and numbers
 * Contest/Problem reminders?
 * RubberDuck Web: set up server and connect it with RubberDuck mobile
 client socket
