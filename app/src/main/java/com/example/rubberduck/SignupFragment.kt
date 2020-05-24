@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_signup.*
 import kotlinx.android.synthetic.main.fragment_signup.view.*
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.fragment_signup.view.*
 class SignupFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var ref: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +33,10 @@ class SignupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_signup, container, false)
+
         auth = FirebaseAuth.getInstance()
+        ref = FirebaseDatabase.getInstance().getReference("users")
+
         view.signupBtn.setOnClickListener {
             if (view.emailText.toString().isEmpty() or passwordText.text.toString().isEmpty())
                 return@setOnClickListener
@@ -41,7 +46,7 @@ class SignupFragment : Fragment() {
                         if (task.isSuccessful){
                             Log.d(TAG, "createUserWithEmail:success")
                             Toast.makeText(context, "Authentication successful", Toast.LENGTH_SHORT).show()
-//                            saveUserToFirebaseDatabase(view.handleText.text.toString())
+                            saveUserToFirebaseDatabase(view.handleText.text.toString(), view.emailText.text.toString())
                         }
                         else{
                             Toast.makeText(context, "Authentication failed", Toast.LENGTH_SHORT).show()
@@ -54,11 +59,11 @@ class SignupFragment : Fragment() {
         return view
     }
 
-    private fun saveUserToFirebaseDatabase(handle: String){
-        val uid = FirebaseAuth.getInstance().uid ?: ""
-        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
-        ref.setValue(handle).addOnSuccessListener {
-            Log.d(TAG, "User $handle saved to the firebase database")
+    private fun saveUserToFirebaseDatabase(handle: String, email: String){
+        val userId = ref.push().key.toString()
+        val user = UserData(userId, handle, email)
+        ref.child(userId).setValue(user).addOnCompleteListener {
+            Toast.makeText(context, "User saved to database successfully", Toast.LENGTH_LONG).show()
         }
     }
 

@@ -14,11 +14,12 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/anaheim"
         android:hint="codeforces handle"
+        android:inputType="textPersonName"
         android:textColor="@color/font_color"
         android:textSize="22sp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/emailText"

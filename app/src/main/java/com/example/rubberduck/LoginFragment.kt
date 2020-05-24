@@ -12,23 +12,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.content.ContextCompat.getSystemService
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import kotlinx.android.synthetic.main.fragment_signup.*
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import org.json.JSONObject
 import kotlin.math.max
 
+
 class LoginFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var ref: DatabaseReference
+    private lateinit var data: HashMap<String, Any>
+    var handleValue: String = ""
     val user = User()
 
     @SuppressLint("StaticFieldLeak")
@@ -42,7 +44,12 @@ class LoginFragment : Fragment() {
         }
 
         override fun doInBackground(vararg params: Context): Boolean {
-            if (!userInfo())    return false
+//            handleValue = getHandle("gandhi21299@gmail.com")
+            handleValue = data["handle"].toString()
+            if (!userInfo()){
+                println("User info could not be received")
+                return false
+            }
             if (!userStatus())  return false
             if (!userRating())  return false
             return true
@@ -74,10 +81,14 @@ class LoginFragment : Fragment() {
         }
 
         private fun userInfo(): Boolean{
+            println("HANDLE = $handleValue")
             val json = sendHTTPRequest("https://codeforces.com/api/user.info?handles="
-                    + getHandle())
+                    + handleValue)
             val jsonObj = JSONObject(json)
-            if (jsonObj.getString("status") == "FAILED")    return false
+            if (jsonObj.getString("status") == "FAILED"){
+                println("Status: FAILED")
+                return false
+            }
             val resultArray = jsonObj.getJSONArray("result")
             user.setHandle(resultArray.getJSONObject(0).getString("handle"))
             user.setTitlePhoto("https:" + resultArray.getJSONObject(0)
@@ -92,7 +103,7 @@ class LoginFragment : Fragment() {
 
         private fun userStatus(): Boolean{
             val json = sendHTTPRequest("https://codeforces.com/api/user.status?handle="
-                    + getHandle())
+                    + handleValue)
             val jsonObj = JSONObject(json)
             if (jsonObj.getString("status") == "FAILED")    return false
             val resultArray = jsonObj.getJSONArray("result")
@@ -162,6 +173,25 @@ class LoginFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
         auth = FirebaseAuth.getInstance()
+        ref = FirebaseDatabase.getInstance().getReference("users")
+        ref.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if (p0.exists()){
+                    for (snapshot in p0.children){
+                        data = snapshot.value as HashMap<String, Any>
+                        if (data["email"] as String == emailLogin.text.toString()){
+                            break
+                        }
+                    }
+                }
+            }
+
+        })
+
         view.loginBtn.setOnClickListener {
             println("HIT")
             val email = emailLogin.text.toString()
@@ -172,7 +202,6 @@ class LoginFragment : Fragment() {
                 .addOnCompleteListener(it){ task->
                     if (task.isSuccessful){
                         Log.d(TAG, "createUserWithEmail:success")
-                        val user = auth.currentUser
                         UserProfileRequest().execute()
                     }
                     else{
@@ -197,25 +226,12 @@ class LoginFragment : Fragment() {
         return view
     }
 
-    private fun getHandle(): String{
-        return "gandhi21299"
-    }
-
     private fun startMainActivity(){
         val intent = Intent(activity, MainActivity::class.java)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             intent.putExtra(Intent.EXTRA_USER, user)
         }
         startActivity(intent)
-    }
-
-    private fun hideKeyboard(){
-        val view: View? = activity!!.currentFocus
-        if (view != null){
-            val hideMe = activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            hideMe.hideSoftInputFromWindow(view.windowToken, 0)
-        }
-//        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
     }
 
 }
