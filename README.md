@@ -4,6 +4,9 @@
 * RubberDuck is an android application that helps competitive programmers
 to track and improve their problem-solving skills.
 
+### Preview
+![](preview.gif)
+
 ### Development
 * This project is currently under development, mainly under the alpha4
 branch. Features that have been implemented include:
