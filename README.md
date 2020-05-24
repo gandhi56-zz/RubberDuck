@@ -20,7 +20,7 @@ branch. Features that have been implemented include:
   * code pond, an area where user is suggested a problem to solve
   * search interface to search a problem in the codeforces problemset
 
-### Issues and TODOs
+### Issues
 * Offline support
 * Code pond
   * keep track of user progress in the code pond
