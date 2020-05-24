@@ -1,13 +1,12 @@
-## RubberDuck
 
-### Overview
+# Overview
 * RubberDuck is an android application that helps competitive programmers
 to track and improve their problem-solving skills.
 
-### Preview
+# Preview
 ![](preview.gif)
 
-### Development
+# Development
 * This project is currently under development, mainly under the alpha4
 branch. Features that have been implemented include:
   * signing up/into a codeforces user account
@@ -20,7 +19,7 @@ branch. Features that have been implemented include:
   * code pond, an area where user is suggested a problem to solve
   * search interface to search a problem in the codeforces problemset
 
-### Issues
+# Issues
 * Offline support
 * Code pond
   * keep track of user progress in the code pond
