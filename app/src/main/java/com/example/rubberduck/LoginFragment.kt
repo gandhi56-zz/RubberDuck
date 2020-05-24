@@ -31,6 +31,7 @@ class LoginFragment : Fragment() {
     private lateinit var ref: DatabaseReference
     private lateinit var data: HashMap<String, Any>
     var handleValue: String = ""
+    var emailValue: String = ""
     val user = User()
 
     @SuppressLint("StaticFieldLeak")
@@ -46,6 +47,7 @@ class LoginFragment : Fragment() {
         override fun doInBackground(vararg params: Context): Boolean {
 //            handleValue = getHandle("gandhi21299@gmail.com")
             handleValue = data["handle"].toString()
+            emailValue = data["email"].toString()
             if (!userInfo()){
                 println("User info could not be received")
                 return false
@@ -180,14 +182,7 @@ class LoginFragment : Fragment() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                if (p0.exists()){
-                    for (snapshot in p0.children){
-                        data = snapshot.value as HashMap<String, Any>
-                        if (data["email"] as String == emailLogin.text.toString()){
-                            break
-                        }
-                    }
-                }
+
             }
 
         })

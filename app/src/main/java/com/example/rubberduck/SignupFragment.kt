@@ -40,6 +40,9 @@ class SignupFragment : Fragment() {
         view.signupBtn.setOnClickListener {
             if (view.emailText.toString().isEmpty() or passwordText.text.toString().isEmpty())
                 return@setOnClickListener
+            handleText.isEnabled = false
+            emailText.isEnabled = false
+            passwordText.isEnabled = false
             activity?.let {
                 auth.createUserWithEmailAndPassword(view.emailText.text.toString(), view.passwordText.text.toString())
                     .addOnCompleteListener(it){ task->
@@ -51,10 +54,14 @@ class SignupFragment : Fragment() {
                         else{
                             Toast.makeText(context, "Authentication failed", Toast.LENGTH_SHORT).show()
                         }
+                        handleText.text.clear()
                         emailText.text.clear()
                         passwordText.text.clear()
                     }
             }
+            handleText.isEnabled = true
+            emailText.isEnabled = true
+            passwordText.isEnabled = true
         }
         return view
     }
